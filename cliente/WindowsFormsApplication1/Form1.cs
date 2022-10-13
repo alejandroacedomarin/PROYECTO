@@ -24,8 +24,8 @@ namespace WindowsFormsApplication1
             
             //Creamos un IPEndPoint con el ip del servid0r y puerto del servidor 
             //al que deseamos conectarnos
-            IPAddress direc = IPAddress.Parse("192.168.56.102");
-            IPEndPoint ipep = new IPEndPoint(direc, 9050);
+            IPAddress direc = IPAddress.Parse("192.168.56.101");
+            IPEndPoint ipep = new IPEndPoint(direc, 9080);
 
 
             //Creamos el socket 
@@ -35,8 +35,8 @@ namespace WindowsFormsApplication1
                 server.Connect(ipep);//Intentamos conectar el socket
                 
                 MessageBox.Show("Conectado");
-                iniciar_groupBox.Visible = true;
-                peticion_groupBox.Visible = false;
+                iniciar_groupBox.Visible = false;
+                peticion_groupBox.Visible = true;
 
             }
             catch (SocketException ex)

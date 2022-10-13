@@ -25,7 +25,7 @@ int main (int argc, char *argv[])
 	//htonl formatea el numero que recibe al formato necesario
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	//escuchamos en el puerto 9050
-	serv_adr.sin_port = htons(9050);
+	serv_adr.sin_port = htons(9080);
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
 		printf ("Error al bind");
 	
@@ -66,21 +66,23 @@ int main (int argc, char *argv[])
 				
 				strcpy(nombre, p);
 				printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
-				p = strtok (NULL, "/");
-				strcpy(Password, p);
+/*				p = strtok (NULL, "/");*/
+/*				strcpy(Password, p);*/
+				
 				
 			}
 			if (codigo ==0) //petici?n de desconexi?n
 			{
 				terminar = 1;
 			}
-			else if(codigo == 1)
-			{
+/*			else if(codigo == 1)*/
+/*			{*/
 				 
-				strcpy (respuesta, SignIN(nombre,Password));
-			}
+/*				strcpy (respuesta, a(nombre,Password));*/
+/*			}*/
 			else if(codigo == 2)
 			{
+				printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
 				sprintf (respuesta,"%d",DameNivel(nombre));
 			}
 			else if(codigo == 3)
@@ -207,74 +209,74 @@ int DameNivel (char username[20])
 	
 }
 
-char SignIN (char username[20], char Password[10])
-{
-	MYSQL *conn;
-	int err;
-	// Estructura especial para almacenar resultados de consultas 
-	MYSQL_RES *resultado;
-	MYSQL_ROW row;
+/*char a(char username[20], char Password[10])*/
+/*{*/
+/*	MYSQL *conn;*/
+/*	int err;*/
 	
-	char consulta [100];
-	char respuesta[100];
-	//Creamos una conexion al servidor MYSQL 
-	conn = mysql_init(NULL);
-	if (conn==NULL) {
-		printf ("Error al crear la conexion: %u %s\n", 
-				mysql_errno(conn), mysql_error(conn));
-		exit (1);
-	}
-	//inicializar la conexin
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", "Othello",0, NULL, 0);
-	if (conn==NULL) {
-		printf ("Error al inicializar la conexion: %u %s\n", 
-				mysql_errno(conn), mysql_error(conn));
-		exit (1);
-	}
+/*	MYSQL_RES *resultado;*/
+/*	MYSQL_ROW row;*/
 	
-	//consulta SQL
-	strcpy (consulta, "SELECT Password FROM Jugador WHERE username = '");
-	strcat (consulta, username);
-	strcat (consulta, "'");
+/*	char consulta [100];*/
+/*	char respuesta[100];*/
+	
+/*	conn = mysql_init(NULL);*/
+/*	if (conn==NULL) {*/
+/*		printf ("Error al crear la conexion: %u %s\n", */
+/*				mysql_errno(conn), mysql_error(conn));*/
+/*		exit (1);*/
+/*	}*/
+
+/*	conn = mysql_real_connect (conn, "localhost","root", "mysql", "Othello",0, NULL, 0);*/
+/*	if (conn==NULL) {*/
+/*		printf ("Error al inicializar la conexion: %u %s\n", */
+/*				mysql_errno(conn), mysql_error(conn));*/
+/*		exit (1);*/
+/*	}*/
 	
 	
-	
-	//Para comprobar errores en la consulta
-	err=mysql_query (conn, consulta);
-	if (err!=0) {
-		printf ("Error al consultar datos de la base %u %s\n",
-				mysql_errno(conn), mysql_error(conn));
-		exit (1);
-	}
-	
-	resultado = mysql_store_result (conn);
-	row = mysql_fetch_row (resultado);
+/*	strcpy (consulta, "SELECT Password FROM Jugador WHERE username = '");*/
+/*	strcat (consulta, username);*/
+/*	strcat (consulta, "'");*/
 	
 	
-	if (row == NULL)
-		printf ("No se han obtenido datos en la consulta\n");
-	else
-	{	
-		if (row[0] == Password)
-		{
-			//recogemos el resultado de la consulta
-			strcpy(respuesta, "SI");
-			return respuesta;
-		}
-		else
-		{
-			strcpy(respuesta, "NO");
-			return respuesta;
-		}	
-	}
+	
+	
+/*	err=mysql_query (conn, consulta);*/
+/*	if (err!=0) {*/
+/*		printf ("Error al consultar datos de la base %u %s\n",*/
+/*				mysql_errno(conn), mysql_error(conn));*/
+/*		exit (1);*/
+/*	}*/
+	
+/*	resultado = mysql_store_result (conn);*/
+/*	row = mysql_fetch_row (resultado);*/
+	
+	
+/*	if (row == NULL)*/
+/*		printf ("No se han obtenido datos en la consulta\n");*/
+/*	else*/
+/*	{	*/
+/*		if (row[0] == Password)*/
+/*		{*/
+			
+/*			strcpy(respuesta, "SI");*/
+/*			return respuesta;*/
+/*		}*/
+/*		else*/
+/*		{*/
+/*			strcpy(respuesta, "NO");*/
+/*			return respuesta;*/
+/*		}	*/
+/*	}*/
 
 	
 	
 	
 	
-	mysql_close (conn);
-	exit(0);
-}
+/*	mysql_close (conn);*/
+/*	exit(0);*/
+/*}*/
 int MaxNivel()
 {
 	MYSQL *conn;
