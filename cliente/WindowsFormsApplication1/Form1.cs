@@ -22,7 +22,7 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
             
-            //Creamos un IPEndPoint con el ip del servidor y puerto del servidor 
+            //Creamos un IPEndPoint con el ip del servid0r y puerto del servidor 
             //al que deseamos conectarnos
             IPAddress direc = IPAddress.Parse("192.168.56.102");
             IPEndPoint ipep = new IPEndPoint(direc, 9050);
@@ -53,7 +53,7 @@ namespace WindowsFormsApplication1
         private void button3_Click(object sender, EventArgs e)
         {
             //Mensaje de desconexión
-            string mensaje = "100/";
+            string mensaje = "0/";
         
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
@@ -72,7 +72,7 @@ namespace WindowsFormsApplication1
             {
                 if(username.Text != null)
                 {
-                    string mensaje = "1/" + username.Text;
+                    string mensaje = "2/" + username.Text;
                     // Enviamos al servidor el nombre tecleado
                     byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                     server.Send(msg);
@@ -93,7 +93,7 @@ namespace WindowsFormsApplication1
             {
                 if(username.Text != null)
                 {
-                    string mensaje = "2/" + username.Text;
+                    string mensaje = "3/" + username.Text;
                     // Enviamos al servidor el nombre tecleado
                     byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                     server.Send(msg);
@@ -114,7 +114,7 @@ namespace WindowsFormsApplication1
             else if(maxnivel.Checked)
             {
                 // Enviamos nombre.
-                string mensaje = "3/";
+                string mensaje = "4/";
                 // Enviamos al servidor el nombre tecleado
                 byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                 server.Send(msg);
@@ -127,31 +127,14 @@ namespace WindowsFormsApplication1
             }
             else
             {
-                if(username.Text != null)
-                {
-                    // Enviamos nombre.
-                    string mensaje = "4/" + username.Text ;
-                    // Enviamos al servidor el nombre tecleado
-                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-                    server.Send(msg);
-
-                    //Recibimos la respuesta del servidor
-                    byte[] msg2 = new byte[80];
-                    server.Receive(msg2);
-                    mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                    MessageBox.Show("El codigo de la primera partida que gano " + username + "es: " + mensaje);
-                }
-                else
-                {
-                    MessageBox.Show("ERROR. No has introducido el usuario.");
-                }
-                
+                MessageBox.Show("No has elegido ninguna opcion");
             }
+            
         }
 
         private void sign_button_Click(object sender, EventArgs e)
         {
-            string mensaje = "0/" + user_textBox.Text + "-" + contr_textBox.Text;
+            string mensaje = "1/" + user_textBox.Text + "/" + contr_textBox.Text;
             // Enviamos al servidor el nombre tecleado
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);

@@ -43,7 +43,6 @@
             this.contr_textBox = new System.Windows.Forms.TextBox();
             this.user_textBox = new System.Windows.Forms.TextBox();
             this.labeluser = new System.Windows.Forms.Label();
-            this.primeraganada = new System.Windows.Forms.RadioButton();
             this.peticion_groupBox.SuspendLayout();
             this.iniciar_groupBox.SuspendLayout();
             this.SuspendLayout();
@@ -81,7 +80,6 @@
             // peticion_groupBox
             // 
             this.peticion_groupBox.BackColor = System.Drawing.SystemColors.Control;
-            this.peticion_groupBox.Controls.Add(this.primeraganada);
             this.peticion_groupBox.Controls.Add(this.partidasganadas);
             this.peticion_groupBox.Controls.Add(this.maxnivel);
             this.peticion_groupBox.Controls.Add(this.nivel);
@@ -212,18 +210,6 @@
             this.labeluser.TabIndex = 0;
             this.labeluser.Text = "Username:";
             // 
-            // primeraganada
-            // 
-            this.primeraganada.AutoSize = true;
-            this.primeraganada.Location = new System.Drawing.Point(174, 217);
-            this.primeraganada.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.primeraganada.Name = "primeraganada";
-            this.primeraganada.Size = new System.Drawing.Size(203, 24);
-            this.primeraganada.TabIndex = 10;
-            this.primeraganada.TabStop = true;
-            this.primeraganada.Text = "Primera partida ganada.";
-            this.primeraganada.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -261,7 +247,6 @@
         private System.Windows.Forms.TextBox contr_textBox;
         private System.Windows.Forms.TextBox user_textBox;
         private System.Windows.Forms.Label labeluser;
-        private System.Windows.Forms.RadioButton primeraganada;
     }
 }
 
