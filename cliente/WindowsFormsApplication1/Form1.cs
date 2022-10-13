@@ -81,7 +81,15 @@ namespace WindowsFormsApplication1
                     byte[] msg2 = new byte[80];
                     server.Receive(msg2);
                     mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                    MessageBox.Show("El nivel del jugador es: " + mensaje);
+                    if(Int32.Parse(mensaje) != -1)
+                    {
+                        MessageBox.Show("El nivel del jugador es: " + mensaje);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No existe el usuario");
+                    }
+                    
                 }
                 else
                 {
@@ -102,7 +110,15 @@ namespace WindowsFormsApplication1
                     byte[] msg2 = new byte[80];
                     server.Receive(msg2);
                     mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                    MessageBox.Show(username.Text + " ha ganado " + mensaje + " partidas.");
+                    if (Int32.Parse(mensaje) != -1)
+                    {
+                        MessageBox.Show(username.Text + " ha ganado " + mensaje + " partidas.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("No existe el usuario");
+                    }
+                    
 
                 }
                 else
@@ -113,17 +129,35 @@ namespace WindowsFormsApplication1
             }
             else if(maxnivel.Checked)
             {
-                // Enviamos nombre.
-                string mensaje = "4/";
-                // Enviamos al servidor el nombre tecleado
-                byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-                server.Send(msg);
+                if (username.Text != null)
+                {
 
-                //Recibimos la respuesta del servidor
-                byte[] msg2 = new byte[80];
-                server.Receive(msg2);
-                mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                MessageBox.Show("El jugador de mayor nivel es: " + mensaje);
+                    // Enviamos nombre.
+                    string mensaje = "4/" + username.Text;
+                    // Enviamos al servidor el nombre tecleado
+                    byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+                    server.Send(msg);
+
+                    //Recibimos la respuesta del servidor
+                    byte[] msg2 = new byte[80];
+                    server.Receive(msg2);
+                    mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
+                    if (Int32.Parse(mensaje) != -1)
+                    {
+                        MessageBox.Show("El jugador de mayor nivel es: " + mensaje);
+                    }
+                    else
+                    {
+                        MessageBox.Show("No existe el usuario");
+                    }
+
+
+                }
+                else
+                {
+                    MessageBox.Show("ERROR. No has introducido el usuario.");
+                }
+                
             }
             else
             {

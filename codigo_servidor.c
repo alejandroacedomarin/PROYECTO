@@ -91,7 +91,7 @@ int main (int argc, char *argv[])
 			}
 			else if(codigo == 4)
 			{
-				sprintf (respuesta,"%d",MaxNivel());
+				sprintf (respuesta,"%d",MaxNivel(nombre));
 			}
 			printf ("Respuesta: %s\n", respuesta);
 			//lo enviamos
@@ -149,8 +149,8 @@ int DamePartidasGanadas(char username[20])
 	
 	//Recogemos el resultado
 	
-	if (row == NULL)
-		printf ("No se han obtenido datos en la consulta\n");
+	if (row == NULL || atoi(row[0]) == 0)
+		return -1;
 	else
 		return atoi(row[0]);
 	
@@ -197,7 +197,8 @@ int DameNivel (char username[20])
 	resultado = mysql_store_result (conn); 
 	row = mysql_fetch_row (resultado);
 	if (row == NULL)
-		printf ("No se han obtenido datos en la consulta\n");
+		return -1;
+	
 	else
 		// El resultado debe ser una matriz con una sola fila
 		// y una columna que contiene el nivel
@@ -277,7 +278,7 @@ int DameNivel (char username[20])
 /*	mysql_close (conn);*/
 /*	exit(0);*/
 /*}*/
-int MaxNivel()
+int MaxNivel(char username[20])
 {
 	MYSQL *conn;
 	int err;
@@ -320,7 +321,7 @@ int MaxNivel()
 	
 	
 	if (row == NULL)
-		printf ("No se han obtenido datos en la consulta\n");
+		return -1;
 	else
 	{	
 		return atoi(row[0]);
