@@ -193,6 +193,7 @@
             this.contr_textBox.Name = "contr_textBox";
             this.contr_textBox.Size = new System.Drawing.Size(100, 26);
             this.contr_textBox.TabIndex = 2;
+            this.contr_textBox.UseSystemPasswordChar = true;
             // 
             // user_textBox
             // 

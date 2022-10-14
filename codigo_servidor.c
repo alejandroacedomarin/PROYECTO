@@ -66,8 +66,7 @@ int main (int argc, char *argv[])
 				
 				strcpy(nombre, p);
 				printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
-/*				p = strtok (NULL, "/");*/
-/*				strcpy(Password, p);*/
+				
 				
 				
 			}
@@ -75,11 +74,83 @@ int main (int argc, char *argv[])
 			{
 				terminar = 1;
 			}
-/*			else if(codigo == 1)*/
-/*			{*/
-				 
-/*				strcpy (respuesta, a(nombre,Password));*/
-/*			}*/
+			else if(codigo == 1)
+			{
+				p = strtok (NULL, "/");
+				strcpy(Password, p);
+				printf ("Codigo: %d, Nombre: %s, Password: %s\n", codigo, nombre,Password);
+				MYSQL *conn;
+				int err;
+				
+				MYSQL_RES *resultado;
+				MYSQL_ROW row;
+				
+				char consulta [100];
+				
+				
+				conn = mysql_init(NULL);
+				if (conn==NULL) {
+					printf ("Error al crear la conexion: %u %s\n", 
+							mysql_errno(conn), mysql_error(conn));
+					exit (1);
+				}
+				
+				conn = mysql_real_connect (conn, "localhost","root", "mysql", "Othello",0, NULL, 0);
+				if (conn==NULL) {
+					printf ("Error al inicializar la conexion: %u %s\n", 
+							mysql_errno(conn), mysql_error(conn));
+					exit (1);
+				}
+				
+				
+				strcpy (consulta, "SELECT Password FROM Jugador WHERE Username = '");
+				strcat (consulta, nombre);
+				strcat (consulta, "'");
+				
+				
+				
+				
+				err=mysql_query (conn, consulta);
+				if (err!=0) {
+					printf ("Error al consultar datos de la base %u %s\n",
+							mysql_errno(conn), mysql_error(conn));
+					exit (1);
+				}
+				
+				resultado = mysql_store_result (conn);
+				row = mysql_fetch_row (resultado);
+				
+				
+				if (row == NULL)
+				{
+					printf ("No se han obtenido datos en la consulta\n");
+					strcpy(respuesta, "NO");
+				}
+				
+					
+				else
+				{	
+					if (row[0] == Password)
+					{
+						
+						strcpy(respuesta, "SI");
+						
+					}
+					else
+					{
+						strcpy(respuesta, "NO");
+						
+					}	
+				}
+				
+				
+				
+				
+				
+				mysql_close (conn);
+				exit(0);
+				
+			}
 			else if(codigo == 2)
 			{
 				printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
@@ -212,71 +283,7 @@ int DameNivel (char username[20])
 
 /*char a(char username[20], char Password[10])*/
 /*{*/
-/*	MYSQL *conn;*/
-/*	int err;*/
 	
-/*	MYSQL_RES *resultado;*/
-/*	MYSQL_ROW row;*/
-	
-/*	char consulta [100];*/
-/*	char respuesta[100];*/
-	
-/*	conn = mysql_init(NULL);*/
-/*	if (conn==NULL) {*/
-/*		printf ("Error al crear la conexion: %u %s\n", */
-/*				mysql_errno(conn), mysql_error(conn));*/
-/*		exit (1);*/
-/*	}*/
-
-/*	conn = mysql_real_connect (conn, "localhost","root", "mysql", "Othello",0, NULL, 0);*/
-/*	if (conn==NULL) {*/
-/*		printf ("Error al inicializar la conexion: %u %s\n", */
-/*				mysql_errno(conn), mysql_error(conn));*/
-/*		exit (1);*/
-/*	}*/
-	
-	
-/*	strcpy (consulta, "SELECT Password FROM Jugador WHERE username = '");*/
-/*	strcat (consulta, username);*/
-/*	strcat (consulta, "'");*/
-	
-	
-	
-	
-/*	err=mysql_query (conn, consulta);*/
-/*	if (err!=0) {*/
-/*		printf ("Error al consultar datos de la base %u %s\n",*/
-/*				mysql_errno(conn), mysql_error(conn));*/
-/*		exit (1);*/
-/*	}*/
-	
-/*	resultado = mysql_store_result (conn);*/
-/*	row = mysql_fetch_row (resultado);*/
-	
-	
-/*	if (row == NULL)*/
-/*		printf ("No se han obtenido datos en la consulta\n");*/
-/*	else*/
-/*	{	*/
-/*		if (row[0] == Password)*/
-/*		{*/
-			
-/*			strcpy(respuesta, "SI");*/
-/*			return respuesta;*/
-/*		}*/
-/*		else*/
-/*		{*/
-/*			strcpy(respuesta, "NO");*/
-/*			return respuesta;*/
-/*		}	*/
-/*	}*/
-
-	
-	
-	
-	
-/*	mysql_close (conn);*/
-/*	exit(0);*/
 /*}*/
 int MaxNivel(char username[20])
 {

@@ -35,8 +35,8 @@ namespace WindowsFormsApplication1
                 server.Connect(ipep);//Intentamos conectar el socket
                 
                 MessageBox.Show("Conectado");
-                iniciar_groupBox.Visible = false;
-                peticion_groupBox.Visible = true;
+                iniciar_groupBox.Visible = true;
+                peticion_groupBox.Visible = false;
 
             }
             catch (SocketException ex)
@@ -185,7 +185,12 @@ namespace WindowsFormsApplication1
                 peticion_groupBox.Visible = true;
             } 
             else
+            {
                 MessageBox.Show("Username o contraseña incorrecta.");
+                user_textBox.Text = null;
+                contr_textBox.Text = null;
+            }
+                
         }
     }
 }
