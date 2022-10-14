@@ -13,6 +13,7 @@ int main (int argc, char *argv[])
 	struct sockaddr_in serv_adr;
 	char peticion[512];
 	char respuesta[512];
+	char respuesta1[512];
 	//abrimos socket
 	if ((sock_listen = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 		printf("Error creant socket");
@@ -79,6 +80,7 @@ int main (int argc, char *argv[])
 				p = strtok (NULL, "/");
 				strcpy(Password, p);
 				printf ("Codigo: %d, Nombre: %s, Password: %s\n", codigo, nombre,Password);
+				
 				MYSQL *conn;
 				int err;
 				
@@ -103,9 +105,10 @@ int main (int argc, char *argv[])
 				}
 				
 				
-				strcpy (consulta, "SELECT Password FROM Jugador WHERE Username = '");
-				strcat (consulta, nombre);
-				strcat (consulta, "'");
+/*				strcpy (consulta, "SELECT Password FROM Jugador WHERE Username = '");*/
+/*				strcat (consulta, nombre);*/
+/*				strcat (consulta, "'");*/
+				sprintf(consulta, "SELECT Jugador.Username, Jugador.Password FROM Jugador WHERE (Jugador.Username='%s' AND Jugador.Password='%s')", nombre, Password);
 				
 				
 				
@@ -116,57 +119,67 @@ int main (int argc, char *argv[])
 							mysql_errno(conn), mysql_error(conn));
 					exit (1);
 				}
-				
+				printf("aqui\n");
 				resultado = mysql_store_result (conn);
+				
+				printf("aqui\n",resultado);
+				
 				row = mysql_fetch_row (resultado);
+				printf(row[0]);
+/*				printf ("No se han obtenido datos en la consuanteslta\n");*/
+/*				printf(Password);*/
 				
-				
-				if (row == NULL)
+				if (row[0] == NULL)
 				{
 					printf ("No se han obtenido datos en la consulta\n");
-					strcpy(respuesta, "NO");
+					strcpy(respuesta1, "NO");
 				}
 				
 					
 				else
 				{	
-					if (row[0] == Password)
-					{
+/*					if (atoi(row[0]) == Password)*/
+/*					{*/
+/*						printf ("Nno se han obtenido datos en la consulta\n");*/
+/*						sprintf(respuesta, "NO");*/
 						
-						strcpy(respuesta, "SI");
-						
-					}
-					else
-					{
-						strcpy(respuesta, "NO");
-						
-					}	
+/*					}*/
+/*					else*/
+/*					{*/
+/*						printf ("Nnno se han obtenido datos en la consulta\n");*/
+/*						strcpy (respuesta, "NO");*/
+/*					}	*/
+					strcpy(respuesta1, "SI");
+					
 				}
 				
 				
 				
-				
+				write (sock_conn, respuesta1, strlen(respuesta1));
 				
 				mysql_close (conn);
-				exit(0);
+				
 				
 			}
 			else if(codigo == 2)
 			{
 				printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
 				sprintf (respuesta,"%d",DameNivel(nombre));
+				write (sock_conn, respuesta, strlen(respuesta));
 			}
 			else if(codigo == 3)
 			{
 				sprintf (respuesta,"%d",DamePartidasGanadas(nombre));
+				write (sock_conn, respuesta, strlen(respuesta));
 			}
 			else if(codigo == 4)
 			{
 				sprintf (respuesta,"%d",MaxNivel(nombre));
+				write (sock_conn, respuesta, strlen(respuesta));
 			}
 			printf ("Respuesta: %s\n", respuesta);
 			//lo enviamos
-			write (sock_conn, respuesta, strlen(respuesta));
+			
 			
 			
 		}

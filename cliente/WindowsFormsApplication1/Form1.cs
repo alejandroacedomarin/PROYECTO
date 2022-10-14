@@ -37,6 +37,7 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("Conectado");
                 iniciar_groupBox.Visible = true;
                 peticion_groupBox.Visible = false;
+                desconectar_button.Visible = false;
 
             }
             catch (SocketException ex)
@@ -45,6 +46,8 @@ namespace WindowsFormsApplication1
                 MessageBox.Show("No he podido conectar con el servidor");
                 iniciar_groupBox.Visible = false;
                 peticion_groupBox.Visible = false;
+                desconectar_button.Visible = false;
+                this.Close();
                 return;
             }
         }
@@ -81,13 +84,22 @@ namespace WindowsFormsApplication1
                     byte[] msg2 = new byte[80];
                     server.Receive(msg2);
                     mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                    if(Int32.Parse(mensaje) != -1)
+                    
+                    try
                     {
-                        MessageBox.Show("El nivel del jugador es: " + mensaje);
+                        if (Int32.Parse(mensaje) != -1)
+                        {
+                            MessageBox.Show("El nivel del jugador es: " + mensaje);
+                        }
+                        else
+                        {
+                            MessageBox.Show("No existe el usuario");
+                        }
+                            
                     }
-                    else
+                    catch(System.FormatException)
                     {
-                        MessageBox.Show("No existe el usuario");
+                        MessageBox.Show("ERROR. No has introducido el usuario.");
                     }
                     
                 }
@@ -110,13 +122,21 @@ namespace WindowsFormsApplication1
                     byte[] msg2 = new byte[80];
                     server.Receive(msg2);
                     mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                    if (Int32.Parse(mensaje) != -1)
+                    try
                     {
-                        MessageBox.Show(username.Text + " ha ganado " + mensaje + " partidas.");
+                        if (Int32.Parse(mensaje) != -1)
+                        {
+                            MessageBox.Show(username.Text + " ha ganado " + mensaje + " partidas.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("No existe el usuario");
+                        }
+                            
                     }
-                    else
+                    catch
                     {
-                        MessageBox.Show("No existe el usuario");
+                        MessageBox.Show("ERROR. No has introducido el usuario.");
                     }
                     
 
@@ -142,13 +162,20 @@ namespace WindowsFormsApplication1
                     byte[] msg2 = new byte[80];
                     server.Receive(msg2);
                     mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                    if (Int32.Parse(mensaje) != -1)
+                    try
                     {
-                        MessageBox.Show("El jugador de mayor nivel es: " + mensaje);
+                        if (Int32.Parse(mensaje) != -1)
+                        {
+                            MessageBox.Show("El jugador de mayor nivel es: " + mensaje);
+                        }
+                        else
+                        {
+                            MessageBox.Show("No existe el usuario");
+                        }
                     }
-                    else
+                    catch(System.FormatException)
                     {
-                        MessageBox.Show("No existe el usuario");
+                        MessageBox.Show("ERROR. No has introducido el usuario.");
                     }
 
 
@@ -177,12 +204,13 @@ namespace WindowsFormsApplication1
             byte[] msg2 = new byte[80];
             server.Receive(msg2);
             mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-
-
+            
+            
             if (mensaje == "SI")
             {
                 iniciar_groupBox.Visible = false;
                 peticion_groupBox.Visible = true;
+                desconectar_button.Visible = true;
             } 
             else
             {
@@ -190,6 +218,7 @@ namespace WindowsFormsApplication1
                 user_textBox.Text = null;
                 contr_textBox.Text = null;
             }
+            
                 
         }
     }
