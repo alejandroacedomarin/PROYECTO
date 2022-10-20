@@ -22,34 +22,7 @@ namespace WindowsFormsApplication1
         private void Form1_Load(object sender, EventArgs e)
         {
             
-            //Creamos un IPEndPoint con el ip del servid0r y puerto del servidor 
-            //al que deseamos conectarnos
-            IPAddress direc = IPAddress.Parse("192.168.56.101");
-            IPEndPoint ipep = new IPEndPoint(direc, 9080);
-
-
-            //Creamos el socket 
-            server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            try
-            {
-                server.Connect(ipep);//Intentamos conectar el socket
-                
-                MessageBox.Show("Conectado");
-                iniciar_groupBox.Visible = true;
-                peticion_groupBox.Visible = false;
-                desconectar_button.Visible = false;
-
-            }
-            catch (SocketException ex)
-            {
-                //Si hay excepcion imprimimos error y salimos del programa con return 
-                MessageBox.Show("No he podido conectar con el servidor");
-                iniciar_groupBox.Visible = false;
-                peticion_groupBox.Visible = false;
-                desconectar_button.Visible = false;
-                this.Close();
-                return;
-            }
+           
         }
 
 
@@ -65,7 +38,7 @@ namespace WindowsFormsApplication1
             
             server.Shutdown(SocketShutdown.Both);
             server.Close();
-
+            this.BackColor = Color.Gray;
 
         }
 
@@ -220,6 +193,44 @@ namespace WindowsFormsApplication1
             }
             
                 
+        }
+
+        private void peticion_groupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void conect_button_Click(object sender, EventArgs e)
+        {
+            //Creamos un IPEndPoint con el ip del servid0r y puerto del servidor 
+            //al que deseamos conectarnos
+            IPAddress direc = IPAddress.Parse("192.168.56.101");
+            IPEndPoint ipep = new IPEndPoint(direc, 9080);
+
+
+            //Creamos el socket 
+            server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            try
+            {
+                server.Connect(ipep);//Intentamos conectar el socket
+
+                MessageBox.Show("Conectado");
+                iniciar_groupBox.Visible = true;
+                peticion_groupBox.Visible = false;
+                desconectar_button.Visible = false;
+                this.BackColor=Color.Green;
+
+            }
+            catch (SocketException ex)
+            {
+                //Si hay excepcion imprimimos error y salimos del programa con return 
+                MessageBox.Show("No he podido conectar con el servidor");
+                iniciar_groupBox.Visible = false;
+                peticion_groupBox.Visible = false;
+                desconectar_button.Visible = false;
+                this.Close();
+                return;
+            }
         }
     }
 }

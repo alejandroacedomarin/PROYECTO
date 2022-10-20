@@ -43,6 +43,7 @@
             this.contr_textBox = new System.Windows.Forms.TextBox();
             this.user_textBox = new System.Windows.Forms.TextBox();
             this.labeluser = new System.Windows.Forms.Label();
+            this.conect_button = new System.Windows.Forms.Button();
             this.peticion_groupBox.SuspendLayout();
             this.iniciar_groupBox.SuspendLayout();
             this.SuspendLayout();
@@ -94,6 +95,7 @@
             this.peticion_groupBox.TabIndex = 6;
             this.peticion_groupBox.TabStop = false;
             this.peticion_groupBox.Text = "Peticion";
+            this.peticion_groupBox.Enter += new System.EventHandler(this.peticion_groupBox_Enter);
             // 
             // partidasganadas
             // 
@@ -211,11 +213,22 @@
             this.labeluser.TabIndex = 0;
             this.labeluser.Text = "Username:";
             // 
+            // conect_button
+            // 
+            this.conect_button.Location = new System.Drawing.Point(410, 63);
+            this.conect_button.Name = "conect_button";
+            this.conect_button.Size = new System.Drawing.Size(182, 39);
+            this.conect_button.TabIndex = 12;
+            this.conect_button.Text = "CONECTAR";
+            this.conect_button.UseVisualStyleBackColor = true;
+            this.conect_button.Click += new System.EventHandler(this.conect_button_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1112, 865);
+            this.Controls.Add(this.conect_button);
             this.Controls.Add(this.iniciar_groupBox);
             this.Controls.Add(this.desconectar_button);
             this.Controls.Add(this.peticion_groupBox);
@@ -248,6 +261,7 @@
         private System.Windows.Forms.TextBox contr_textBox;
         private System.Windows.Forms.TextBox user_textBox;
         private System.Windows.Forms.Label labeluser;
+        private System.Windows.Forms.Button conect_button;
     }
 }
 

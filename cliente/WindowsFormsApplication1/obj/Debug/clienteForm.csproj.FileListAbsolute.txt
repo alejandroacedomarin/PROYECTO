@@ -115,3 +115,12 @@ C:\Share\PROYECTO\cliente\WindowsFormsApplication1\obj\Debug\clienteForm.csproj.
 C:\Share\PROYECTO\cliente\WindowsFormsApplication1\obj\Debug\clienteForm.csproj.CoreCompileInputs.cache
 C:\Share\PROYECTO\cliente\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
 C:\Share\PROYECTO\cliente\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
+C:\Users\laura\OneDrive\Escriptori\SO\PROYECTO\cliente\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.exe
+C:\Users\laura\OneDrive\Escriptori\SO\PROYECTO\cliente\WindowsFormsApplication1\bin\Debug\WindowsFormsApplication1.pdb
+C:\Users\laura\OneDrive\Escriptori\SO\PROYECTO\cliente\WindowsFormsApplication1\obj\Debug\clienteForm.csproj.AssemblyReference.cache
+C:\Users\laura\OneDrive\Escriptori\SO\PROYECTO\cliente\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Form1.resources
+C:\Users\laura\OneDrive\Escriptori\SO\PROYECTO\cliente\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.Properties.Resources.resources
+C:\Users\laura\OneDrive\Escriptori\SO\PROYECTO\cliente\WindowsFormsApplication1\obj\Debug\clienteForm.csproj.GenerateResource.cache
+C:\Users\laura\OneDrive\Escriptori\SO\PROYECTO\cliente\WindowsFormsApplication1\obj\Debug\clienteForm.csproj.CoreCompileInputs.cache
+C:\Users\laura\OneDrive\Escriptori\SO\PROYECTO\cliente\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.exe
+C:\Users\laura\OneDrive\Escriptori\SO\PROYECTO\cliente\WindowsFormsApplication1\obj\Debug\WindowsFormsApplication1.pdb
