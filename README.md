@@ -11,6 +11,6 @@ Version 2 generada por Laura
 
 Version 2 verificada por Alejandro
 
-Version comunicada por Marina
+Version 2 comunicada por Marina
 
 url: https://www.youtube.com/watch?v=xths7epSUhY 
