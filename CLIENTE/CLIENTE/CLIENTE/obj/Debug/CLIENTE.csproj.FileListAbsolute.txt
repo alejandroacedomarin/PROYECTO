@@ -1,0 +1,10 @@
+C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\bin\Debug\CLIENTE.exe.config
+C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\bin\Debug\CLIENTE.exe
+C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\bin\Debug\CLIENTE.pdb
+C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\obj\Debug\CLIENTE.csproj.AssemblyReference.cache
+C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\obj\Debug\CLIENTE.Form1.resources
+C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\obj\Debug\CLIENTE.Properties.Resources.resources
+C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\obj\Debug\CLIENTE.csproj.GenerateResource.cache
+C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\obj\Debug\CLIENTE.csproj.CoreCompileInputs.cache
+C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\obj\Debug\CLIENTE.exe
+C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\obj\Debug\CLIENTE.pdb
