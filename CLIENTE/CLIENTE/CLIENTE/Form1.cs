@@ -229,5 +229,12 @@ namespace CLIENTE
             mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
             cont_lbl.Text=mensaje;
         }
+
+        private void juga_btn_Click(object sender, EventArgs e)
+        {
+            Partida p = new Partida();
+            p.ShowDialog();
+
+        }
     }
 }

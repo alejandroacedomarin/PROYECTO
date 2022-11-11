@@ -46,6 +46,7 @@ namespace CLIENTE
             this.desconectar_button = new System.Windows.Forms.Button();
             this.servicios_btn = new System.Windows.Forms.Button();
             this.cont_lbl = new System.Windows.Forms.Label();
+            this.juga_btn = new System.Windows.Forms.Button();
             this.signin_groupBox.SuspendLayout();
             this.peticiones_groupBox.SuspendLayout();
             this.SuspendLayout();
@@ -220,11 +221,22 @@ namespace CLIENTE
             this.cont_lbl.Size = new System.Drawing.Size(196, 184);
             this.cont_lbl.TabIndex = 6;
             // 
+            // juga_btn
+            // 
+            this.juga_btn.Location = new System.Drawing.Point(362, 438);
+            this.juga_btn.Name = "juga_btn";
+            this.juga_btn.Size = new System.Drawing.Size(107, 41);
+            this.juga_btn.TabIndex = 6;
+            this.juga_btn.Text = "jugar";
+            this.juga_btn.UseVisualStyleBackColor = true;
+            this.juga_btn.Click += new System.EventHandler(this.juga_btn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 612);
+            this.Controls.Add(this.juga_btn);
             this.Controls.Add(this.cont_lbl);
             this.Controls.Add(this.servicios_btn);
             this.Controls.Add(this.desconectar_button);
@@ -260,6 +272,7 @@ namespace CLIENTE
         private System.Windows.Forms.RadioButton nivel_radiobtn;
         private System.Windows.Forms.Button servicios_btn;
         private System.Windows.Forms.Label cont_lbl;
+        private System.Windows.Forms.Button juga_btn;
     }
 }
 

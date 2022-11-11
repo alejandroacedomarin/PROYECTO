@@ -8,3 +8,4 @@ C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\obj\Debug\CLIENTE.csp
 C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\obj\Debug\CLIENTE.csproj.CoreCompileInputs.cache
 C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\obj\Debug\CLIENTE.exe
 C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\obj\Debug\CLIENTE.pdb
+C:\Users\laura\OneDrive\Escriptori\CLIENTE\CLIENTE\CLIENTE\obj\Debug\CLIENTE.Partida.resources
