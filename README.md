@@ -7,6 +7,4 @@ URL video --> https://youtu.be/XMLqMb9jxj0
 
 VersionConConexionDesconexion
 
-Version 2 generada por Laura
-
 
