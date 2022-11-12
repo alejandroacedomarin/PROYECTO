@@ -1,0 +1,6 @@
+C:\Share\CLIENTE\PartidaLib\bin\Debug\PartidaLib.dll
+C:\Share\CLIENTE\PartidaLib\bin\Debug\PartidaLib.pdb
+C:\Share\CLIENTE\PartidaLib\obj\Debug\PartidaLib.csproj.AssemblyReference.cache
+C:\Share\CLIENTE\PartidaLib\obj\Debug\PartidaLib.csproj.CoreCompileInputs.cache
+C:\Share\CLIENTE\PartidaLib\obj\Debug\PartidaLib.dll
+C:\Share\CLIENTE\PartidaLib\obj\Debug\PartidaLib.pdb

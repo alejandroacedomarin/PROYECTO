@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PartidaLib", "PartidaLib\PartidaLib.csproj", "{FD83FF25-2574-4EF3-9ACE-C5EE737C1964}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClienteForms", "ClienteForms\ClienteForms.csproj", "{3BC4CDA6-E553-4150-8EEA-6E848F70671D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD83FF25-2574-4EF3-9ACE-C5EE737C1964}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD83FF25-2574-4EF3-9ACE-C5EE737C1964}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD83FF25-2574-4EF3-9ACE-C5EE737C1964}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD83FF25-2574-4EF3-9ACE-C5EE737C1964}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BC4CDA6-E553-4150-8EEA-6E848F70671D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BC4CDA6-E553-4150-8EEA-6E848F70671D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BC4CDA6-E553-4150-8EEA-6E848F70671D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BC4CDA6-E553-4150-8EEA-6E848F70671D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5270AF7B-A453-4C99-AAA8-59920AD04812}
+	EndGlobalSection
+EndGlobal
