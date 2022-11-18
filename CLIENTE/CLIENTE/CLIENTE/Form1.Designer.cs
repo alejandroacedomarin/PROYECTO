@@ -47,6 +47,8 @@ namespace CLIENTE
             this.servicios_btn = new System.Windows.Forms.Button();
             this.cont_lbl = new System.Windows.Forms.Label();
             this.juga_btn = new System.Windows.Forms.Button();
+            this.ListaConectados_btn = new System.Windows.Forms.Button();
+            this.ListaConectados_lbl = new System.Windows.Forms.Label();
             this.signin_groupBox.SuspendLayout();
             this.peticiones_groupBox.SuspendLayout();
             this.SuspendLayout();
@@ -79,6 +81,7 @@ namespace CLIENTE
             // 
             this.password_txt.Location = new System.Drawing.Point(134, 84);
             this.password_txt.Name = "password_txt";
+            this.password_txt.PasswordChar = '*';
             this.password_txt.Size = new System.Drawing.Size(100, 26);
             this.password_txt.TabIndex = 1;
             // 
@@ -98,6 +101,7 @@ namespace CLIENTE
             this.usuario_txt.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.usuario_txt.Size = new System.Drawing.Size(100, 26);
             this.usuario_txt.TabIndex = 1;
+            this.usuario_txt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // user_label
             // 
@@ -231,11 +235,31 @@ namespace CLIENTE
             this.juga_btn.UseVisualStyleBackColor = true;
             this.juga_btn.Click += new System.EventHandler(this.juga_btn_Click);
             // 
+            // ListaConectados_btn
+            // 
+            this.ListaConectados_btn.Location = new System.Drawing.Point(864, 132);
+            this.ListaConectados_btn.Name = "ListaConectados_btn";
+            this.ListaConectados_btn.Size = new System.Drawing.Size(172, 69);
+            this.ListaConectados_btn.TabIndex = 7;
+            this.ListaConectados_btn.Text = "¿Quien esta conectado?";
+            this.ListaConectados_btn.UseVisualStyleBackColor = true;
+            this.ListaConectados_btn.Click += new System.EventHandler(this.ListaConectados_btn_Click);
+            // 
+            // ListaConectados_lbl
+            // 
+            this.ListaConectados_lbl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ListaConectados_lbl.Location = new System.Drawing.Point(857, 225);
+            this.ListaConectados_lbl.Name = "ListaConectados_lbl";
+            this.ListaConectados_lbl.Size = new System.Drawing.Size(195, 198);
+            this.ListaConectados_lbl.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 612);
+            this.ClientSize = new System.Drawing.Size(1111, 612);
+            this.Controls.Add(this.ListaConectados_lbl);
+            this.Controls.Add(this.ListaConectados_btn);
             this.Controls.Add(this.juga_btn);
             this.Controls.Add(this.cont_lbl);
             this.Controls.Add(this.servicios_btn);
@@ -273,6 +297,8 @@ namespace CLIENTE
         private System.Windows.Forms.Button servicios_btn;
         private System.Windows.Forms.Label cont_lbl;
         private System.Windows.Forms.Button juga_btn;
+        private System.Windows.Forms.Button ListaConectados_btn;
+        private System.Windows.Forms.Label ListaConectados_lbl;
     }
 }
 

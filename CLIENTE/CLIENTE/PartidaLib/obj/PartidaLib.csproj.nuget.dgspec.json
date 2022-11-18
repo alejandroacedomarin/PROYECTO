@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\laura\\OneDrive\\Escriptori\\CLIENTE\\CLIENTE\\PartidaLib\\PartidaLib.csproj": {}
+    "C:\\Users\\laura\\OneDrive\\Escriptori\\Othello\\PROYECTO\\CLIENTE\\CLIENTE\\PartidaLib\\PartidaLib.csproj": {}
   },
   "projects": {
-    "C:\\Users\\laura\\OneDrive\\Escriptori\\CLIENTE\\CLIENTE\\PartidaLib\\PartidaLib.csproj": {
+    "C:\\Users\\laura\\OneDrive\\Escriptori\\Othello\\PROYECTO\\CLIENTE\\CLIENTE\\PartidaLib\\PartidaLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\laura\\OneDrive\\Escriptori\\CLIENTE\\CLIENTE\\PartidaLib\\PartidaLib.csproj",
+        "projectUniqueName": "C:\\Users\\laura\\OneDrive\\Escriptori\\Othello\\PROYECTO\\CLIENTE\\CLIENTE\\PartidaLib\\PartidaLib.csproj",
         "projectName": "PartidaLib",
-        "projectPath": "C:\\Users\\laura\\OneDrive\\Escriptori\\CLIENTE\\CLIENTE\\PartidaLib\\PartidaLib.csproj",
+        "projectPath": "C:\\Users\\laura\\OneDrive\\Escriptori\\Othello\\PROYECTO\\CLIENTE\\CLIENTE\\PartidaLib\\PartidaLib.csproj",
         "packagesPath": "C:\\Users\\laura\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\laura\\OneDrive\\Escriptori\\CLIENTE\\CLIENTE\\PartidaLib\\obj\\",
+        "outputPath": "C:\\Users\\laura\\OneDrive\\Escriptori\\Othello\\PROYECTO\\CLIENTE\\CLIENTE\\PartidaLib\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\laura\\AppData\\Roaming\\NuGet\\NuGet.Config",

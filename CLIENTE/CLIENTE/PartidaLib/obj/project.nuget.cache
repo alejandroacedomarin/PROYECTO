@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "iuHu7d4n3YFse/uqnaoCjYpDAhWjyhQ6o5gtGpuLzoGMnGypuDo2+xblHyJLDSs1K1xknByA219tCpnvWuVCqg==",
+  "dgSpecHash": "hwcKqCKE0MOsc+1EoAFzVUVme37xyH+SVJKMZqpu3PZ9GCOzPpl6sEggXD9CowUCEMGlpwKx3Jx60gKDJR8Rjw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\laura\\OneDrive\\Escriptori\\CLIENTE\\CLIENTE\\PartidaLib\\PartidaLib.csproj",
+  "projectFilePath": "C:\\Users\\laura\\OneDrive\\Escriptori\\Othello\\PROYECTO\\CLIENTE\\CLIENTE\\PartidaLib\\PartidaLib.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
