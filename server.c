@@ -43,21 +43,19 @@ void *AtenderCliente (void *socket)
 	int ret;
 	
 	//	printf("Aqui %d\n", sockets[i]);
-
+	
 	
 	
 	int terminar = 0;
 	while(terminar == 0)
 	{
-	
+		
 		
 		//Ahora recibimos su nombre, que dejamos en el buf
 		ret=read(sock_conn,peticion, sizeof(peticion));
 		
 		printf ("Recibido\n");
 		
-		
-	
 		
 		//Tenemos que a￱adir la marca de fin de string para que no escriba lo que hay en el buffer
 		peticion[ret]='\0';
@@ -73,20 +71,6 @@ void *AtenderCliente (void *socket)
 		char nombre[20];
 		char Password[10];
 		
-		if(codigo != 10)
-		{
-			//Lista de conectados
-			char conectados[300];
-			conectados[0]= '\0';
-			DameConectados(&miLista, conectados);
-			sprintf(respuesta,"6/%s", conectados);
-			write (sock_conn, respuesta, strlen(respuesta));
-			char notificacion[200];
-			sprintf (notificacion, "6/%s", conectados);
-			int j;
-			for(j=0; j<i; j++)
-				write (sockets[j], notificacion, strlen(notificacion));
-		}
 		
 		
 		if ((codigo !=0)&&(codigo!=5)&&(codigo!=6))
@@ -100,13 +84,13 @@ void *AtenderCliente (void *socket)
 		
 		/*if (codigo == 6)
 		{
-			
-			char conectados[300];
-			conectados[0]= '\0';
-			printf("estoy aqui2");
-			DameConectados(&miLista, conectados);
-			printf(conectados);
-			write (sock_conn, conectados, strlen(conectados));
+		
+		char conectados[300];
+		conectados[0]= '\0';
+		printf("estoy aqui2");
+		DameConectados(&miLista, conectados);
+		printf(conectados);
+		write (sock_conn, conectados, strlen(conectados));
 		}*/
 		
 		if (codigo ==0) //petici?n de desconexi?n
@@ -215,7 +199,7 @@ void *AtenderCliente (void *socket)
 				
 			}
 			
-		
+			
 			
 			write (sock_conn, respuesta1, strlen(respuesta1));
 			
@@ -276,7 +260,7 @@ int main (int argc, char *argv[])
 	//htonl formatea el numero que recibe al formato necesario
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	//escuchamos en el puerto 9050
-	serv_adr.sin_port = htons(9070);
+	serv_adr.sin_port = htons(9080);
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
 		printf ("Error al bind");
 	
@@ -298,19 +282,7 @@ int main (int argc, char *argv[])
 		
 		sockets[i]= sock_conn;
 		
-		//Lista de conectados
-	
-		/*char respuesta[200];
-		char conectados[300];
-		conectados[0]= '\0';
-		DameConectados(&miLista, conectados);
-		sprintf(respuesta,"6/%s", conectados);
-		write (sock_conn, respuesta, strlen(respuesta));
-		char notificacion[200];
-		sprintf (notificacion, "6/%s", conectados);
-		int j;
-		for(j=0; j<i; j++)
-			write (sockets[j], notificacion, strlen(notificacion));*/
+		
 		
 		//Crear thread y decirle lo que tiene que hacer
 		pthread_create (&thread, NULL, AtenderCliente, &sockets[i]);
@@ -540,7 +512,7 @@ int MaxNivel(char username[20])
 		return atoi(row[0]);
 	}
 	
-
+	
 	
 	
 	
@@ -548,5 +520,6 @@ int MaxNivel(char username[20])
 	mysql_close (conn);
 	exit(0);
 }
+
 
 
