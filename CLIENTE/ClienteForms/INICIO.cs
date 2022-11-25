@@ -39,9 +39,9 @@ namespace ClienteForms
                 byte[] msg2 = new byte[80];
                 server.Receive(msg2);
                 string mensaje_limpio = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                MessageBox.Show(mensaje_limpio);
+                //MessageBox.Show(mensaje_limpio);
                 string[] trozos = mensaje_limpio.Split('/');
-                MessageBox.Show(trozos[0]);
+                //MessageBox.Show(trozos[0]);
                 int codigo = Convert.ToInt32(trozos[0]);
                 string mensaje = trozos[1].Split('\0')[0];
                
@@ -136,17 +136,17 @@ namespace ClienteForms
                         int i=0;
                         int n = mensaje.Length;
                         dataGridView_conectados.ClearSelection();
-                        try
+                        this.dataGridView_conectados.Rows.Clear();
+                        /*try
                         {
                             dataGridView_conectados.Rows.Remove(dataGridView_conectados.Rows[0]);
                         }
                         catch(System.InvalidOperationException)
                         {
 
-                        }
+                        }*/
                         
-
-                        
+                                               
                         int m = 0;
                         while (i < n)
                         {
@@ -170,7 +170,7 @@ namespace ClienteForms
             //Creamos un IPEndPoint con el ip del servid0o y puerto del servidor 
             //al que deseamos conectarnos
             IPAddress direc = IPAddress.Parse("192.168.56.101");
-            IPEndPoint ipep = new IPEndPoint(direc, 9080);
+            IPEndPoint ipep = new IPEndPoint(direc, 9070);
 
 
             //Creamos el socket 

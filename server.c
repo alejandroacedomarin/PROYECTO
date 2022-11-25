@@ -104,11 +104,11 @@ void *AtenderCliente (void *socket)
 			DameConectados(&miLista, conectados);
 			sprintf(noti,"6/%s", conectados);
 			strcpy(respuesta, noti);
-			printf("me cagao:\n",respuesta);
+			//printf("me cagao:\n",respuesta);
 			int j;
 			for(j=0; j<miLista.num; j++)
 				write (sockets[j], respuesta, strlen(respuesta));
-			printf("dentro for:\n",sockets[j]);
+			//printf("dentro for:\n",sockets[j]);
 			terminar = 1;
 			
 			
@@ -192,11 +192,11 @@ void *AtenderCliente (void *socket)
 				DameConectados(&miLista, conectados);
 				sprintf(noti,"6/%s", conectados);
 				strcpy(respuesta, noti);
-				printf("me cagao:\n",respuesta);
+				//printf("me cagao:\n",respuesta);
 				int j;
 				for(j=0; j<miLista.num; j++)
 					write (sockets[j], respuesta, strlen(respuesta));
-					printf("dentro for:\n",sockets[j]);
+				//printf("dentro for:\n",sockets[j]);
 				
 				
 			}
@@ -262,7 +262,7 @@ int main (int argc, char *argv[])
 	//htonl formatea el numero que recibe al formato necesario
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	//escuchamos en el puerto 9050
-	serv_adr.sin_port = htons(9080);
+	serv_adr.sin_port = htons(9070);
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
 		printf ("Error al bind");
 	
@@ -320,8 +320,8 @@ int Eliminar (ListaConectados *lista, char nombre[20])
 	int pos = DamePos(lista,nombre);
 	printf("pos %d\n",pos);
 	
-    int i=0;
-    for (i = pos; i < lista->num-1; i++)
+	int i=0;
+	for (i = pos; i < lista->num-1; i++)
 	{
 		strcpy(lista->conectados[i].nombre, lista->conectados[i+1].nombre);
 		lista->conectados[i].socket = lista->conectados[i+1].socket;
@@ -350,15 +350,16 @@ void DamePos (ListaConectados *lista,  char nombre[20])
 	int i=0;
 	int terminado=0;
 	int pos;
-	while(i< lista->num && terminado==0 )
-	{
+	//while(i< lista->num && terminado==0 )
+	//{
 		/*sprintf(conectados, "%s%s,", conectados, lista->conectados[i].nombre);*/
 		if(lista->conectados[i].nombre==nombre)
 		{
 			int pos = i;
 		}
 		
-	}
+		//i++;
+	//}
 	return pos;
 } 
 
@@ -528,6 +529,8 @@ int MaxNivel(char username[20])
 	mysql_close (conn);
 	exit(0);
 }
+
+
 
 
 
