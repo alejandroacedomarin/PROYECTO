@@ -8,6 +8,10 @@
 #include <mysql.h>
 #include <pthread.h>
 
+
+
+//****************** VARIABLES GLOBALES ***********************
+
 int contador;
 int i;
 int sockets[100];
@@ -29,6 +33,25 @@ typedef struct {
 
 ListaConectados miLista;
 
+//estructura para la tabla de partidas
+typedef struct{
+	int idP;
+	int numParticipantes;
+	int idJ[10];
+	Conectado conectados [10];
+}Partida;
+
+typedef struct{
+	Partida partidas[100];
+	int num;
+}ListaPartidas;
+
+ListaPartidas TablaPartidas;
+
+
+
+
+//******************THREAD DE ATENDER CLIENTE***********************
 void *AtenderCliente (void *socket)
 {
 	int sock_conn;
@@ -67,7 +90,7 @@ void *AtenderCliente (void *socket)
 		//Vamos a ver que nos pide la peticion
 		char *p = strtok( peticion, "/");
 		int codigo = atoi(p);
-		printf("ya tengo el codigo %d\n", codigo);
+		//printf("ya tengo el codigo %d\n", codigo);
 		char nombre[20];
 		char Password[10];
 		
@@ -240,6 +263,7 @@ void *AtenderCliente (void *socket)
 }
 
 
+//****************** PROGRAMA MAIN ***********************
 
 int main (int argc, char *argv[])
 {
@@ -293,6 +317,9 @@ int main (int argc, char *argv[])
 	
 }
 
+
+
+//******************Funciones para la lista de conectados***********************
 
 //Funcion que a￱ade un nuevo conectado. Retorna 0 si se ha a￱adido correctamente y -1 si no se ha podido a￱adir debido a que la lista esta llena.
 int AddConectado (ListaConectados *lista, char nombre[20], int socket)
@@ -355,7 +382,43 @@ void DameSocket (ListaConectados *lista, int conectados [300])
 } 
 
 
+//******************Funciones para la tabla de partidas***********************
 
+int DameIdP(ListaPartidas*listap)
+{
+	int max =0;
+	for(int p = 0; p<listap->num; p++)
+	{
+		if(listap->partidas[p].idP > max)
+			max = listap->partidas[p].idP;
+		
+	}
+	return max;
+}
+
+int AnadirPartida (ListaPartidas *listap)
+{
+	if (listap->num ==100)
+		return -1;
+	else {
+		listap->partidas[listap->num].idP = listap->num;
+		listap->num++;
+		return 0;
+	}
+}
+
+EliminarPartida(ListaPartidas *listap, int idP)
+{
+	if(listap->num <= 0)
+		return -1;
+	else {
+		listap->partidas[idP].idP = listap ->partidas[idP+1].idP;
+		listap->num--;
+		return 0;
+	}
+}
+
+//******************Funciones para las consultas***********************
 
 int DamePartidasGanadas(char username[20])
 {
@@ -520,6 +583,3 @@ int MaxNivel(char username[20])
 	mysql_close (conn);
 	exit(0);
 }
-
-
-
