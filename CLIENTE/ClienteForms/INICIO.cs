@@ -10,18 +10,19 @@ using System.Net;
 using System.Net.Sockets;
 using System.Windows.Forms;
 using PartidaLib;
-
+using System.Threading;
 namespace ClienteForms
 {
     public partial class INICIO : Form
     {
         ListaFichas listafichas = new ListaFichas();
         Socket server;
+        Thread atender;
         public INICIO()
         {
             InitializeComponent();
-            
-            peticiones_groupBox.Visible = false;
+            CheckForIllegalCrossThreadCalls = false;
+            peticiones_groupBox.Visible = true;
         }
 
         private void INICIO_Load(object sender, EventArgs e)
@@ -29,9 +30,133 @@ namespace ClienteForms
 
         }
 
+        private void AtenderServer()
+        {
+            while (true)
+            {
+                //codigo recibir lista conectados del server
+                //Recibimos la respuesta del servidor
+                byte[] msg2 = new byte[80];
+                server.Receive(msg2);
+                string mensaje_limpio = Encoding.ASCII.GetString(msg2).Split('\0')[0];
+                MessageBox.Show(mensaje_limpio);
+                string[] trozos = mensaje_limpio.Split('/');
+                MessageBox.Show(trozos[0]);
+                int codigo = Convert.ToInt32(trozos[0]);
+                string mensaje = trozos[1].Split('\0')[0];
+               
+
+                switch (codigo)
+                {
+
+                    case 1: //funcion LogIn
+
+                        if (mensaje == "SI")
+                        {
+                            //MessageBox.Show("Has iniciado sesion");
+
+                            signin_groupBox.Visible = false;
+                            peticiones_groupBox.Visible = true;
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("Username o contraseña incorrecta.");
+                            usuario_txt.Text = null;
+                            password_txt.Text = null;
+                        }
+                        break;
+
+                    case 2:  //Funcion DameNIvel
+
+                        try
+                        {
+                            if (Int32.Parse(mensaje) != -1)
+                            {
+                                MessageBox.Show("El nivel del jugador es: " + mensaje);
+                            }
+                            else
+                            {
+                                MessageBox.Show("No existe el usuario");
+                            }
+
+                        }
+                        catch (System.FormatException)
+                        {
+                            MessageBox.Show("ERROR. No has introducido el usuario.");
+                        }
+
+                        break;
+
+                    case 3: // Partidas Ganadas
+                        try
+                        {
+                            if (Int32.Parse(mensaje) != -1)
+                            {
+                                MessageBox.Show(user_txt.Text + " ha ganado " + mensaje + " partidas.");
+                            }
+                            else
+                            {
+                                MessageBox.Show("No existe el usuario");
+                            }
+
+                        }
+                        catch
+                        {
+                            MessageBox.Show("ERROR. No has introducido el usuario.");
+                        }
+                        break;
+
+
+                    case 4: // Maximo Nivel
+                        try
+                        {
+                            if (Int32.Parse(mensaje) != -1)
+                            {
+                                MessageBox.Show("El jugador de mayor nivel es: " + mensaje);
+                            }
+                            else
+                            {
+                                MessageBox.Show("No existe el usuario");
+                            }
+                        }
+                        catch (System.FormatException)
+                        {
+                            MessageBox.Show("ERROR. No has introducido el usuario.");
+                        }
+                        break;
+
+
+                    case 5: // DameServicios
+                        cont_lbl.Text = mensaje;
+                        break;
+
+                    case 6: // Notificacion lista de conectados
+                        
+                        int i=0;
+                        int n = mensaje.Length;
+                        dataGridView_conectados.ClearSelection();
+                        int m = 0;
+                        while (i < n)
+                        {
+                            string[] conectado = mensaje.Split(',');
+                            string usuario = conectado[m];
+                            dataGridView_conectados.Rows.Add(usuario);
+                            i = i + usuario.Length + 1;
+                            m = m + 1;
+                        }
+                        
+                       
+                        break;
+                }
+
+
+            }
+        }
+
         private void conectar_button_Click(object sender, EventArgs e)
         {
-            //Creamos un IPEndPoint con el ip del servid0r y puerto del servidor 
+            //Creamos un IPEndPoint con el ip del servid0o y puerto del servidor 
             //al que deseamos conectarnos
             IPAddress direc = IPAddress.Parse("192.168.56.101");
             IPEndPoint ipep = new IPEndPoint(direc, 9080);
@@ -45,7 +170,7 @@ namespace ClienteForms
 
                 MessageBox.Show("Conectado");
                 signin_groupBox.Visible = true;
-                peticiones_groupBox.Visible = false;
+               // peticiones_groupBox.Visible = false;
                 this.BackColor = Color.Green;
 
             }
@@ -58,6 +183,11 @@ namespace ClienteForms
                 this.Close();
                 return;
             }
+
+            //ponemos en marcha el thread
+            ThreadStart ts = delegate { AtenderServer(); };
+            atender = new Thread(ts);
+            atender.Start();
         }
 
         private void desconectar_button_Click(object sender, EventArgs e)
@@ -72,6 +202,9 @@ namespace ClienteForms
             this.BackColor = Color.Gray;
             server.Shutdown(SocketShutdown.Both);
             server.Close();
+
+            // Cerramos thread
+            atender.Abort();
         }
 
         private void enviar_button_Click(object sender, EventArgs e)
@@ -85,28 +218,7 @@ namespace ClienteForms
                     byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                     server.Send(msg);
 
-                    //Recibimos la respuesta del servidor
-                    byte[] msg2 = new byte[80];
-                    server.Receive(msg2);
-                    mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-
-                    try
-                    {
-                        if (Int32.Parse(mensaje) != -1)
-                        {
-                            MessageBox.Show("El nivel del jugador es: " + mensaje);
-                        }
-                        else
-                        {
-                            MessageBox.Show("No existe el usuario");
-                        }
-
-                    }
-                    catch (System.FormatException)
-                    {
-                        MessageBox.Show("ERROR. No has introducido el usuario.");
-                    }
-
+            
                 }
                 else
                 {
@@ -123,28 +235,7 @@ namespace ClienteForms
                     byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                     server.Send(msg);
 
-                    //Recibimos la respuesta del servidor
-                    byte[] msg2 = new byte[80];
-                    server.Receive(msg2);
-                    mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                    try
-                    {
-                        if (Int32.Parse(mensaje) != -1)
-                        {
-                            MessageBox.Show(user_txt.Text + " ha ganado " + mensaje + " partidas.");
-                        }
-                        else
-                        {
-                            MessageBox.Show("No existe el usuario");
-                        }
-
-                    }
-                    catch
-                    {
-                        MessageBox.Show("ERROR. No has introducido el usuario.");
-                    }
-
-
+                   
                 }
                 else
                 {
@@ -162,28 +253,6 @@ namespace ClienteForms
                     // Enviamos al servidor el nombre tecleado
                     byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                     server.Send(msg);
-
-                    //Recibimos la respuesta del servidor
-                    byte[] msg2 = new byte[80];
-                    server.Receive(msg2);
-                    mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-                    try
-                    {
-                        if (Int32.Parse(mensaje) != -1)
-                        {
-                            MessageBox.Show("El jugador de mayor nivel es: " + mensaje);
-                        }
-                        else
-                        {
-                            MessageBox.Show("No existe el usuario");
-                        }
-                    }
-                    catch (System.FormatException)
-                    {
-                        MessageBox.Show("ERROR. No has introducido el usuario.");
-                    }
-
-
                 }
                 else
                 {
@@ -203,25 +272,7 @@ namespace ClienteForms
             // Enviamos al servidor el nombre tecleado
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
-
-            //Recibimos la respuesta del servidor
-            byte[] msg2 = new byte[80];
-            server.Receive(msg2);
-            mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-
-
-            if (mensaje == "SI")
-            {
-                signin_groupBox.Visible = false;
-                peticiones_groupBox.Visible = true;
-            }
-
-            else
-            {
-                MessageBox.Show("Username o contraseña incorrecta.");
-                usuario_txt.Text = null;
-                password_txt.Text = null;
-            }
+                            
         }
 
         private void servicios_btn_Click(object sender, EventArgs e)
@@ -231,11 +282,6 @@ namespace ClienteForms
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
 
-            //Recibimos la respuesta del servidor
-            byte[] msg2 = new byte[80];
-            server.Receive(msg2);
-            mensaje = Encoding.ASCII.GetString(msg2).Split('\0')[0];
-            cont_lbl.Text = mensaje;
         }
 
         private void juga_btn_Click(object sender, EventArgs e)
