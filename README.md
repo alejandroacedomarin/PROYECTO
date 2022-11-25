@@ -27,8 +27,4 @@ Version 3 comunicada por Carla
 
 URL: https://youtu.be/QMrkwTPNam8
 
-------------------VERSION 4-------------------------
-
-Version 4 generada por Laura
-
-Version 4 verificada por Carla
+-----------------------------------------------------

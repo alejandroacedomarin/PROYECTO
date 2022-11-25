@@ -136,6 +136,17 @@ namespace ClienteForms
                         int i=0;
                         int n = mensaje.Length;
                         dataGridView_conectados.ClearSelection();
+                        try
+                        {
+                            dataGridView_conectados.Rows.Remove(dataGridView_conectados.Rows[0]);
+                        }
+                        catch(System.InvalidOperationException)
+                        {
+
+                        }
+                        
+
+                        
                         int m = 0;
                         while (i < n)
                         {
