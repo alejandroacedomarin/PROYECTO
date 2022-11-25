@@ -32,5 +32,3 @@ URL: https://youtu.be/QMrkwTPNam8
 Version 4 generada por Laura
 
 Version 4 verificada por Carla
-
-Version 4 comunicada por 
