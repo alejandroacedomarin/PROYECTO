@@ -50,9 +50,19 @@ namespace ClienteForms
             this.dataGridView_conectados = new System.Windows.Forms.DataGridView();
             this.Conectados = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.invitado_txt = new System.Windows.Forms.TextBox();
+            this.groupBox_invitacionPartida = new System.Windows.Forms.GroupBox();
+            this.button2_invitacionPartida_NO = new System.Windows.Forms.Button();
+            this.button_invitacionPartida_si = new System.Windows.Forms.Button();
+            this.label_invitacionPartida_name = new System.Windows.Forms.Label();
+            this.groupBox1_invitar = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label_yo = new System.Windows.Forms.Label();
             this.signin_groupBox.SuspendLayout();
             this.peticiones_groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_conectados)).BeginInit();
+            this.groupBox_invitacionPartida.SuspendLayout();
+            this.groupBox1_invitar.SuspendLayout();
             this.SuspendLayout();
             // 
             // signin_groupBox
@@ -246,8 +256,6 @@ namespace ClienteForms
             this.dataGridView_conectados.RowTemplate.Height = 28;
             this.dataGridView_conectados.Size = new System.Drawing.Size(381, 299);
             this.dataGridView_conectados.TabIndex = 11;
-            this.dataGridView_conectados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_conectados_CellContentClick);
-            this.dataGridView_conectados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_conectados_CellDoubleClick);
             // 
             // Conectados
             // 
@@ -263,11 +271,91 @@ namespace ClienteForms
             this.invitado_txt.Size = new System.Drawing.Size(100, 26);
             this.invitado_txt.TabIndex = 12;
             // 
+            // groupBox_invitacionPartida
+            // 
+            this.groupBox_invitacionPartida.Controls.Add(this.button2_invitacionPartida_NO);
+            this.groupBox_invitacionPartida.Controls.Add(this.button_invitacionPartida_si);
+            this.groupBox_invitacionPartida.Controls.Add(this.label_invitacionPartida_name);
+            this.groupBox_invitacionPartida.Location = new System.Drawing.Point(581, 422);
+            this.groupBox_invitacionPartida.Name = "groupBox_invitacionPartida";
+            this.groupBox_invitacionPartida.Size = new System.Drawing.Size(196, 139);
+            this.groupBox_invitacionPartida.TabIndex = 13;
+            this.groupBox_invitacionPartida.TabStop = false;
+            this.groupBox_invitacionPartida.Text = "INVITACION";
+            // 
+            // button2_invitacionPartida_NO
+            // 
+            this.button2_invitacionPartida_NO.Location = new System.Drawing.Point(124, 80);
+            this.button2_invitacionPartida_NO.Name = "button2_invitacionPartida_NO";
+            this.button2_invitacionPartida_NO.Size = new System.Drawing.Size(55, 33);
+            this.button2_invitacionPartida_NO.TabIndex = 2;
+            this.button2_invitacionPartida_NO.Text = "NO";
+            this.button2_invitacionPartida_NO.UseVisualStyleBackColor = true;
+            this.button2_invitacionPartida_NO.Click += new System.EventHandler(this.button2_invitacionPartida_NO_Click);
+            // 
+            // button_invitacionPartida_si
+            // 
+            this.button_invitacionPartida_si.Location = new System.Drawing.Point(22, 81);
+            this.button_invitacionPartida_si.Name = "button_invitacionPartida_si";
+            this.button_invitacionPartida_si.Size = new System.Drawing.Size(61, 32);
+            this.button_invitacionPartida_si.TabIndex = 1;
+            this.button_invitacionPartida_si.Text = "SI";
+            this.button_invitacionPartida_si.UseVisualStyleBackColor = true;
+            this.button_invitacionPartida_si.Click += new System.EventHandler(this.button_invitacionPartida_si_Click);
+            // 
+            // label_invitacionPartida_name
+            // 
+            this.label_invitacionPartida_name.AutoSize = true;
+            this.label_invitacionPartida_name.Location = new System.Drawing.Point(18, 41);
+            this.label_invitacionPartida_name.Name = "label_invitacionPartida_name";
+            this.label_invitacionPartida_name.Size = new System.Drawing.Size(51, 20);
+            this.label_invitacionPartida_name.TabIndex = 0;
+            this.label_invitacionPartida_name.Text = "label1";
+            // 
+            // groupBox1_invitar
+            // 
+            this.groupBox1_invitar.Controls.Add(this.button1);
+            this.groupBox1_invitar.Controls.Add(this.textBox1);
+            this.groupBox1_invitar.Location = new System.Drawing.Point(122, 461);
+            this.groupBox1_invitar.Name = "groupBox1_invitar";
+            this.groupBox1_invitar.Size = new System.Drawing.Size(200, 100);
+            this.groupBox1_invitar.TabIndex = 14;
+            this.groupBox1_invitar.TabStop = false;
+            this.groupBox1_invitar.Text = "INVITAR";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(61, 71);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(37, 26);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 26);
+            this.textBox1.TabIndex = 0;
+            // 
+            // label_yo
+            // 
+            this.label_yo.AutoSize = true;
+            this.label_yo.Location = new System.Drawing.Point(345, 33);
+            this.label_yo.Name = "label_yo";
+            this.label_yo.Size = new System.Drawing.Size(0, 20);
+            this.label_yo.TabIndex = 15;
+            // 
             // INICIO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1262, 588);
+            this.Controls.Add(this.label_yo);
+            this.Controls.Add(this.groupBox1_invitar);
+            this.Controls.Add(this.groupBox_invitacionPartida);
             this.Controls.Add(this.invitado_txt);
             this.Controls.Add(this.dataGridView_conectados);
             this.Controls.Add(this.cont_lbl);
@@ -286,6 +374,10 @@ namespace ClienteForms
             this.peticiones_groupBox.ResumeLayout(false);
             this.peticiones_groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_conectados)).EndInit();
+            this.groupBox_invitacionPartida.ResumeLayout(false);
+            this.groupBox_invitacionPartida.PerformLayout();
+            this.groupBox1_invitar.ResumeLayout(false);
+            this.groupBox1_invitar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -314,6 +406,14 @@ namespace ClienteForms
         private System.Windows.Forms.DataGridView dataGridView_conectados;
         private System.Windows.Forms.DataGridViewTextBoxColumn Conectados;
         private System.Windows.Forms.TextBox invitado_txt;
+        private System.Windows.Forms.GroupBox groupBox_invitacionPartida;
+        private System.Windows.Forms.Button button2_invitacionPartida_NO;
+        private System.Windows.Forms.Button button_invitacionPartida_si;
+        private System.Windows.Forms.Label label_invitacionPartida_name;
+        private System.Windows.Forms.GroupBox groupBox1_invitar;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label_yo;
     }
 }
 

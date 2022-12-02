@@ -30,7 +30,7 @@ typedef struct {
 } Partida;
 
 typedef struct {
-	PArtida partidas [100];
+	Partida partidas [100];
 	int num;
 } ListaPartidas;
 
@@ -86,6 +86,8 @@ void *AtenderCliente (void *socket)
 		printf("ya tengo el codigo %d\n", codigo);
 		char nombre[20];
 		char Password[10];
+		char nombre2[20];
+		char resp[2];
 		
 		
 		
@@ -207,7 +209,7 @@ void *AtenderCliente (void *socket)
 				DameConectados(&miLista, conectados);
 				sprintf(noti,"6/%s", conectados);
 				strcpy(respuesta, noti);
-				//printf("me cagao:\n",respuesta);
+				//printf("me:\n",respuesta);
 				int j;
 				for(j=0; j<miLista.num; j++)
 					write (sockets[j], respuesta, strlen(respuesta));
@@ -241,6 +243,24 @@ void *AtenderCliente (void *socket)
 		{
 			sprintf (respuesta,"4/%d",MaxNivel(nombre));
 			write (sock_conn, respuesta, strlen(respuesta));
+		}
+		else if(codigo == 7)
+		{
+			p = strtok (NULL, "/");
+			strcpy(nombre2, p);
+			sprintf (respuesta,"7/%s-%s",nombre,nombre2);
+			write (DameSocket(&miLista,nombre), respuesta, strlen(respuesta));
+			
+			
+		}
+		else if(codigo == 8)
+		{
+			p = strtok (NULL, "/");
+			strcpy(nombre2, p);
+			p = strtok (NULL, "/");
+			strcpy(resp, p);
+			sprintf (respuesta,"8/%s-%s-%s",nombre,nombre2,resp);
+			write (DameSocket(&miLista, nombre2), respuesta, strlen(respuesta));
 		}
 		printf ("Respuesta: %s\n", respuesta);
 		//lo enviamos
@@ -277,7 +297,7 @@ int main (int argc, char *argv[])
 	//htonl formatea el numero que recibe al formato necesario
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	//escuchamos en el puerto 9050
-	serv_adr.sin_port = htons(9070);
+	serv_adr.sin_port = htons(9080);
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
 		printf ("Error al bind");
 	
@@ -357,7 +377,22 @@ void DameConectados (ListaConectados *lista, char conectados [300])
 		
 	}
 } 
-
+int DameSocket(ListaConectados *lista, char nombre[20])
+{
+	int i = 0;
+	while(i<lista->num)
+	{
+		if(strcmp(lista->conectados[i].nombre,nombre)==0)
+		{
+			return lista->conectados[i].socket;
+		}
+		else
+		{
+			i++;
+		}
+		   
+	}
+}
 
 
 void DamePos (ListaConectados *lista,  char nombre[20])

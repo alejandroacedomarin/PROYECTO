@@ -18,16 +18,22 @@ namespace ClienteForms
         ListaFichas listafichas = new ListaFichas();
         Socket server;
         Thread atender;
+        string nombreyo;
+        string nombreel;
+        string yo;
+        
+
         public INICIO()
         {
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             peticiones_groupBox.Visible = true;
+            label_invitacionPartida_name.Text = null;
         }
 
         private void INICIO_Load(object sender, EventArgs e)
         {
-
+            groupBox_invitacionPartida.Visible = true;
         }
 
         private void AtenderServer()
@@ -43,7 +49,7 @@ namespace ClienteForms
                 string[] trozos = mensaje_limpio.Split('/');
                 //MessageBox.Show(trozos[0]);
                 int codigo = Convert.ToInt32(trozos[0]);
-                string mensaje = trozos[1].Split('\0')[0];
+                string mensaje = trozos[1];
                
 
                 switch (codigo)
@@ -158,6 +164,19 @@ namespace ClienteForms
                         }
                         
                        
+                        break;
+                    case 7: //Invitacion a partida
+                        groupBox_invitacionPartida.Visible = true;
+                        nombreyo = mensaje.Split('-')[0];
+                        nombreel = mensaje.Split('-')[1];
+                        label_invitacionPartida_name.Text = nombreel + " te invita a una partida. Aceptas?";
+                        break;
+                    case 8: //Respuesta invitacion a partida
+                        
+                        string el = mensaje.Split('-')[0];
+                        string yo = mensaje.Split('-')[1];
+                        string resp = mensaje.Split('-')[2];
+                        MessageBox.Show(el + " ha dicho: " + resp);
                         break;
                 }
 
@@ -281,6 +300,8 @@ namespace ClienteForms
         {
             string mensaje = "1/" + usuario_txt.Text + "/" + password_txt.Text;
             // Enviamos al servidor el nombre tecleado
+            yo = usuario_txt.Text;
+            label_yo.Text = usuario_txt.Text;
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
                             
@@ -301,27 +322,51 @@ namespace ClienteForms
             p.ShowDialog();
         }
 
-        private void dataGridView_conectados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        
+
+        private void button_invitacionPartida_si_Click(object sender, EventArgs e)
         {
             
+            string mensaje = "8/"+nombreyo+"/"+nombreel+"/SI";
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+            groupBox_invitacionPartida.Visible = false;
         }
 
-        private void dataGridView_conectados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        private void button2_invitacionPartida_NO_Click(object sender, EventArgs e)
         {
-           /* try
-            {
-                string invitado = this.dataGridView_conectados.SelectedRows[1].Cells[1].Value.ToString();
-                MessageBox.Show("Estas invintando a " + invitado);
-            }
-            catch (Exception)
-            {
-                return;
-            }
-            // Enviamos nombre.
-            string mensaje = "7/" + invitado.Text;
+            string mensaje = "8/"+nombreyo+"/"+nombreel+"/NO";
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+            groupBox_invitacionPartida.Visible = false;
+        }
+
+        //private void dataGridView_conectados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        //{
+        //    try
+        //    {
+        //        string invitado = this.dataGridView_conectados.SelectedRows[1].Cells[1].Value.ToString();
+        //        label_invitacionPartida_name.Text = invitado;
+        //        MessageBox.Show("Estas invintando a " + invitado);
+        //        // Enviamos nombre.
+        //        string mensaje = "7/" + invitado + "/" + yo;
+        //        // Enviamos al servidor el nombre tecleado
+        //        byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+        //        server.Send(msg);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return;
+        //    }
+        //}
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string invitado = textBox1.Text;
+            string mensaje = "7/" + invitado + "/" + yo;
             // Enviamos al servidor el nombre tecleado
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-            server.Send(msg);*/
+            server.Send(msg);
         }
     }
 }
