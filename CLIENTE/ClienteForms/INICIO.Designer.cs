@@ -49,6 +49,7 @@ namespace ClienteForms
             this.cont_lbl = new System.Windows.Forms.Label();
             this.dataGridView_conectados = new System.Windows.Forms.DataGridView();
             this.Conectados = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.invitado_txt = new System.Windows.Forms.TextBox();
             this.signin_groupBox.SuspendLayout();
             this.peticiones_groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_conectados)).BeginInit();
@@ -239,12 +240,14 @@ namespace ClienteForms
             this.dataGridView_conectados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_conectados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Conectados});
-            this.dataGridView_conectados.Location = new System.Drawing.Point(861, 138);
+            this.dataGridView_conectados.Location = new System.Drawing.Point(803, 138);
             this.dataGridView_conectados.Name = "dataGridView_conectados";
             this.dataGridView_conectados.RowHeadersWidth = 62;
             this.dataGridView_conectados.RowTemplate.Height = 28;
-            this.dataGridView_conectados.Size = new System.Drawing.Size(229, 279);
+            this.dataGridView_conectados.Size = new System.Drawing.Size(381, 299);
             this.dataGridView_conectados.TabIndex = 11;
+            this.dataGridView_conectados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_conectados_CellContentClick);
+            this.dataGridView_conectados.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_conectados_CellDoubleClick);
             // 
             // Conectados
             // 
@@ -253,11 +256,19 @@ namespace ClienteForms
             this.Conectados.Name = "Conectados";
             this.Conectados.Width = 150;
             // 
+            // invitado_txt
+            // 
+            this.invitado_txt.Location = new System.Drawing.Point(871, 92);
+            this.invitado_txt.Name = "invitado_txt";
+            this.invitado_txt.Size = new System.Drawing.Size(100, 26);
+            this.invitado_txt.TabIndex = 12;
+            // 
             // INICIO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1143, 450);
+            this.ClientSize = new System.Drawing.Size(1262, 588);
+            this.Controls.Add(this.invitado_txt);
             this.Controls.Add(this.dataGridView_conectados);
             this.Controls.Add(this.cont_lbl);
             this.Controls.Add(this.servicios_btn);
@@ -276,6 +287,7 @@ namespace ClienteForms
             this.peticiones_groupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_conectados)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -301,6 +313,7 @@ namespace ClienteForms
         private System.Windows.Forms.Label cont_lbl;
         private System.Windows.Forms.DataGridView dataGridView_conectados;
         private System.Windows.Forms.DataGridViewTextBoxColumn Conectados;
+        private System.Windows.Forms.TextBox invitado_txt;
     }
 }
 

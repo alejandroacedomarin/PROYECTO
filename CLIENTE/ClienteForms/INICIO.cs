@@ -300,5 +300,28 @@ namespace ClienteForms
             PARTIDA p = new PARTIDA();
             p.ShowDialog();
         }
+
+        private void dataGridView_conectados_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void dataGridView_conectados_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+           /* try
+            {
+                string invitado = this.dataGridView_conectados.SelectedRows[1].Cells[1].Value.ToString();
+                MessageBox.Show("Estas invintando a " + invitado);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            // Enviamos nombre.
+            string mensaje = "7/" + invitado.Text;
+            // Enviamos al servidor el nombre tecleado
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);*/
+        }
     }
 }

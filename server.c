@@ -8,14 +8,7 @@
 #include <mysql.h>
 #include <pthread.h>
 
-int contador;
-int i;
-int sockets[100];
-
-
-//Estructura necessaria para acceso excluyente
-pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-
+//**************************ESTRUCTURAS***************************
 //Estructuras necessarias para lista de conectados
 typedef struct {
 	char nombre[20];
@@ -27,8 +20,30 @@ typedef struct {
 	int num;
 } ListaConectados;
 
-ListaConectados miLista;
+//Estructuras necessarias para lista de partidas
+typedef struct {
+	int idP;
+	char usrHost[20];
+	int socketHost;
+	char usrInvitado[20];
+	int socketInvitado;
+} Partida;
 
+typedef struct {
+	PArtida partidas [100];
+	int num;
+} ListaPartidas;
+
+//***********************VARIABLES GLOBALES***********************
+//Estructura necessaria para acceso excluyente
+pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+int contador;
+int i;
+int sockets[100];
+ListaConectados miLista;
+ListaPartidas miListaP;
+
+//**********************ATENDEMOS CLIENTE***************************
 void *AtenderCliente (void *socket)
 {
 	int sock_conn;
@@ -242,7 +257,7 @@ void *AtenderCliente (void *socket)
 }
 
 
-
+//********************************MAIN(ESTABLECER CONEXION)**************************************
 int main (int argc, char *argv[])
 {
 	int sock_conn, sock_listen;
@@ -295,7 +310,7 @@ int main (int argc, char *argv[])
 	
 }
 
-
+//****************************************FUNCIONES*****************************************************
 //Funcion que a￱ade un nuevo conectado. Retorna 0 si se ha a￱adido correctamente y -1 si no se ha podido a￱adir debido a que la lista esta llena.
 int AddConectado (ListaConectados *lista, char nombre[20], int socket)
 {
