@@ -8,16 +8,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PartidaLib;
+using System.Net;
+using System.Net.Sockets;
 
 namespace ClienteForms
 {
+    
     public partial class PARTIDA : Form
     {
-        PictureBox[] fichaB = new PictureBox[129];
-        PictureBox[] fichaN = new PictureBox[129];
-        public PARTIDA()
+        PictureBox[] fichaB = new PictureBox[32];
+        PictureBox[] fichaN = new PictureBox[32];
+        string nombre;
+        Socket server;
+        int idP;
+        public PARTIDA(string nombre,Socket server, int idP)
         {
             InitializeComponent();
+            this.nombre = nombre;
+            this.server = server;
+            this.idP = idP;
         }
 
         private void PARTIDA_Load(object sender, EventArgs e)
@@ -69,13 +78,13 @@ namespace ClienteForms
             //    fichaN[i].Tag = i;
             //    j++;
             //}
-            fichaN[128] = new PictureBox();
-            fichaN[128].Location = new Point(381 + 60 * 4 - 30, (21 + 60 * 8 + 30));
-            fichaN[128].ClientSize = new Size(59, 59);
-            fichaN[128].SizeMode = PictureBoxSizeMode.StretchImage;
-            fichaN[128].Image = FichaN;
-            tablero.Controls.Add(fichaN[128]);
-            fichaN[128].Tag = 128;
+            fichaN[32] = new PictureBox();
+            fichaN[32].Location = new Point(381 + 60 * 4 - 30, (21 + 60 * 8 + 30));
+            fichaN[32].ClientSize = new Size(59, 59);
+            fichaN[32].SizeMode = PictureBoxSizeMode.StretchImage;
+            fichaN[32].Image = FichaN;
+            tablero.Controls.Add(fichaN[32]);
+            fichaN[32].Tag = 32;
         }
 
         private void tablero_Paint(object sender, PaintEventArgs e)
@@ -95,6 +104,20 @@ namespace ClienteForms
             }
 
             myPen.Dispose();
+        }
+
+        private void enviat_txt_button_Click(object sender, EventArgs e)
+        {
+            string mensaje = "10/" + idP + "/" + textBox_mensaje.Text;
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+
+        }
+        public void TomarMensaje(string mensaje)
+        {
+            dataGridView_mensajes.ClearSelection();
+            
+            dataGridView_mensajes.Rows.Add(mensaje);
         }
     }
 }

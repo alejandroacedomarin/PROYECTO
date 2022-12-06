@@ -21,8 +21,8 @@ namespace ClienteForms
         string nombreyo;
         string nombreel;
         string yo;
-        
-
+        List<PARTIDA> partidas = new List<PARTIDA>();
+        int numForm;
         public INICIO()
         {
             InitializeComponent();
@@ -176,7 +176,22 @@ namespace ClienteForms
                         string el = mensaje.Split('-')[0];
                         string yo = mensaje.Split('-')[1];
                         string resp = mensaje.Split('-')[2];
+                        int idP = Convert.ToInt32(mensaje.Split('-')[3]);
                         MessageBox.Show(el + " ha dicho: " + resp);
+                        if(resp=="SI")
+                        {
+                            ThreadStart ts = delegate { PonerEnMarchaPartida(idP); };
+                            Thread partida_thread = new Thread(ts);
+                            partida_thread.Start();
+                        }
+                        //string mensaje2 = "8/" + nombreyo + "/" + nombreel + "/SI/"+idP;
+                        //byte[] msg45 = System.Text.Encoding.ASCII.GetBytes(mensaje2);
+                        //server.Send(msg45);
+                        break;
+                    case 10:
+                        int num = Convert.ToInt32(mensaje.Split('-')[0]);
+                        string texto = mensaje.Split('-')[1];
+                        partidas[num].TomarMensaje(texto);
                         break;
                 }
 
@@ -318,19 +333,32 @@ namespace ClienteForms
 
         private void juga_btn_Click(object sender, EventArgs e)
         {
-            PARTIDA p = new PARTIDA();
-            p.ShowDialog();
+            //PARTIDA p = new PARTIDA();
+            //p.ShowDialog();
         }
-
+        private void PonerEnMarchaPartida(int idP)
+        {
+            int numForm = partidas.Count;
+            PARTIDA p = new PARTIDA(nombreyo,server,idP);
+            partidas.Add(p);
+            string mensaje = "11/"+numForm+"/"+nombreyo;
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+            p.ShowDialog();
+            
+        }
         
 
         private void button_invitacionPartida_si_Click(object sender, EventArgs e)
         {
-            
-            string mensaje = "8/"+nombreyo+"/"+nombreel+"/SI";
+
+            string mensaje = "8/" + nombreyo + "/" + nombreel + "/SI";
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
             groupBox_invitacionPartida.Visible = false;
+            //ThreadStart ts = delegate { PonerEnMarchaPartida(idP); };
+            //Thread partida_thread = new Thread(ts);
+            //partida_thread.Start();
         }
 
         private void button2_invitacionPartida_NO_Click(object sender, EventArgs e)

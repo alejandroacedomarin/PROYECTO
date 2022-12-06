@@ -20,19 +20,17 @@ typedef struct {
 	int num;
 } ListaConectados;
 
-//Estructuras necessarias para lista de partidas
+//Estructuras necessarias para tabla de partidas
 typedef struct {
-	int idP;
+	int idP ;
 	char usrHost[20];
 	int socketHost;
+	int numFormHost;
 	char usrInvitado[20];
 	int socketInvitado;
+	int numFormInvitado;
 } Partida;
 
-typedef struct {
-	Partida partidas [100];
-	int num;
-} ListaPartidas;
 
 //***********************VARIABLES GLOBALES***********************
 //Estructura necessaria para acceso excluyente
@@ -41,7 +39,7 @@ int contador;
 int i;
 int sockets[100];
 ListaConectados miLista;
-ListaPartidas miListaP;
+Partida miPartida[100];
 
 //**********************ATENDEMOS CLIENTE***************************
 void *AtenderCliente (void *socket)
@@ -58,7 +56,7 @@ void *AtenderCliente (void *socket)
 	char noti[512];
 	int ret;
 	
-	//	printf("Aqui %d\n", sockets[i]);
+
 	
 	
 	
@@ -88,7 +86,9 @@ void *AtenderCliente (void *socket)
 		char Password[10];
 		char nombre2[20];
 		char resp[2];
-		
+		int numForm;
+		char frase[100];
+		int idPartida;
 		
 		
 		if ((codigo !=0)&&(codigo!=5)&&(codigo!=6))
@@ -259,8 +259,39 @@ void *AtenderCliente (void *socket)
 			strcpy(nombre2, p);
 			p = strtok (NULL, "/");
 			strcpy(resp, p);
-			sprintf (respuesta,"8/%s-%s-%s",nombre,nombre2,resp);
+			if(strcmp(resp,"SI")==0)
+			{
+				int idP = AddPartida (miPartida,nombre,nombre2,DameSocket(&miLista, nombre),DameSocket(&miLista, nombre2));
+				sprintf (respuesta,"8/%s-%s-%s-%d",nombre2,nombre,resp,idP);
+				write (DameSocket(&miLista, nombre), respuesta, strlen(respuesta));
+				sprintf (respuesta,"8/%s-%s-%s-%d",nombre,nombre2,resp,idP);
+				write (DameSocket(&miLista, nombre2), respuesta, strlen(respuesta));
+			}
+			else
+			{
+				sprintf (respuesta,"8/%s-%s-%s",nombre2,nombre,resp);
+				write (DameSocket(&miLista, nombre), respuesta, strlen(respuesta));
+			}
+			
+		}
+		else if(codigo ==10)
+		{
+			p = strtok (NULL, "/");
+			strcpy(numForm, p);
+			p = strtok (NULL, "/");
+			strcpy(idPartida, p);
+			p = strtok (NULL, "/");
+			strcpy(frase, p);
+			sprintf (respuesta,"9/%s",frase);
 			write (DameSocket(&miLista, nombre2), respuesta, strlen(respuesta));
+		}
+		else if(codigo = 11)
+		{
+			p = strtok (NULL, "/");
+			strcpy(numForm, p);
+			p = strtok (NULL, "/");
+			strcpy(nombre, p);
+			AddFormEnPartida(miPartida,nombre,numForm);
 		}
 		printf ("Respuesta: %s\n", respuesta);
 		//lo enviamos
@@ -413,9 +444,47 @@ void DamePos (ListaConectados *lista,  char nombre[20])
 	return pos;
 } 
 
+/*int AñadirPartida (Partida miPartida,char nombreHost[20],char nombreInv[20], int socketH,int socketI)*/
+/*{*/
+/*	int pos =0;*/
+/*	return pos;*/
+/*}*/
 
 
-
+int AddPartida(Partida miPartida[],char nombreHost[20],char nombreInv[20], int socketH,int socketI)
+{
+	int i =0;
+	int terminado=0;
+	while(i<100 && terminado==0)
+	{
+		if(miPartida[i].idP == NULL)
+		{
+			miPartida[i].idP = i;
+			miPartida[i].usrHost == nombreHost;
+			miPartida[i].socketHost = socketH;
+			miPartida[i].usrInvitado == nombreInv;
+			miPartida[i].socketInvitado = socketI;
+			terminado =1;
+			
+		}
+		else
+		{
+			i++;
+		}
+	}
+	if(terminado == 0)
+	{
+		return -1;
+	}
+	else
+	{
+		return i;
+	}
+} 
+void AddFormEnPartida(Partida miPartida[], char nombre[20], int numForm)
+{
+	
+}
 int DamePartidasGanadas(char username[20])
 {
 	MYSQL *conn;

@@ -247,11 +247,14 @@ namespace ClienteForms
             // 
             // dataGridView_conectados
             // 
+            this.dataGridView_conectados.AllowUserToAddRows = false;
+            this.dataGridView_conectados.AllowUserToDeleteRows = false;
             this.dataGridView_conectados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_conectados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Conectados});
             this.dataGridView_conectados.Location = new System.Drawing.Point(803, 138);
             this.dataGridView_conectados.Name = "dataGridView_conectados";
+            this.dataGridView_conectados.ReadOnly = true;
             this.dataGridView_conectados.RowHeadersWidth = 62;
             this.dataGridView_conectados.RowTemplate.Height = 28;
             this.dataGridView_conectados.Size = new System.Drawing.Size(381, 299);
@@ -262,6 +265,7 @@ namespace ClienteForms
             this.Conectados.HeaderText = "Usuarios conectados";
             this.Conectados.MinimumWidth = 8;
             this.Conectados.Name = "Conectados";
+            this.Conectados.ReadOnly = true;
             this.Conectados.Width = 150;
             // 
             // invitado_txt
