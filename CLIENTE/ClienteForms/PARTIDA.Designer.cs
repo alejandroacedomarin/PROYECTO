@@ -30,9 +30,9 @@ namespace ClienteForms
         private void InitializeComponent()
         {
             this.tablero = new System.Windows.Forms.Panel();
-            this.dataGridView_mensajes = new System.Windows.Forms.DataGridView();
-            this.textBox_mensaje = new System.Windows.Forms.TextBox();
             this.enviat_txt_button = new System.Windows.Forms.Button();
+            this.textBox_mensaje = new System.Windows.Forms.TextBox();
+            this.dataGridView_mensajes = new System.Windows.Forms.DataGridView();
             this.tablero.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_mensajes)).BeginInit();
             this.SuspendLayout();
@@ -49,6 +49,23 @@ namespace ClienteForms
             this.tablero.TabIndex = 1;
             this.tablero.Paint += new System.Windows.Forms.PaintEventHandler(this.tablero_Paint);
             // 
+            // enviat_txt_button
+            // 
+            this.enviat_txt_button.Location = new System.Drawing.Point(108, 261);
+            this.enviat_txt_button.Name = "enviat_txt_button";
+            this.enviat_txt_button.Size = new System.Drawing.Size(81, 28);
+            this.enviat_txt_button.TabIndex = 2;
+            this.enviat_txt_button.Text = "ENVIAR";
+            this.enviat_txt_button.UseVisualStyleBackColor = true;
+            this.enviat_txt_button.Click += new System.EventHandler(this.enviat_txt_button_Click);
+            // 
+            // textBox_mensaje
+            // 
+            this.textBox_mensaje.Location = new System.Drawing.Point(29, 229);
+            this.textBox_mensaje.Name = "textBox_mensaje";
+            this.textBox_mensaje.Size = new System.Drawing.Size(240, 26);
+            this.textBox_mensaje.TabIndex = 1;
+            // 
             // dataGridView_mensajes
             // 
             this.dataGridView_mensajes.AllowUserToAddRows = false;
@@ -61,23 +78,6 @@ namespace ClienteForms
             this.dataGridView_mensajes.RowTemplate.Height = 28;
             this.dataGridView_mensajes.Size = new System.Drawing.Size(240, 150);
             this.dataGridView_mensajes.TabIndex = 0;
-            // 
-            // textBox_mensaje
-            // 
-            this.textBox_mensaje.Location = new System.Drawing.Point(29, 229);
-            this.textBox_mensaje.Name = "textBox_mensaje";
-            this.textBox_mensaje.Size = new System.Drawing.Size(240, 26);
-            this.textBox_mensaje.TabIndex = 1;
-            // 
-            // enviat_txt_button
-            // 
-            this.enviat_txt_button.Location = new System.Drawing.Point(108, 261);
-            this.enviat_txt_button.Name = "enviat_txt_button";
-            this.enviat_txt_button.Size = new System.Drawing.Size(81, 28);
-            this.enviat_txt_button.TabIndex = 2;
-            this.enviat_txt_button.Text = "ENVIAR";
-            this.enviat_txt_button.UseVisualStyleBackColor = true;
-            this.enviat_txt_button.Click += new System.EventHandler(this.enviat_txt_button_Click);
             // 
             // PARTIDA
             // 

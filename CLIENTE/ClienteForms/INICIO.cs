@@ -48,9 +48,18 @@ namespace ClienteForms
                 //MessageBox.Show(mensaje_limpio);
                 string[] trozos = mensaje_limpio.Split('/');
                 //MessageBox.Show(trozos[0]);
-                int codigo = Convert.ToInt32(trozos[0]);
-                string mensaje = trozos[1];
-               
+                int codigo;
+                string mensaje=null;
+                try
+                {
+                    codigo = Convert.ToInt32(trozos[0]);
+                    mensaje = trozos[1];
+                }
+                catch(System.FormatException)
+                {
+                    codigo = 0;
+                    
+                }
 
                 switch (codigo)
                 {
@@ -341,7 +350,7 @@ namespace ClienteForms
             int numForm = partidas.Count;
             PARTIDA p = new PARTIDA(nombreyo,server,idP);
             partidas.Add(p);
-            string mensaje = "11/"+numForm+"/"+nombreyo;
+            string mensaje = "11/"+numForm+"/"+nombreyo+"/"+idP;
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
             p.ShowDialog();

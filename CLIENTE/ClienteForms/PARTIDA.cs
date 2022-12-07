@@ -16,8 +16,8 @@ namespace ClienteForms
     
     public partial class PARTIDA : Form
     {
-        PictureBox[] fichaB = new PictureBox[32];
-        PictureBox[] fichaN = new PictureBox[32];
+        PictureBox[] fichaB = new PictureBox[33];
+        PictureBox[] fichaN = new PictureBox[33];
         string nombre;
         Socket server;
         int idP;

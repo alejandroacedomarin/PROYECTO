@@ -289,11 +289,14 @@ void *AtenderCliente (void *socket)
 		{
 			p = strtok (NULL, "/");
 			strcpy(numForm, p);
+			printf(numForm);
 			p = strtok (NULL, "/");
 			strcpy(nombre, p);
-			AddFormEnPartida(miPartida,nombre,numForm);
+			p = strtok (NULL, "/");
+			strcpy(idPartida, p);
+			AddFormEnPartida(miPartida,nombre,numForm,idPartida);
 		}
-		printf ("Respuesta: %s\n", respuesta);
+		/*printf ("Respuesta: %s\n", respuesta);*/
 		//lo enviamos
 		if ((codigo == 2)||(codigo == 3)||(codigo == 4))
 		{
@@ -460,9 +463,10 @@ int AddPartida(Partida miPartida[],char nombreHost[20],char nombreInv[20], int s
 		if(miPartida[i].idP == NULL)
 		{
 			miPartida[i].idP = i;
-			miPartida[i].usrHost == nombreHost;
+			strcpy(miPartida[i].usrHost, nombreHost);
+			
 			miPartida[i].socketHost = socketH;
-			miPartida[i].usrInvitado == nombreInv;
+			strcpy(miPartida[i].usrInvitado, nombreInv);
 			miPartida[i].socketInvitado = socketI;
 			terminado =1;
 			
@@ -481,8 +485,27 @@ int AddPartida(Partida miPartida[],char nombreHost[20],char nombreInv[20], int s
 		return i;
 	}
 } 
-void AddFormEnPartida(Partida miPartida[], char nombre[20], int numForm)
+void AddFormEnPartida(Partida miPartida[], char nombre[20], int numForm,int idP)
 {
+	int i =0;
+	int terminado =0;
+	while(i<100 && terminado==0)
+	{
+		if(strcmp(miPartida[i].usrHost,nombre)==0 && strcmp(miPartida[i].idP,idP)==0)
+		{
+			miPartida[i].numFormHost=numForm;
+			terminado=1;
+		}
+		else if(strcmp(miPartida[i].usrInvitado,nombre)==0  && strcmp(miPartida[i].idP,idP)==0)
+		{
+			miPartida[i].numFormInvitado=numForm;
+			terminado =1;
+		}
+		else
+		{
+			i++;
+		}
+	}
 	
 }
 int DamePartidasGanadas(char username[20])
