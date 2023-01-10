@@ -40,3 +40,17 @@ C:\Users\laura\OneDrive\Escriptori\OTHELLO_GIT\PROYECTO\CLIENTE\ClienteForms\obj
 C:\Users\laura\OneDrive\Escriptori\OTHELLO_GIT\PROYECTO\CLIENTE\ClienteForms\obj\Debug\ClienteForms.csproj.CopyComplete
 C:\Users\laura\OneDrive\Escriptori\OTHELLO_GIT\PROYECTO\CLIENTE\ClienteForms\obj\Debug\ClienteForms.exe
 C:\Users\laura\OneDrive\Escriptori\OTHELLO_GIT\PROYECTO\CLIENTE\ClienteForms\obj\Debug\ClienteForms.pdb
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\bin\Debug\ClienteForms.exe.config
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\bin\Debug\ClienteForms.exe
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\bin\Debug\ClienteForms.pdb
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\bin\Debug\PartidaLib.dll
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\bin\Debug\PartidaLib.pdb
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\obj\Debug\ClienteForms.csproj.AssemblyReference.cache
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\obj\Debug\ClienteForms.INICIO.resources
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\obj\Debug\ClienteForms.PARTIDA.resources
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\obj\Debug\ClienteForms.Properties.Resources.resources
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\obj\Debug\ClienteForms.csproj.GenerateResource.cache
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\obj\Debug\ClienteForms.csproj.CoreCompileInputs.cache
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\obj\Debug\ClienteForms.csproj.CopyComplete
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\obj\Debug\ClienteForms.exe
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\ClienteForms\obj\Debug\ClienteForms.pdb

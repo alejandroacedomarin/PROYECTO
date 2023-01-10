@@ -103,4 +103,12 @@ namespace ClienteForms
         private System.Windows.Forms.Button enviat_txt_button;
         private System.Windows.Forms.TextBox textBox_mensaje;
     }
+
+    partial class JUGADOR
+    {
+        char nombre;
+        int puntuacion;
+        int nivel;
+    }
 }
+

@@ -21,7 +21,9 @@ namespace ClienteForms
         string nombreyo;
         string nombreel;
         string yo;
+        int puntuacionGanador; // Carla: He creado variable para puntos del ganador de la partida
         List<PARTIDA> partidas = new List<PARTIDA>();
+        List<JUGADOR> jugadores = new List<JUGADOR>();
         int numForm;
         public INICIO()
         {
@@ -202,6 +204,9 @@ namespace ClienteForms
                         string texto = mensaje.Split('-')[1];
                         partidas[num].TomarMensaje(texto);
                         break;
+                    case 12:
+                        nombreyo = mensaje.Split('-')[0];
+                        break;
                 }
 
 
@@ -356,7 +361,19 @@ namespace ClienteForms
             p.ShowDialog();
             
         }
-        
+        // CARLA
+        private void TerminarPartida (object sender, EventArgs e)
+        {
+            int puntuacion = puntuacionGanador;
+            int idP = partidas.Count;
+            string nombreGanador = nombreyo;
+            PARTIDA p = new PARTIDA(nombreyo, server, idP);
+            string mensaje = "12/"+ nombreGanador;
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+            p.ShowDialog();
+        }
+
 
         private void button_invitacionPartida_si_Click(object sender, EventArgs e)
         {
