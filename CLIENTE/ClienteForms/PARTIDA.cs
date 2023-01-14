@@ -21,6 +21,7 @@ namespace ClienteForms
         string nombre;
         Socket server;
         int idP;
+
         public PARTIDA(string nombre,Socket server, int idP)
         {
             InitializeComponent();

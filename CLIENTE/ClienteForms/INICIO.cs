@@ -188,6 +188,7 @@ namespace ClienteForms
                         string yo = mensaje.Split('-')[1];
                         string resp = mensaje.Split('-')[2];
                         int idP = Convert.ToInt32(mensaje.Split('-')[3]);
+                        
                         MessageBox.Show(el + " ha dicho: " + resp);
                         if(resp=="SI")
                         {
@@ -203,6 +204,21 @@ namespace ClienteForms
                         int num = Convert.ToInt32(mensaje.Split('-')[0]);
                         string texto = mensaje.Split('-')[1];
                         partidas[num].TomarMensaje(texto);
+                        break;
+
+                    case 11:
+                        string el2 = mensaje.Split('-')[0];
+                        string yo2 = mensaje.Split('-')[1];
+                        string resp2 = mensaje.Split('-')[2];
+                        int idP2 = Convert.ToInt32(mensaje.Split('-')[3]);
+
+                        MessageBox.Show(el2 + " ha dicho: " + resp2);
+                        if (resp2 == "SI")
+                        {
+                            ThreadStart ts = delegate { PonerEnMarchaPartida(idP2); };
+                            Thread partida_thread = new Thread(ts);
+                            partida_thread.Start();
+                        }
                         break;
                     case 12:
                         nombreyo = mensaje.Split('-')[0];
@@ -355,9 +371,10 @@ namespace ClienteForms
             int numForm = partidas.Count;
             PARTIDA p = new PARTIDA(nombreyo,server,idP);
             partidas.Add(p);
-            string mensaje = "11/"+numForm+"/"+nombreyo+"/"+idP;
-            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
-            server.Send(msg);
+            //string mensaje = "11/"+numForm+"/"+nombreyo+"/"+idP
+            //string mensaje = "11/" + nombreyo + "/" + nombreel + "/SI";
+            //byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            //server.Send(msg);
             p.ShowDialog();
             
         }

@@ -39,19 +39,20 @@ namespace ClienteForms
             // 
             // tablero
             // 
+            this.tablero.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tablero.Controls.Add(this.enviat_txt_button);
             this.tablero.Controls.Add(this.textBox_mensaje);
             this.tablero.Controls.Add(this.dataGridView_mensajes);
             this.tablero.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tablero.Location = new System.Drawing.Point(0, 0);
             this.tablero.Name = "tablero";
-            this.tablero.Size = new System.Drawing.Size(800, 450);
+            this.tablero.Size = new System.Drawing.Size(1130, 651);
             this.tablero.TabIndex = 1;
             this.tablero.Paint += new System.Windows.Forms.PaintEventHandler(this.tablero_Paint);
             // 
             // enviat_txt_button
             // 
-            this.enviat_txt_button.Location = new System.Drawing.Point(108, 261);
+            this.enviat_txt_button.Location = new System.Drawing.Point(894, 246);
             this.enviat_txt_button.Name = "enviat_txt_button";
             this.enviat_txt_button.Size = new System.Drawing.Size(81, 28);
             this.enviat_txt_button.TabIndex = 2;
@@ -61,7 +62,7 @@ namespace ClienteForms
             // 
             // textBox_mensaje
             // 
-            this.textBox_mensaje.Location = new System.Drawing.Point(29, 229);
+            this.textBox_mensaje.Location = new System.Drawing.Point(802, 214);
             this.textBox_mensaje.Name = "textBox_mensaje";
             this.textBox_mensaje.Size = new System.Drawing.Size(240, 26);
             this.textBox_mensaje.TabIndex = 1;
@@ -71,7 +72,7 @@ namespace ClienteForms
             this.dataGridView_mensajes.AllowUserToAddRows = false;
             this.dataGridView_mensajes.AllowUserToDeleteRows = false;
             this.dataGridView_mensajes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_mensajes.Location = new System.Drawing.Point(29, 81);
+            this.dataGridView_mensajes.Location = new System.Drawing.Point(802, 58);
             this.dataGridView_mensajes.Name = "dataGridView_mensajes";
             this.dataGridView_mensajes.ReadOnly = true;
             this.dataGridView_mensajes.RowHeadersWidth = 62;
@@ -83,7 +84,7 @@ namespace ClienteForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1130, 651);
             this.Controls.Add(this.tablero);
             this.Name = "PARTIDA";
             this.Text = "OTHELLO";
