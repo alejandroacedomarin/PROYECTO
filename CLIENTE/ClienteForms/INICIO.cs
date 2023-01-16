@@ -223,8 +223,23 @@ namespace ClienteForms
                     case 12:
                         nombreyo = mensaje.Split('-')[0];
                         break;
-                }
+                    case 13:
+                         if (mensaje == "SI")
+                        {
+                            MessageBox.Show("Te has registrado correctamente");
 
+                            signin_groupBox.Visible = false;
+                            peticiones_groupBox.Visible = true;
+                        }
+
+                        else
+                        {
+                            MessageBox.Show("No te has podido registrar.");
+                            UserRegistro.Text = null;
+                            PasswordRegistro.Text = null;
+                        }
+                        break;
+                }
 
             }
         }
@@ -234,7 +249,7 @@ namespace ClienteForms
             //Creamos un IPEndPoint con el ip del servid0o y puerto del servidor 
             //al que deseamos conectarnos
             IPAddress direc = IPAddress.Parse("192.168.56.101");
-            IPEndPoint ipep = new IPEndPoint(direc, 9080);
+            IPEndPoint ipep = new IPEndPoint(direc, 9030);
 
 
             //Creamos el socket 
@@ -439,5 +454,41 @@ namespace ClienteForms
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+       
+
+        private void signin_groupBox_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RegistrarseButton_Click(object sender, EventArgs e)
+        {
+            string mensaje = "13/" + UserRegistro.Text + "/" + PasswordRegistro.Text;
+            // Enviamos al servidor el nombre tecleado
+            yo = UserRegistro.Text;
+            label_yo.Text = UserRegistro.Text;
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+        }
+
+        private void EliminarUser_Click(object sender, EventArgs e)
+        {
+            string mensaje = "14/" + UserRegistro.Text + "/" + PasswordRegistro.Text;
+            yo = UserRegistro.Text;
+            label_yo.Text = UserRegistro.Text;
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+        }
     }
+
 }

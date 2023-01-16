@@ -265,7 +265,7 @@ void *AtenderCliente (void *socket)
 				int idP = AddPartida (miPartida,nombre,nombre2,DameSocket(&miLista, nombre),DameSocket(&miLista, nombre2));
 				sprintf (respuesta,"8/%s-%s-%s-%d",nombre2,nombre,resp,idP);
 				write (DameSocket(&miLista, nombre), respuesta, strlen(respuesta));
-				sprintf (respuesta,"8/%s-%s-%s-%d",nombre,nombre2,resp,idP);
+				sprintf (respuesta,"11/%s-%s-%s-%d",nombre,nombre2,resp,idP);
 				write (DameSocket(&miLista, nombre2), respuesta, strlen(respuesta));
 			}
 			else
@@ -286,7 +286,7 @@ void *AtenderCliente (void *socket)
 			sprintf (respuesta,"9/%s",frase);
 			write (DameSocket(&miLista, nombre2), respuesta, strlen(respuesta));
 		}
-		else if(codigo = 11)
+		else if(codigo == 11)
 		{
 			p = strtok (NULL, "/");
 			strcpy(numForm, p);
@@ -296,11 +296,29 @@ void *AtenderCliente (void *socket)
 			p = strtok (NULL, "/");
 			strcpy(idPartida, p);
 			AddFormEnPartida(miPartida,nombre,numForm,idPartida);
+			
+			p = strtok (NULL, "/");
+			strcpy(nombre2, p);
+			p = strtok (NULL, "/");
+			strcpy(resp, p);
+			if(strcmp(resp,"SI")==0)
+			{
+				int idP = AddPartida (miPartida,nombre,nombre2,DameSocket(&miLista, nombre),DameSocket(&miLista, nombre2));
+				sprintf (respuesta,"11/%s-%s-%s-%d",nombre2,nombre,resp,idP);
+				write (DameSocket(&miLista, nombre), respuesta, strlen(respuesta));
+				sprintf (respuesta,"11/%s-%s-%s-%d",nombre,nombre2,resp,idP);
+				write (DameSocket(&miLista, nombre2), respuesta, strlen(respuesta));
+			}
+			else
+			{
+				sprintf (respuesta,"11/%s-%s-%s",nombre2,nombre,resp);
+				write (DameSocket(&miLista, nombre), respuesta, strlen(respuesta));
+			}
 		}
 
 		/*printf ("Respuesta: %s\n", respuesta);*/
 		//lo enviamos
-		else if(codigo = 12)
+		else if(codigo == 12)
 		{
 			p = strtok (NULL, "/");
 			strcpy(nombreGanador, p);
@@ -314,9 +332,109 @@ void *AtenderCliente (void *socket)
 			pthread_mutex_unlock( &mutex ); //ya puedes interrumpir
 		}
 		
-		
+		else if (codigo == 13)
+		{
+			p = strtok (NULL, "/");
+			strcpy(Password, p);
+			printf ("Codigo: %d, Nombre: %s, Password: %s\n", codigo, nombre,Password);
+			MYSQL *conn;
+			int err;
+			MYSQL_RES *resultado;
+			MYSQL_ROW row;
+			char consulta [100];
+			conn = mysql_init(NULL);
+			if (conn == NULL) {
+				printf("Error al crear la conexion: %u %s\n",
+					   mysql_errno(conn), mysql_error(conn));
+				exit(1);
+			}
+			conn = mysql_real_connect (conn, "localhost", "root", "mysql", "Othello", 0, NULL, 0);
+			if (conn == NULL) {
+				printf("Error al inicializar la conexion: %u %s\n",
+					   mysql_errno(conn), mysql_error(conn));
+				exit(1);
+			}
+			sprintf(consulta, "INSERT INTO Jugador VALUES ( '%s','%s', 0)", nombre, Password);
+			err=mysql_query (conn, consulta);
+			if (err!=0) {
+				printf("Error al consultar datos de la base: %u %s\n",
+					   mysql_errno(conn), mysql_error(conn));
+				exit(1);
+			}
+			resultado = mysql_store_result (conn);
+			
+
+				AddConectado(&miLista, nombre, sock_conn);
+				//Lista de conectados
+				char conectados[300];
+				conectados[0]= '\0';
+				DameConectados(&miLista, conectados);
+				sprintf(noti,"6/%s", conectados);
+				strcpy(respuesta, noti);
+				//printf("me:\n",respuesta);
+				int j;
+				for(j=0; j<miLista.num; j++)
+					write (sockets[j], respuesta, strlen(respuesta));
+				//printf("dentro for:\n",sockets[j]);
+				
+			write (sock_conn, respuesta1, strlen(respuesta1));
+			
+			mysql_close (conn);
+			
+			
+		}
+		else if (codigo == 14)
+		{
+			p = strtok (NULL, "/");
+			strcpy(Password, p);
+			printf ("Codigo: %d, Nombre: %s, Password: %s\n", codigo, nombre,Password);
+			MYSQL *conn;
+			int err;
+			MYSQL_RES *resultado;
+			MYSQL_ROW row;
+			char consulta [100];
+			conn = mysql_init(NULL);
+			if (conn == NULL) {
+				printf("Error al crear la conexion: %u %s\n",
+					   mysql_errno(conn), mysql_error(conn));
+				exit(1);
+			}
+			conn = mysql_real_connect (conn, "localhost", "root", "mysql", "Othello", 0, NULL, 0);
+			if (conn == NULL) {
+				printf("Error al inicializar la conexion: %u %s\n",
+					   mysql_errno(conn), mysql_error(conn));
+				exit(1);
+			}
+			sprintf(consulta, "DELETE FROM Jugador WHERE (Jugador.Username='%s' AND Jugador.Password='%s')", nombre, Password);
+			err=mysql_query (conn, consulta);
+			if (err!=0) {
+				printf("Error al consultar datos de la base: %u %s\n",
+					   mysql_errno(conn), mysql_error(conn));
+				exit(1);
+			}
+			resultado = mysql_store_result (conn);
+			
+			
+			Eliminar(&miLista, nombre);
+			char conectados[300];
+			conectados[0]= '\0';
+			DameConectados(&miLista, conectados);
+			sprintf(noti,"6/%s", conectados);
+			strcpy(respuesta, noti);
+			//printf("me:\n",respuesta);
+			int j;
+			for(j=0; j<miLista.num; j++)
+				write (sockets[j], respuesta, strlen(respuesta));
+			//printf("dentro for:\n",sockets[j]);
+			
+			write (sock_conn, respuesta1, strlen(respuesta1));
+			
+			mysql_close (conn);
+			
+			
+		}
+				 
 	}
-	close(sock_conn); 
 }
 
 
@@ -340,7 +458,7 @@ int main (int argc, char *argv[])
 	//htonl formatea el numero que recibe al formato necesario
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	//escuchamos en el puerto 9050
-	serv_adr.sin_port = htons(9080);
+	serv_adr.sin_port = htons(9030);
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
 		printf ("Error al bind");
 	
@@ -675,6 +793,56 @@ int MaxNivel(char username[20])
 	mysql_close (conn);
 	exit(0);
 }
+
+//FUNCION DE REGISTRARSE
+int Register(char username[20], char password[20])
+{
+	
+	MYSQL *conn;
+	int err;
+	
+	MYSQL_RES *resultado;
+	MYSQL_ROW row;
+	
+	char consulta [100];
+	char respuesta1 [100];
+	
+	conn = mysql_init(NULL);
+	if (conn==NULL) {
+		printf ("Error al crear la conexion: %u %s\n", 
+				mysql_errno(conn), mysql_error(conn));
+		exit (1);
+	}
+	
+	conn = mysql_real_connect (conn, "localhost","root", "mysql", "Othello",0, NULL, 0);
+	if (conn==NULL) {
+		printf ("Error al inicializar la conexion: %u %s\n", 
+				mysql_errno(conn), mysql_error(conn));
+		exit (1);
+	}
+	
+	
+	sprintf(consulta, "INSERT INTO Jugador VALUES ( '%s','%s', 0)", username, password);
+	
+	
+	
+	
+	err=mysql_query (conn, consulta);
+	if (err!=0) {
+		printf ("Error al consultar datos de la base %u %s\n",
+				mysql_errno(conn), mysql_error(conn));
+		exit (1);
+	}
+	else
+	{
+		strcpy(respuesta1, "13/SI");
+	}
+	
+	
+	mysql_close (conn);
+	
+}
+
 // CARLA
 int SubirNivel(char nombreGanador[20])
 {

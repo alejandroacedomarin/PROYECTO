@@ -16,3 +16,9 @@ C:\Users\laura\OneDrive\Escriptori\Proyecto\PROYECTO\CLIENTE\PartidaLib\obj\Debu
 C:\Users\laura\OneDrive\Escriptori\Proyecto\PROYECTO\CLIENTE\PartidaLib\obj\Debug\PartidaLib.csproj.CoreCompileInputs.cache
 C:\Users\laura\OneDrive\Escriptori\Proyecto\PROYECTO\CLIENTE\PartidaLib\obj\Debug\PartidaLib.dll
 C:\Users\laura\OneDrive\Escriptori\Proyecto\PROYECTO\CLIENTE\PartidaLib\obj\Debug\PartidaLib.pdb
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\PartidaLib\bin\Debug\PartidaLib.dll
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\PartidaLib\bin\Debug\PartidaLib.pdb
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\PartidaLib\obj\Debug\PartidaLib.csproj.AssemblyReference.cache
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\PartidaLib\obj\Debug\PartidaLib.csproj.CoreCompileInputs.cache
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\PartidaLib\obj\Debug\PartidaLib.dll
+C:\Users\CARLA\Desktop\OTHELLO Git\PROYECTO\CLIENTE\PartidaLib\obj\Debug\PartidaLib.pdb
