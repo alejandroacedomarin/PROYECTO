@@ -59,18 +59,20 @@ namespace ClienteForms
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label_yo = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.EliminarUser = new System.Windows.Forms.Button();
             this.RegistrarseButton = new System.Windows.Forms.Button();
             this.PasswordRegistro = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.UserRegistro = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.EliminarUser = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.signin_groupBox.SuspendLayout();
             this.peticiones_groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_conectados)).BeginInit();
             this.groupBox_invitacionPartida.SuspendLayout();
             this.groupBox1_invitar.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // signin_groupBox
@@ -80,7 +82,7 @@ namespace ClienteForms
             this.signin_groupBox.Controls.Add(this.password_lbl);
             this.signin_groupBox.Controls.Add(this.usuario_txt);
             this.signin_groupBox.Controls.Add(this.user_label);
-            this.signin_groupBox.Location = new System.Drawing.Point(25, 98);
+            this.signin_groupBox.Location = new System.Drawing.Point(11, 300);
             this.signin_groupBox.Name = "signin_groupBox";
             this.signin_groupBox.Size = new System.Drawing.Size(256, 214);
             this.signin_groupBox.TabIndex = 1;
@@ -139,7 +141,7 @@ namespace ClienteForms
             this.peticiones_groupBox.Controls.Add(this.nivel_radiobtn);
             this.peticiones_groupBox.Controls.Add(this.user_txt);
             this.peticiones_groupBox.Controls.Add(this.user_lbl);
-            this.peticiones_groupBox.Location = new System.Drawing.Point(300, 98);
+            this.peticiones_groupBox.Location = new System.Drawing.Point(273, 300);
             this.peticiones_groupBox.Name = "peticiones_groupBox";
             this.peticiones_groupBox.Size = new System.Drawing.Size(241, 275);
             this.peticiones_groupBox.TabIndex = 2;
@@ -207,9 +209,9 @@ namespace ClienteForms
             // 
             // desconectar_button
             // 
-            this.desconectar_button.Location = new System.Drawing.Point(73, 349);
+            this.desconectar_button.Location = new System.Drawing.Point(204, 12);
             this.desconectar_button.Name = "desconectar_button";
-            this.desconectar_button.Size = new System.Drawing.Size(156, 52);
+            this.desconectar_button.Size = new System.Drawing.Size(156, 35);
             this.desconectar_button.TabIndex = 4;
             this.desconectar_button.Text = "DESCONECTAR";
             this.desconectar_button.UseVisualStyleBackColor = true;
@@ -217,9 +219,9 @@ namespace ClienteForms
             // 
             // conectar_button
             // 
-            this.conectar_button.Location = new System.Drawing.Point(73, 24);
+            this.conectar_button.Location = new System.Drawing.Point(24, 12);
             this.conectar_button.Name = "conectar_button";
-            this.conectar_button.Size = new System.Drawing.Size(146, 45);
+            this.conectar_button.Size = new System.Drawing.Size(146, 35);
             this.conectar_button.TabIndex = 5;
             this.conectar_button.Text = "CONECTAR";
             this.conectar_button.UseVisualStyleBackColor = true;
@@ -227,7 +229,7 @@ namespace ClienteForms
             // 
             // juga_btn
             // 
-            this.juga_btn.Location = new System.Drawing.Point(360, 388);
+            this.juga_btn.Location = new System.Drawing.Point(795, 581);
             this.juga_btn.Name = "juga_btn";
             this.juga_btn.Size = new System.Drawing.Size(107, 41);
             this.juga_btn.TabIndex = 7;
@@ -237,9 +239,9 @@ namespace ClienteForms
             // 
             // servicios_btn
             // 
-            this.servicios_btn.Location = new System.Drawing.Point(620, 92);
+            this.servicios_btn.Location = new System.Drawing.Point(273, 584);
             this.servicios_btn.Name = "servicios_btn";
-            this.servicios_btn.Size = new System.Drawing.Size(129, 69);
+            this.servicios_btn.Size = new System.Drawing.Size(211, 47);
             this.servicios_btn.TabIndex = 8;
             this.servicios_btn.Text = "¿Cuantos servicios?";
             this.servicios_btn.UseVisualStyleBackColor = true;
@@ -249,9 +251,9 @@ namespace ClienteForms
             // 
             this.cont_lbl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cont_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cont_lbl.Location = new System.Drawing.Point(581, 182);
+            this.cont_lbl.Location = new System.Drawing.Point(497, 584);
             this.cont_lbl.Name = "cont_lbl";
-            this.cont_lbl.Size = new System.Drawing.Size(196, 184);
+            this.cont_lbl.Size = new System.Drawing.Size(92, 47);
             this.cont_lbl.TabIndex = 9;
             // 
             // dataGridView_conectados
@@ -261,12 +263,12 @@ namespace ClienteForms
             this.dataGridView_conectados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_conectados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Conectados});
-            this.dataGridView_conectados.Location = new System.Drawing.Point(803, 138);
+            this.dataGridView_conectados.Location = new System.Drawing.Point(738, 308);
             this.dataGridView_conectados.Name = "dataGridView_conectados";
             this.dataGridView_conectados.ReadOnly = true;
             this.dataGridView_conectados.RowHeadersWidth = 62;
             this.dataGridView_conectados.RowTemplate.Height = 28;
-            this.dataGridView_conectados.Size = new System.Drawing.Size(381, 299);
+            this.dataGridView_conectados.Size = new System.Drawing.Size(266, 261);
             this.dataGridView_conectados.TabIndex = 11;
             // 
             // Conectados
@@ -279,7 +281,7 @@ namespace ClienteForms
             // 
             // invitado_txt
             // 
-            this.invitado_txt.Location = new System.Drawing.Point(871, 92);
+            this.invitado_txt.Location = new System.Drawing.Point(802, 276);
             this.invitado_txt.Name = "invitado_txt";
             this.invitado_txt.Size = new System.Drawing.Size(100, 26);
             this.invitado_txt.TabIndex = 12;
@@ -289,7 +291,7 @@ namespace ClienteForms
             this.groupBox_invitacionPartida.Controls.Add(this.button2_invitacionPartida_NO);
             this.groupBox_invitacionPartida.Controls.Add(this.button_invitacionPartida_si);
             this.groupBox_invitacionPartida.Controls.Add(this.label_invitacionPartida_name);
-            this.groupBox_invitacionPartida.Location = new System.Drawing.Point(581, 422);
+            this.groupBox_invitacionPartida.Location = new System.Drawing.Point(520, 430);
             this.groupBox_invitacionPartida.Name = "groupBox_invitacionPartida";
             this.groupBox_invitacionPartida.Size = new System.Drawing.Size(196, 139);
             this.groupBox_invitacionPartida.TabIndex = 13;
@@ -329,7 +331,7 @@ namespace ClienteForms
             // 
             this.groupBox1_invitar.Controls.Add(this.button1);
             this.groupBox1_invitar.Controls.Add(this.textBox1);
-            this.groupBox1_invitar.Location = new System.Drawing.Point(122, 461);
+            this.groupBox1_invitar.Location = new System.Drawing.Point(520, 300);
             this.groupBox1_invitar.Name = "groupBox1_invitar";
             this.groupBox1_invitar.Size = new System.Drawing.Size(212, 125);
             this.groupBox1_invitar.TabIndex = 14;
@@ -342,7 +344,7 @@ namespace ClienteForms
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(98, 41);
             this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
+            this.button1.Text = "INVITAR";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -356,7 +358,7 @@ namespace ClienteForms
             // label_yo
             // 
             this.label_yo.AutoSize = true;
-            this.label_yo.Location = new System.Drawing.Point(345, 33);
+            this.label_yo.Location = new System.Drawing.Point(395, 90);
             this.label_yo.Name = "label_yo";
             this.label_yo.Size = new System.Drawing.Size(0, 20);
             this.label_yo.TabIndex = 15;
@@ -369,13 +371,23 @@ namespace ClienteForms
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.UserRegistro);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(853, 463);
+            this.groupBox1.Location = new System.Drawing.Point(24, 70);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(418, 214);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "REGISTRATE";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            // 
+            // EliminarUser
+            // 
+            this.EliminarUser.Location = new System.Drawing.Point(225, 128);
+            this.EliminarUser.Name = "EliminarUser";
+            this.EliminarUser.Size = new System.Drawing.Size(151, 40);
+            this.EliminarUser.TabIndex = 17;
+            this.EliminarUser.Text = "Eliminar usuario";
+            this.EliminarUser.UseVisualStyleBackColor = true;
+            this.EliminarUser.Click += new System.EventHandler(this.EliminarUser_Click);
             // 
             // RegistrarseButton
             // 
@@ -421,21 +433,22 @@ namespace ClienteForms
             this.label2.TabIndex = 1;
             this.label2.Text = "Usuario";
             // 
-            // EliminarUser
+            // pictureBox1
             // 
-            this.EliminarUser.Location = new System.Drawing.Point(225, 128);
-            this.EliminarUser.Name = "EliminarUser";
-            this.EliminarUser.Size = new System.Drawing.Size(151, 40);
-            this.EliminarUser.TabIndex = 17;
-            this.EliminarUser.Text = "Eliminar usuario";
-            this.EliminarUser.UseVisualStyleBackColor = true;
-            this.EliminarUser.Click += new System.EventHandler(this.EliminarUser_Click);
+            this.pictureBox1.Image = global::ClienteForms.Properties.Resources.Titulo;
+            this.pictureBox1.Location = new System.Drawing.Point(431, 26);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(886, 226);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 17;
+            this.pictureBox1.TabStop = false;
             // 
             // INICIO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1329, 673);
+            this.ClientSize = new System.Drawing.Size(1329, 652);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label_yo);
             this.Controls.Add(this.groupBox1_invitar);
@@ -464,6 +477,7 @@ namespace ClienteForms
             this.groupBox1_invitar.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -507,6 +521,7 @@ namespace ClienteForms
         private System.Windows.Forms.TextBox UserRegistro;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button EliminarUser;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

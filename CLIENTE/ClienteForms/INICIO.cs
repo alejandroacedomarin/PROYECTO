@@ -13,6 +13,7 @@ using PartidaLib;
 using System.Threading;
 namespace ClienteForms
 {
+   
     public partial class INICIO : Form
     {
         ListaFichas listafichas = new ListaFichas();
@@ -35,6 +36,7 @@ namespace ClienteForms
 
         private void INICIO_Load(object sender, EventArgs e)
         {
+            this.BackColor = Color.DarkGray;
             groupBox_invitacionPartida.Visible = true;
         }
 
