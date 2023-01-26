@@ -103,7 +103,7 @@ void *AtenderCliente (void *socket)
 			
 		}
 		
-	
+		
 		//****PETICION PARA LA DESCONEXION******
 		if (codigo ==0) 
 		{
@@ -252,7 +252,7 @@ void *AtenderCliente (void *socket)
 			strcpy(nombre2, p);
 			sprintf (respuesta,"7/%s-%s",nombre,nombre2);
 			write (DameSocket(&miLista,nombre), respuesta, strlen(respuesta));
-					
+			
 		}
 		
 		//ENVIA LA RESPUESTA DEL INVITADO AL USUARIO QUE HA REALIZADO LA INVITACION
@@ -280,17 +280,17 @@ void *AtenderCliente (void *socket)
 		}
 		
 		//
-		/*else if(codigo ==10)
+		else if(codigo ==10)
 		{
-			p = strtok (NULL, "/");
-			strcpy(numForm, p);
-			p = strtok (NULL, "/");
-			strcpy(idPartida, p);
-			p = strtok (NULL, "/");
-			strcpy(frase, p);
-			sprintf (respuesta,"9/%s",frase);
-			write (DameSocket(&miLista, nombre2), respuesta, strlen(respuesta));
-		}*/
+		p = strtok (NULL, "/");
+		strcpy(numForm, p);
+		p = strtok (NULL, "/");
+		strcpy(idPartida, p);
+		p = strtok (NULL, "/");
+		strcpy(frase, p);
+		sprintf (respuesta,"9/%s",frase);
+		write (DameSocket(&miLista, nombre2), respuesta, strlen(respuesta));
+		}
 		
 		//*******ENVIA CONFIRMACION AL INVITADO*******
 		else if(codigo == 11)
@@ -387,6 +387,8 @@ void *AtenderCliente (void *socket)
 				write (sockets[j], respuesta, strlen(respuesta));
 			//printf("dentro for:\n",sockets[j]);
 			
+			sprintf(respuesta1, "13/SI");
+			
 			write (sock_conn, respuesta1, strlen(respuesta1));
 			
 			mysql_close (conn);
@@ -459,11 +461,11 @@ void *AtenderCliente (void *socket)
 			
 			/*p = strtok (NULL, "/");
 			strcpy(nombre2, p);
-				
+			
 			p = strtok (NULL, "/");
 			char mensaje[200];
 			strcpy(mensaje, p);
-				
+			
 			sprintf (respuesta,"15/%s/",mensaje);
 			write (DameSocket(&miLista, nombre2), respuesta, strlen(respuesta));
 			write (DameSocket(&miLista, nombre), respuesta, strlen(respuesta));*/	
@@ -513,7 +515,7 @@ int main (int argc, char *argv[])
 		printf ("He recibido conexion\n");
 		
 		sockets[i]= sock_conn;
-			
+		
 		//Crear thread y decirle lo que tiene que hacer
 		pthread_create (&thread, NULL, AtenderCliente, &sockets[i]);
 		i=i+1;
@@ -585,7 +587,7 @@ int LogIn (char nombre[20], char Password[10])
 	}
 	
 	mysql_close (conn);
-		
+	
 }
 
 //Funcion que a￱ade un nuevo conectado. Retorna 0 si se ha a￯﾿ﾱadido correctamente y -1 si no se ha podido a￯﾿ﾱadir debido a que la lista esta llena.
@@ -667,7 +669,7 @@ void DamePos (ListaConectados *lista,  char nombre[20])
 		int pos = i;
 	}
 	
-
+	
 	return pos;
 } 
 
@@ -883,7 +885,7 @@ int MaxNivel(char username[20])
 	
 	if (row == NULL)
 		return -1;
-	else
+	
 	{	
 		return atoi(row[0]);
 	}
