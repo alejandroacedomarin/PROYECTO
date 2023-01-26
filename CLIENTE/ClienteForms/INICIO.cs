@@ -237,6 +237,18 @@ namespace ClienteForms
                             PasswordRegistro.Text = null;
                         }
                         break;
+                    case 15:
+                        string mensaje_chat = mensaje.Split('/')[0];
+                        /*DataGridViewRow fila = new DataGridViewRow();
+                        fila.CreateCells(dataGridView_Chat);
+                        fila.Cells[0].Value = mensaje_chat[0];*/
+
+                        int j = dataGridView_Chat.Rows.Add();
+                        dataGridView_Chat.Rows[j].Cells[0].Value = mensaje_chat;
+                        textBox_Chat.Text = "";
+
+                        break;
+
                 }
 
             }
@@ -246,8 +258,8 @@ namespace ClienteForms
         {
             //Creamos un IPEndPoint con el ip del servid0o y puerto del servidor 
             //al que deseamos conectarnos
-            IPAddress direc = IPAddress.Parse("147.83.117.22");
-            IPEndPoint ipep = new IPEndPoint(direc, 50062);
+            IPAddress direc = IPAddress.Parse("192.168.56.101");
+            IPEndPoint ipep = new IPEndPoint(direc, 9050);
 
 
             //Creamos el socket 
@@ -486,6 +498,19 @@ namespace ClienteForms
             label_yo.Text = UserRegistro.Text;
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
+        }
+
+        private void Enviar_Chat_Click(object sender, EventArgs e)
+        {
+            string mensaje = "15/" + textBox_Chat.Text;
+
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 

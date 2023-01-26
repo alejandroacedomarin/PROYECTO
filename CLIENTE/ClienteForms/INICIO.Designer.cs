@@ -66,6 +66,13 @@ namespace ClienteForms
             this.UserRegistro = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.groupBox_Chat = new System.Windows.Forms.GroupBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBox_UserChat = new System.Windows.Forms.TextBox();
+            this.textBox_Chat = new System.Windows.Forms.TextBox();
+            this.dataGridView_Chat = new System.Windows.Forms.DataGridView();
+            this.Chat = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Enviar_Chat = new System.Windows.Forms.Button();
             this.signin_groupBox.SuspendLayout();
             this.peticiones_groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_conectados)).BeginInit();
@@ -73,6 +80,8 @@ namespace ClienteForms
             this.groupBox1_invitar.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox_Chat.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Chat)).BeginInit();
             this.SuspendLayout();
             // 
             // signin_groupBox
@@ -141,7 +150,7 @@ namespace ClienteForms
             this.peticiones_groupBox.Controls.Add(this.nivel_radiobtn);
             this.peticiones_groupBox.Controls.Add(this.user_txt);
             this.peticiones_groupBox.Controls.Add(this.user_lbl);
-            this.peticiones_groupBox.Location = new System.Drawing.Point(273, 300);
+            this.peticiones_groupBox.Location = new System.Drawing.Point(651, 292);
             this.peticiones_groupBox.Name = "peticiones_groupBox";
             this.peticiones_groupBox.Size = new System.Drawing.Size(241, 275);
             this.peticiones_groupBox.TabIndex = 2;
@@ -183,7 +192,7 @@ namespace ClienteForms
             // nivel_radiobtn
             // 
             this.nivel_radiobtn.AutoSize = true;
-            this.nivel_radiobtn.Location = new System.Drawing.Point(36, 90);
+            this.nivel_radiobtn.Location = new System.Drawing.Point(36, 84);
             this.nivel_radiobtn.Name = "nivel_radiobtn";
             this.nivel_radiobtn.Size = new System.Drawing.Size(67, 24);
             this.nivel_radiobtn.TabIndex = 2;
@@ -229,7 +238,7 @@ namespace ClienteForms
             // 
             // juga_btn
             // 
-            this.juga_btn.Location = new System.Drawing.Point(867, 587);
+            this.juga_btn.Location = new System.Drawing.Point(1245, 579);
             this.juga_btn.Name = "juga_btn";
             this.juga_btn.Size = new System.Drawing.Size(107, 41);
             this.juga_btn.TabIndex = 7;
@@ -239,7 +248,7 @@ namespace ClienteForms
             // 
             // servicios_btn
             // 
-            this.servicios_btn.Location = new System.Drawing.Point(273, 584);
+            this.servicios_btn.Location = new System.Drawing.Point(651, 576);
             this.servicios_btn.Name = "servicios_btn";
             this.servicios_btn.Size = new System.Drawing.Size(211, 47);
             this.servicios_btn.TabIndex = 8;
@@ -251,7 +260,7 @@ namespace ClienteForms
             // 
             this.cont_lbl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cont_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cont_lbl.Location = new System.Drawing.Point(497, 584);
+            this.cont_lbl.Location = new System.Drawing.Point(875, 576);
             this.cont_lbl.Name = "cont_lbl";
             this.cont_lbl.Size = new System.Drawing.Size(92, 47);
             this.cont_lbl.TabIndex = 9;
@@ -263,7 +272,7 @@ namespace ClienteForms
             this.dataGridView_conectados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_conectados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Conectados});
-            this.dataGridView_conectados.Location = new System.Drawing.Point(867, 308);
+            this.dataGridView_conectados.Location = new System.Drawing.Point(1245, 300);
             this.dataGridView_conectados.Name = "dataGridView_conectados";
             this.dataGridView_conectados.ReadOnly = true;
             this.dataGridView_conectados.RowHeadersWidth = 62;
@@ -281,7 +290,7 @@ namespace ClienteForms
             // 
             // invitado_txt
             // 
-            this.invitado_txt.Location = new System.Drawing.Point(867, 276);
+            this.invitado_txt.Location = new System.Drawing.Point(1245, 268);
             this.invitado_txt.Name = "invitado_txt";
             this.invitado_txt.Size = new System.Drawing.Size(100, 26);
             this.invitado_txt.TabIndex = 12;
@@ -291,7 +300,7 @@ namespace ClienteForms
             this.groupBox_invitacionPartida.Controls.Add(this.button2_invitacionPartida_NO);
             this.groupBox_invitacionPartida.Controls.Add(this.button_invitacionPartida_si);
             this.groupBox_invitacionPartida.Controls.Add(this.label_invitacionPartida_name);
-            this.groupBox_invitacionPartida.Location = new System.Drawing.Point(520, 430);
+            this.groupBox_invitacionPartida.Location = new System.Drawing.Point(898, 422);
             this.groupBox_invitacionPartida.Name = "groupBox_invitacionPartida";
             this.groupBox_invitacionPartida.Size = new System.Drawing.Size(327, 139);
             this.groupBox_invitacionPartida.TabIndex = 13;
@@ -331,7 +340,7 @@ namespace ClienteForms
             // 
             this.groupBox1_invitar.Controls.Add(this.button1);
             this.groupBox1_invitar.Controls.Add(this.textBox1);
-            this.groupBox1_invitar.Location = new System.Drawing.Point(575, 300);
+            this.groupBox1_invitar.Location = new System.Drawing.Point(953, 292);
             this.groupBox1_invitar.Name = "groupBox1_invitar";
             this.groupBox1_invitar.Size = new System.Drawing.Size(212, 125);
             this.groupBox1_invitar.TabIndex = 14;
@@ -371,9 +380,9 @@ namespace ClienteForms
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.UserRegistro);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(24, 70);
+            this.groupBox1.Location = new System.Drawing.Point(24, 69);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(418, 214);
+            this.groupBox1.Size = new System.Drawing.Size(448, 214);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "REGISTRATE";
@@ -436,18 +445,86 @@ namespace ClienteForms
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ClienteForms.Properties.Resources.Titulo;
-            this.pictureBox1.Location = new System.Drawing.Point(431, 26);
+            this.pictureBox1.Location = new System.Drawing.Point(547, 24);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(886, 226);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             // 
+            // groupBox_Chat
+            // 
+            this.groupBox_Chat.Controls.Add(this.label3);
+            this.groupBox_Chat.Controls.Add(this.textBox_UserChat);
+            this.groupBox_Chat.Controls.Add(this.textBox_Chat);
+            this.groupBox_Chat.Controls.Add(this.dataGridView_Chat);
+            this.groupBox_Chat.Controls.Add(this.Enviar_Chat);
+            this.groupBox_Chat.Location = new System.Drawing.Point(311, 300);
+            this.groupBox_Chat.Name = "groupBox_Chat";
+            this.groupBox_Chat.Size = new System.Drawing.Size(308, 363);
+            this.groupBox_Chat.TabIndex = 18;
+            this.groupBox_Chat.TabStop = false;
+            this.groupBox_Chat.Text = "CHAT";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(49, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(64, 20);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Usuario";
+            // 
+            // textBox_UserChat
+            // 
+            this.textBox_UserChat.Location = new System.Drawing.Point(120, 41);
+            this.textBox_UserChat.Name = "textBox_UserChat";
+            this.textBox_UserChat.Size = new System.Drawing.Size(128, 26);
+            this.textBox_UserChat.TabIndex = 21;
+            this.textBox_UserChat.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
+            // 
+            // textBox_Chat
+            // 
+            this.textBox_Chat.Location = new System.Drawing.Point(27, 276);
+            this.textBox_Chat.Name = "textBox_Chat";
+            this.textBox_Chat.Size = new System.Drawing.Size(257, 26);
+            this.textBox_Chat.TabIndex = 20;
+            // 
+            // dataGridView_Chat
+            // 
+            this.dataGridView_Chat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView_Chat.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Chat});
+            this.dataGridView_Chat.Location = new System.Drawing.Point(27, 84);
+            this.dataGridView_Chat.Name = "dataGridView_Chat";
+            this.dataGridView_Chat.RowHeadersWidth = 62;
+            this.dataGridView_Chat.RowTemplate.Height = 28;
+            this.dataGridView_Chat.Size = new System.Drawing.Size(257, 177);
+            this.dataGridView_Chat.TabIndex = 19;
+            // 
+            // Chat
+            // 
+            this.Chat.HeaderText = "";
+            this.Chat.MinimumWidth = 8;
+            this.Chat.Name = "Chat";
+            this.Chat.Width = 150;
+            // 
+            // Enviar_Chat
+            // 
+            this.Enviar_Chat.Location = new System.Drawing.Point(99, 321);
+            this.Enviar_Chat.Name = "Enviar_Chat";
+            this.Enviar_Chat.Size = new System.Drawing.Size(122, 36);
+            this.Enviar_Chat.TabIndex = 0;
+            this.Enviar_Chat.Text = "ENVIAR";
+            this.Enviar_Chat.UseVisualStyleBackColor = true;
+            this.Enviar_Chat.Click += new System.EventHandler(this.Enviar_Chat_Click);
+            // 
             // INICIO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1353, 652);
+            this.ClientSize = new System.Drawing.Size(1683, 963);
+            this.Controls.Add(this.groupBox_Chat);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label_yo);
@@ -478,6 +555,9 @@ namespace ClienteForms
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox_Chat.ResumeLayout(false);
+            this.groupBox_Chat.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Chat)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -522,6 +602,13 @@ namespace ClienteForms
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button EliminarUser;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.GroupBox groupBox_Chat;
+        private System.Windows.Forms.TextBox textBox_Chat;
+        private System.Windows.Forms.DataGridView dataGridView_Chat;
+        private System.Windows.Forms.Button Enviar_Chat;
+        private System.Windows.Forms.TextBox textBox_UserChat;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Chat;
     }
 }
 

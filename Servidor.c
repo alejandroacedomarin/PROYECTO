@@ -8,7 +8,7 @@
 #include <mysql.h>
 #include <pthread.h>
 
-//**************************ESTRUCTURAS***************************
+//*********ESTRUCTURAS**********
 //Estructuras necessarias para lista de conectados
 typedef struct {
 	char nombre[20];
@@ -32,7 +32,7 @@ typedef struct {
 } Partida;
 
 
-//***********************VARIABLES GLOBALES***********************
+//********VARIABLES GLOBALES********
 //Estructura necessaria para acceso excluyente
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 int contador;
@@ -41,7 +41,7 @@ int sockets[100];
 ListaConectados miLista;
 Partida miPartida[100];
 
-//**********************ATENDEMOS CLIENTE***************************
+//*******ATENDEMOS CLIENTE**********
 void *AtenderCliente (void *socket)
 {
 	int sock_conn;
@@ -56,32 +56,30 @@ void *AtenderCliente (void *socket)
 	char noti[512];
 	int ret;
 	
-
 	
 	
+	//Empezamos a Recibir PETICIONES DEL CLIENETE
 	
 	int terminar = 0;
 	while(terminar == 0)
 	{
-		
-		
-		//Ahora recibimos su nombre, que dejamos en el buf
+		//Recibimos la peticion del cliente y mostramos en consola un "recibido"
 		ret=read(sock_conn,peticion, sizeof(peticion));
-		
 		printf ("Recibido\n");
 		
 		
 		//Tenemos que a￱adir la marca de fin de string para que no escriba lo que hay en el buffer
 		peticion[ret]='\0';
 		
-		//Escribinos el nombre en consola
-		
+		//Escribimos la peticion en consola
 		printf("Peticion: %s\n", peticion);
 		
-		//Vamos a ver que nos pide la peticion
+		//Recogemos el codigo de la peticion para saber que nos esta pidiendo el cliente
 		char *p = strtok( peticion, "/");
 		int codigo = atoi(p);
 		printf("ya tengo el codigo %d\n", codigo);
+		
+		//Declaramos las variables que necesitaremos en las peticiones
 		char nombre[20];
 		char Password[10];
 		char nombre2[20];
@@ -90,29 +88,24 @@ void *AtenderCliente (void *socket)
 		char frase[100];
 		int idPartida;
 		char nombreGanador[20];
+		int s1;
+		int s2;
 		
-		
-		if ((codigo !=0)&&(codigo!=5)&&(codigo!=6))
+		//Extraemos el nombre de usuario que esta haciendo la peticion
+		if ((codigo !=0)&&(codigo!=5)&&(codigo!=6)&&(codigo!=15))
 		{
 			p = strtok (NULL, "/");
 			
 			strcpy(nombre, p);
 			printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
+			//Guardamos socket del usuario
+			s1 = DameSocket(&miLista, nombre);
 			
 		}
 		
-		/*if (codigo == 6)
-		{
-		
-		char conectados[300];
-		conectados[0]= '\0';
-		printf("estoy aqui2");
-		DameConectados(&miLista, conectados);
-		printf(conectados);
-		write (sock_conn, conectados, strlen(conectados));
-		}*/
-		
-		if (codigo ==0) //petici?n de desconexi?n
+	
+		//****PETICION PARA LA DESCONEXION******
+		if (codigo ==0) 
 		{
 			Eliminar(&miLista, nombre);
 			printf(nombre);
@@ -122,18 +115,17 @@ void *AtenderCliente (void *socket)
 			DameConectados(&miLista, conectados);
 			sprintf(noti,"6/%s", conectados);
 			strcpy(respuesta, noti);
-			//printf("me cagao:\n",respuesta);
+			
 			int j;
 			for(j=0; j<miLista.num; j++)
 				write (sockets[j], respuesta, strlen(respuesta));
-			//printf("dentro for:\n",sockets[j]);
+			
 			terminar = 1;
 			
-			
-			
-			
-			
 		}
+		
+		
+		//****PETICION PARA EL CONTADOR DE SERVICIOS******
 		else if (codigo == 5)
 		{
 			sprintf (respuesta, "5/%d", contador);
@@ -142,6 +134,7 @@ void *AtenderCliente (void *socket)
 			
 		}
 		
+		//*******PETICION PARA EL LOG IN*********
 		else if(codigo == 1)
 		{
 			p = strtok (NULL, "/");
@@ -228,36 +221,44 @@ void *AtenderCliente (void *socket)
 			
 		}
 		
-		
+		//******PETICION PARA SABER NIVEL DEL USUARIO*****
 		else if(codigo == 2)
 		{
 			printf ("Codigo: %d, Nombre: %s\n", codigo, nombre);
 			sprintf (respuesta,"2/%d",DameNivel(nombre));
 			write (sock_conn, respuesta, strlen(respuesta));
 		}
+		
+		//***PETICION PARA SABER CUANTAS PARTIDAS HA GANADO EL USUARIO**
 		else if(codigo == 3)
 		{
 			sprintf (respuesta,"3/%d",DamePartidasGanadas(nombre));
 			write (sock_conn, respuesta, strlen(respuesta));
 		}
+		
+		//**PETICION PARA SABER EL NIVEL MAXIMO DE CUALQUIER USUARIO**
 		else if(codigo == 4)
 		{
 			sprintf (respuesta,"4/%d",MaxNivel(nombre));
 			write (sock_conn, respuesta, strlen(respuesta));
 		}
+		
+		//******PETICION PARA INVITAR A OTRO JUGADOR******
 		else if(codigo == 7)
 		{
 			p = strtok (NULL, "/");
 			strcpy(nombre2, p);
 			sprintf (respuesta,"7/%s-%s",nombre,nombre2);
 			write (DameSocket(&miLista,nombre), respuesta, strlen(respuesta));
-			
-			
+					
 		}
+		
+		//ENVIA LA RESPUESTA DEL INVITADO AL USUARIO QUE HA REALIZADO LA INVITACION
 		else if(codigo == 8)
 		{
 			p = strtok (NULL, "/");
 			strcpy(nombre2, p);
+			
 			p = strtok (NULL, "/");
 			strcpy(resp, p);
 			if(strcmp(resp,"SI")==0)
@@ -275,7 +276,9 @@ void *AtenderCliente (void *socket)
 			}
 			
 		}
-		else if(codigo ==10)
+		
+		//
+		/*else if(codigo ==10)
 		{
 			p = strtok (NULL, "/");
 			strcpy(numForm, p);
@@ -285,7 +288,9 @@ void *AtenderCliente (void *socket)
 			strcpy(frase, p);
 			sprintf (respuesta,"9/%s",frase);
 			write (DameSocket(&miLista, nombre2), respuesta, strlen(respuesta));
-		}
+		}*/
+		
+		//*******ENVIA CONFIRMACION AL INVITADO*******
 		else if(codigo == 11)
 		{
 			p = strtok (NULL, "/");
@@ -315,9 +320,9 @@ void *AtenderCliente (void *socket)
 				write (DameSocket(&miLista, nombre), respuesta, strlen(respuesta));
 			}
 		}
-
-		/*printf ("Respuesta: %s\n", respuesta);*/
-		//lo enviamos
+		
+		
+		//***SUBE DE NIVEL AL USUARIO GANADOR DE LA PARTIDA****
 		else if(codigo == 12)
 		{
 			p = strtok (NULL, "/");
@@ -325,6 +330,8 @@ void *AtenderCliente (void *socket)
 			printf(nombreGanador);
 			SubirNivel();
 		}
+		
+		//******INCREMENTA EL CONTADOR DE SERVICIOS*******
 		if ((codigo == 2)||(codigo == 3)||(codigo == 4))
 		{
 			pthread_mutex_lock( &mutex ); //no interrumpas
@@ -332,6 +339,7 @@ void *AtenderCliente (void *socket)
 			pthread_mutex_unlock( &mutex ); //ya puedes interrumpir
 		}
 		
+		//*******REGISTRARSE************
 		else if (codigo == 13)
 		{
 			p = strtok (NULL, "/");
@@ -348,7 +356,7 @@ void *AtenderCliente (void *socket)
 					   mysql_errno(conn), mysql_error(conn));
 				exit(1);
 			}
-			conn = mysql_real_connect (conn, "localhost", "root", "mysql", "Othello", 0, NULL, 0);
+			conn = mysql_real_connect (conn,  "localhost","root", "mysql", "Othello", 0, NULL, 0);
 			if (conn == NULL) {
 				printf("Error al inicializar la conexion: %u %s\n",
 					   mysql_errno(conn), mysql_error(conn));
@@ -363,26 +371,28 @@ void *AtenderCliente (void *socket)
 			}
 			resultado = mysql_store_result (conn);
 			
-
-				AddConectado(&miLista, nombre, sock_conn);
-				//Lista de conectados
-				char conectados[300];
-				conectados[0]= '\0';
-				DameConectados(&miLista, conectados);
-				sprintf(noti,"6/%s", conectados);
-				strcpy(respuesta, noti);
-				//printf("me:\n",respuesta);
-				int j;
-				for(j=0; j<miLista.num; j++)
-					write (sockets[j], respuesta, strlen(respuesta));
-				//printf("dentro for:\n",sockets[j]);
-				
+			
+			AddConectado(&miLista, nombre, sock_conn);
+			//Lista de conectados
+			char conectados[300];
+			conectados[0]= '\0';
+			DameConectados(&miLista, conectados);
+			sprintf(noti,"6/%s", conectados);
+			strcpy(respuesta, noti);
+			//printf("me:\n",respuesta);
+			int j;
+			for(j=0; j<miLista.num; j++)
+				write (sockets[j], respuesta, strlen(respuesta));
+			//printf("dentro for:\n",sockets[j]);
+			
 			write (sock_conn, respuesta1, strlen(respuesta1));
 			
 			mysql_close (conn);
 			
 			
 		}
+		
+		//*********DARSE DE BAJA***********
 		else if (codigo == 14)
 		{
 			p = strtok (NULL, "/");
@@ -399,7 +409,7 @@ void *AtenderCliente (void *socket)
 					   mysql_errno(conn), mysql_error(conn));
 				exit(1);
 			}
-			conn = mysql_real_connect (conn, "localhost", "root", "mysql", "Othello", 0, NULL, 0);
+			conn = mysql_real_connect (conn, "localhost","root", "mysql", "Othello", 0, NULL, 0);
 			if (conn == NULL) {
 				printf("Error al inicializar la conexion: %u %s\n",
 					   mysql_errno(conn), mysql_error(conn));
@@ -421,11 +431,10 @@ void *AtenderCliente (void *socket)
 			DameConectados(&miLista, conectados);
 			sprintf(noti,"6/%s", conectados);
 			strcpy(respuesta, noti);
-			//printf("me:\n",respuesta);
+			
 			int j;
 			for(j=0; j<miLista.num; j++)
 				write (sockets[j], respuesta, strlen(respuesta));
-			//printf("dentro for:\n",sockets[j]);
 			
 			write (sock_conn, respuesta1, strlen(respuesta1));
 			
@@ -433,19 +442,42 @@ void *AtenderCliente (void *socket)
 			
 			
 		}
-				 
+		
+		//********CHAT*********
+		else if (codigo == 15)
+		{
+			s2 = DameSocket(&miLista, nombre2);
+			p = strtok (NULL, "/");
+			char mensaje[200];
+			strcpy(mensaje, p);
+			sprintf (respuesta,"15/%s/",mensaje);
+			
+			write (s2, respuesta, strlen(respuesta));
+			write (s1, respuesta, strlen(respuesta));
+			
+			/*p = strtok (NULL, "/");
+			strcpy(nombre2, p);
+				
+			p = strtok (NULL, "/");
+			char mensaje[200];
+			strcpy(mensaje, p);
+				
+			sprintf (respuesta,"15/%s/",mensaje);
+			write (DameSocket(&miLista, nombre2), respuesta, strlen(respuesta));
+			write (DameSocket(&miLista, nombre), respuesta, strlen(respuesta));*/	
+			
+		}
+		
 	}
 }
 
 
-//********************************MAIN(ESTABLECER CONEXION)**************************************
+//***********MAIN(ESTABLECER CONEXION)*************
 int main (int argc, char *argv[])
 {
 	int sock_conn, sock_listen;
 	struct sockaddr_in serv_adr;
-	//char peticion[512];
-	//char respuesta[512];
-	//char respuesta1[512];
+	
 	//abrimos socket
 	if ((sock_listen = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 		printf("Error creant socket");
@@ -458,7 +490,7 @@ int main (int argc, char *argv[])
 	//htonl formatea el numero que recibe al formato necesario
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	//escuchamos en el puerto 9050
-	serv_adr.sin_port = htons(9030);
+	serv_adr.sin_port = htons(9050);
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
 		printf ("Error al bind");
 	
@@ -479,20 +511,82 @@ int main (int argc, char *argv[])
 		printf ("He recibido conexion\n");
 		
 		sockets[i]= sock_conn;
-		
-		
-		
+			
 		//Crear thread y decirle lo que tiene que hacer
 		pthread_create (&thread, NULL, AtenderCliente, &sockets[i]);
 		i=i+1;
 	}
 	
 	
-	
 }
 
-//****************************************FUNCIONES*****************************************************
-//Funcion que a￱ade un nuevo conectado. Retorna 0 si se ha a￱adido correctamente y -1 si no se ha podido a￱adir debido a que la lista esta llena.
+//*************FUNCIONES******************
+
+//Funcion del LOG IN, Esta funcion retorna 0 si no te has logeado bien y 1 si has introducido bien los datos
+int LogIn (char nombre[20], char Password[10])
+{
+	
+	MYSQL *conn;
+	int err;
+	
+	MYSQL_RES *resultado;
+	MYSQL_ROW row;
+	
+	char consulta [100];
+	
+	
+	conn = mysql_init(NULL);
+	if (conn==NULL) {
+		printf ("Error al crear la conexion: %u %s\n", 
+				mysql_errno(conn), mysql_error(conn));
+		exit (1);
+	}
+	
+	conn = mysql_real_connect (conn, "localhost","root", "mysql", "Othello",0, NULL, 0);
+	if (conn==NULL) {
+		printf ("Error al inicializar la conexion: %u %s\n", 
+				mysql_errno(conn), mysql_error(conn));
+		exit (1);
+	}
+	
+	
+	sprintf(consulta, "SELECT Jugador.Username, Jugador.Password FROM Jugador WHERE (Jugador.Username='%s' AND Jugador.Password='%s')", nombre, Password);
+	
+	
+	err=mysql_query (conn, consulta);
+	if (err!=0) {
+		printf ("Error al consultar datos de la base %u %s\n",
+				mysql_errno(conn), mysql_error(conn));
+		exit (1);
+	}
+	printf("aqui\n");
+	resultado = mysql_store_result (conn);
+	
+	printf("aqui\n",resultado);
+	
+	row = mysql_fetch_row (resultado);
+	printf(row[0]);
+	
+	
+	if (row[0] == NULL)
+	{
+		return 0;
+		printf ("No se han obtenido datos en la consulta\n");
+		
+	}
+	
+	
+	else
+	{	
+		return 1;
+		
+	}
+	
+	mysql_close (conn);
+		
+}
+
+//Funcion que a￱ade un nuevo conectado. Retorna 0 si se ha a￯﾿ﾱadido correctamente y -1 si no se ha podido a￯﾿ﾱadir debido a que la lista esta llena.
 int AddConectado (ListaConectados *lista, char nombre[20], int socket)
 {
 	if (lista->num == 100)
@@ -529,6 +623,7 @@ int Eliminar (ListaConectados *lista, char nombre[20])
 	
 }
 
+//Funcion que retorna un vector con el nombre de usuario de todos los conectados
 void DameConectados (ListaConectados *lista, char conectados [300])
 {
 	int i;
@@ -538,6 +633,8 @@ void DameConectados (ListaConectados *lista, char conectados [300])
 		
 	}
 } 
+
+//Funcion que retorna el numero del socket cuyo usuario querramos
 int DameSocket(ListaConectados *lista, char nombre[20])
 {
 	int i = 0;
@@ -551,36 +648,29 @@ int DameSocket(ListaConectados *lista, char nombre[20])
 		{
 			i++;
 		}
-		   
+		
 	}
 }
 
-
+//Funcion que devuelve la posicion del usuario en la lista de conectados
 void DamePos (ListaConectados *lista,  char nombre[20])
 {
 	int i=0;
 	int terminado=0;
 	int pos;
-	//while(i< lista->num && terminado==0 )
-	//{
-		/*sprintf(conectados, "%s%s,", conectados, lista->conectados[i].nombre);*/
-		if(lista->conectados[i].nombre==nombre)
-		{
-			int pos = i;
-		}
-		
-		//i++;
-	//}
+	
+	if(lista->conectados[i].nombre==nombre)
+	{
+		int pos = i;
+	}
+	
+
 	return pos;
 } 
 
-/*int A�adirPartida (Partida miPartida,char nombreHost[20],char nombreInv[20], int socketH,int socketI)*/
-/*{*/
-/*	int pos =0;*/
-/*	return pos;*/
-/*}*/
 
 
+//Funcion para generar una nuevo id de partida para ambos usuarios, que devuelve el id de Partida
 int AddPartida(Partida miPartida[],char nombreHost[20],char nombreInv[20], int socketH,int socketI)
 {
 	int i =0;
@@ -612,6 +702,8 @@ int AddPartida(Partida miPartida[],char nombreHost[20],char nombreInv[20], int s
 		return i;
 	}
 } 
+
+
 void AddFormEnPartida(Partida miPartida[], char nombre[20], int numForm,int idP)
 {
 	int i =0;
@@ -635,6 +727,8 @@ void AddFormEnPartida(Partida miPartida[], char nombre[20], int numForm,int idP)
 	}
 	
 }
+
+//Funcion que devuelve el numero de partidas ganadas del usuario que pidamos
 int DamePartidasGanadas(char username[20])
 {
 	MYSQL *conn;
@@ -653,7 +747,7 @@ int DamePartidasGanadas(char username[20])
 		exit (1);
 	}
 	//inicializar la conexin
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", "Othello",0, NULL, 0);
+	conn = mysql_real_connect (conn,"localhost","root", "mysql", "Othello",0, NULL, 0);
 	if (conn==NULL) {
 		printf ("Error al inicializar la conexion: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
@@ -688,6 +782,7 @@ int DamePartidasGanadas(char username[20])
 	exit(0);
 }
 
+//Funcion que nos devuelve el nivel en el que se encuentra el usuario que pedimos
 int DameNivel (char username[20])
 {
 	MYSQL *conn;
@@ -740,7 +835,7 @@ int DameNivel (char username[20])
 	
 }
 
-
+//Funcion que devuelve el nivel del Jugador que tiene el nivel mas alto
 int MaxNivel(char username[20])
 {
 	MYSQL *conn;
@@ -759,7 +854,7 @@ int MaxNivel(char username[20])
 		exit (1);
 	}
 	//inicializar la conexin
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", "Othello",0, NULL, 0);
+	conn = mysql_real_connect (conn,  "localhost","root", "mysql", "Othello",0, NULL, 0);
 	if (conn==NULL) {
 		printf ("Error al inicializar la conexion: %u %s\n", 
 				mysql_errno(conn), mysql_error(conn));
@@ -789,61 +884,14 @@ int MaxNivel(char username[20])
 	{	
 		return atoi(row[0]);
 	}
-
+	
 	mysql_close (conn);
 	exit(0);
 }
 
-//FUNCION DE REGISTRARSE
-int Register(char username[20], char password[20])
-{
-	
-	MYSQL *conn;
-	int err;
-	
-	MYSQL_RES *resultado;
-	MYSQL_ROW row;
-	
-	char consulta [100];
-	char respuesta1 [100];
-	
-	conn = mysql_init(NULL);
-	if (conn==NULL) {
-		printf ("Error al crear la conexion: %u %s\n", 
-				mysql_errno(conn), mysql_error(conn));
-		exit (1);
-	}
-	
-	conn = mysql_real_connect (conn, "localhost","root", "mysql", "Othello",0, NULL, 0);
-	if (conn==NULL) {
-		printf ("Error al inicializar la conexion: %u %s\n", 
-				mysql_errno(conn), mysql_error(conn));
-		exit (1);
-	}
-	
-	
-	sprintf(consulta, "INSERT INTO Jugador VALUES ( '%s','%s', 0)", username, password);
-	
-	
-	
-	
-	err=mysql_query (conn, consulta);
-	if (err!=0) {
-		printf ("Error al consultar datos de la base %u %s\n",
-				mysql_errno(conn), mysql_error(conn));
-		exit (1);
-	}
-	else
-	{
-		strcpy(respuesta1, "13/SI");
-	}
-	
-	
-	mysql_close (conn);
-	
-}
 
-// CARLA
+
+//Funcion que augmenta de nivel al usuario que ha ganado la partida
 int SubirNivel(char nombreGanador[20])
 {
 	MYSQL *conn;
