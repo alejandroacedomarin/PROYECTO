@@ -229,7 +229,7 @@ namespace ClienteForms
             // 
             // juga_btn
             // 
-            this.juga_btn.Location = new System.Drawing.Point(795, 581);
+            this.juga_btn.Location = new System.Drawing.Point(867, 587);
             this.juga_btn.Name = "juga_btn";
             this.juga_btn.Size = new System.Drawing.Size(107, 41);
             this.juga_btn.TabIndex = 7;
@@ -263,7 +263,7 @@ namespace ClienteForms
             this.dataGridView_conectados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_conectados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Conectados});
-            this.dataGridView_conectados.Location = new System.Drawing.Point(738, 308);
+            this.dataGridView_conectados.Location = new System.Drawing.Point(867, 308);
             this.dataGridView_conectados.Name = "dataGridView_conectados";
             this.dataGridView_conectados.ReadOnly = true;
             this.dataGridView_conectados.RowHeadersWidth = 62;
@@ -281,7 +281,7 @@ namespace ClienteForms
             // 
             // invitado_txt
             // 
-            this.invitado_txt.Location = new System.Drawing.Point(802, 276);
+            this.invitado_txt.Location = new System.Drawing.Point(867, 276);
             this.invitado_txt.Name = "invitado_txt";
             this.invitado_txt.Size = new System.Drawing.Size(100, 26);
             this.invitado_txt.TabIndex = 12;
@@ -293,7 +293,7 @@ namespace ClienteForms
             this.groupBox_invitacionPartida.Controls.Add(this.label_invitacionPartida_name);
             this.groupBox_invitacionPartida.Location = new System.Drawing.Point(520, 430);
             this.groupBox_invitacionPartida.Name = "groupBox_invitacionPartida";
-            this.groupBox_invitacionPartida.Size = new System.Drawing.Size(196, 139);
+            this.groupBox_invitacionPartida.Size = new System.Drawing.Size(327, 139);
             this.groupBox_invitacionPartida.TabIndex = 13;
             this.groupBox_invitacionPartida.TabStop = false;
             this.groupBox_invitacionPartida.Text = "INVITACION";
@@ -331,7 +331,7 @@ namespace ClienteForms
             // 
             this.groupBox1_invitar.Controls.Add(this.button1);
             this.groupBox1_invitar.Controls.Add(this.textBox1);
-            this.groupBox1_invitar.Location = new System.Drawing.Point(520, 300);
+            this.groupBox1_invitar.Location = new System.Drawing.Point(575, 300);
             this.groupBox1_invitar.Name = "groupBox1_invitar";
             this.groupBox1_invitar.Size = new System.Drawing.Size(212, 125);
             this.groupBox1_invitar.TabIndex = 14;
@@ -447,7 +447,7 @@ namespace ClienteForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1329, 652);
+            this.ClientSize = new System.Drawing.Size(1353, 652);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label_yo);

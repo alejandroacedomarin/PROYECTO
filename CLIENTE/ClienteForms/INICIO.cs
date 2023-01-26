@@ -1,19 +1,15 @@
-﻿using System;
+﻿using PartidaLib;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Net;
 using System.Net.Sockets;
-using System.Windows.Forms;
-using PartidaLib;
+using System.Text;
 using System.Threading;
+using System.Windows.Forms;
 namespace ClienteForms
 {
-   
+
     public partial class INICIO : Form
     {
         ListaFichas listafichas = new ListaFichas();
@@ -53,16 +49,16 @@ namespace ClienteForms
                 string[] trozos = mensaje_limpio.Split('/');
                 //MessageBox.Show(trozos[0]);
                 int codigo;
-                string mensaje=null;
+                string mensaje = null;
                 try
                 {
                     codigo = Convert.ToInt32(trozos[0]);
                     mensaje = trozos[1];
                 }
-                catch(System.FormatException)
+                catch (System.FormatException)
                 {
                     codigo = 0;
-                    
+
                 }
 
                 switch (codigo)
@@ -151,8 +147,8 @@ namespace ClienteForms
                         break;
 
                     case 6: // Notificacion lista de conectados
-                        
-                        int i=0;
+
+                        int i = 0;
                         int n = mensaje.Length;
                         dataGridView_conectados.ClearSelection();
                         this.dataGridView_conectados.Rows.Clear();
@@ -164,8 +160,8 @@ namespace ClienteForms
                         {
 
                         }*/
-                        
-                                               
+
+
                         int m = 0;
                         while (i < n)
                         {
@@ -175,8 +171,8 @@ namespace ClienteForms
                             i = i + usuario.Length + 1;
                             m = m + 1;
                         }
-                        
-                       
+
+
                         break;
                     case 7: //Invitacion a partida
                         groupBox_invitacionPartida.Visible = true;
@@ -185,14 +181,14 @@ namespace ClienteForms
                         label_invitacionPartida_name.Text = nombreel + " te invita a una partida. Aceptas?";
                         break;
                     case 8: //Respuesta invitacion a partida
-                        
+
                         string el = mensaje.Split('-')[0];
                         string yo = mensaje.Split('-')[1];
                         string resp = mensaje.Split('-')[2];
                         int idP = Convert.ToInt32(mensaje.Split('-')[3]);
-                        
+
                         MessageBox.Show(el + " ha dicho: " + resp);
-                        if(resp=="SI")
+                        if (resp == "SI")
                         {
                             ThreadStart ts = delegate { PonerEnMarchaPartida(idP); };
                             Thread partida_thread = new Thread(ts);
@@ -226,7 +222,7 @@ namespace ClienteForms
                         nombreyo = mensaje.Split('-')[0];
                         break;
                     case 13:
-                         if (mensaje == "SI")
+                        if (mensaje == "SI")
                         {
                             MessageBox.Show("Te has registrado correctamente");
 
@@ -250,8 +246,8 @@ namespace ClienteForms
         {
             //Creamos un IPEndPoint con el ip del servid0o y puerto del servidor 
             //al que deseamos conectarnos
-            IPAddress direc = IPAddress.Parse("192.168.56.101");
-            IPEndPoint ipep = new IPEndPoint(direc, 9030);
+            IPAddress direc = IPAddress.Parse("147.83.117.22");
+            IPEndPoint ipep = new IPEndPoint(direc, 50062);
 
 
             //Creamos el socket 
@@ -262,7 +258,7 @@ namespace ClienteForms
 
                 MessageBox.Show("Conectado");
                 signin_groupBox.Visible = true;
-               // peticiones_groupBox.Visible = false;
+                // peticiones_groupBox.Visible = false;
                 this.BackColor = Color.Green;
 
             }
@@ -310,7 +306,7 @@ namespace ClienteForms
                     byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                     server.Send(msg);
 
-            
+
                 }
                 else
                 {
@@ -327,7 +323,7 @@ namespace ClienteForms
                     byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
                     server.Send(msg);
 
-                   
+
                 }
                 else
                 {
@@ -366,7 +362,7 @@ namespace ClienteForms
             label_yo.Text = usuario_txt.Text;
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
-                            
+
         }
 
         private void servicios_btn_Click(object sender, EventArgs e)
@@ -386,23 +382,23 @@ namespace ClienteForms
         private void PonerEnMarchaPartida(int idP)
         {
             int numForm = partidas.Count;
-            PARTIDA p = new PARTIDA(nombreyo,server,idP);
+            PARTIDA p = new PARTIDA(nombreyo, server, idP);
             partidas.Add(p);
             //string mensaje = "11/"+numForm+"/"+nombreyo+"/"+idP
             //string mensaje = "11/" + nombreyo + "/" + nombreel + "/SI";
             //byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             //server.Send(msg);
             p.ShowDialog();
-            
+
         }
         // CARLA
-        private void TerminarPartida (object sender, EventArgs e)
+        private void TerminarPartida(object sender, EventArgs e)
         {
             int puntuacion = puntuacionGanador;
             int idP = partidas.Count;
             string nombreGanador = nombreyo;
             PARTIDA p = new PARTIDA(nombreyo, server, idP);
-            string mensaje = "12/"+ nombreGanador;
+            string mensaje = "12/" + nombreGanador;
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
             p.ShowDialog();
@@ -423,7 +419,7 @@ namespace ClienteForms
 
         private void button2_invitacionPartida_NO_Click(object sender, EventArgs e)
         {
-            string mensaje = "8/"+nombreyo+"/"+nombreel+"/NO";
+            string mensaje = "8/" + nombreyo + "/" + nombreel + "/NO";
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
             groupBox_invitacionPartida.Visible = false;
@@ -466,7 +462,7 @@ namespace ClienteForms
         {
 
         }
-       
+
 
         private void signin_groupBox_Enter(object sender, EventArgs e)
         {
