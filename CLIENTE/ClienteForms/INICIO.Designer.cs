@@ -67,12 +67,11 @@ namespace ClienteForms
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox_Chat = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox_UserChat = new System.Windows.Forms.TextBox();
             this.textBox_Chat = new System.Windows.Forms.TextBox();
             this.dataGridView_Chat = new System.Windows.Forms.DataGridView();
             this.Chat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Enviar_Chat = new System.Windows.Forms.Button();
+            this.groupBox_listaConectados = new System.Windows.Forms.GroupBox();
             this.signin_groupBox.SuspendLayout();
             this.peticiones_groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_conectados)).BeginInit();
@@ -82,6 +81,7 @@ namespace ClienteForms
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_Chat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Chat)).BeginInit();
+            this.groupBox_listaConectados.SuspendLayout();
             this.SuspendLayout();
             // 
             // signin_groupBox
@@ -113,6 +113,7 @@ namespace ClienteForms
             // 
             this.password_txt.Location = new System.Drawing.Point(134, 84);
             this.password_txt.Name = "password_txt";
+            this.password_txt.PasswordChar = '*';
             this.password_txt.Size = new System.Drawing.Size(100, 26);
             this.password_txt.TabIndex = 1;
             // 
@@ -129,7 +130,7 @@ namespace ClienteForms
             // 
             this.usuario_txt.Location = new System.Drawing.Point(134, 43);
             this.usuario_txt.Name = "usuario_txt";
-            this.usuario_txt.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.usuario_txt.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.usuario_txt.Size = new System.Drawing.Size(100, 26);
             this.usuario_txt.TabIndex = 1;
             // 
@@ -150,16 +151,18 @@ namespace ClienteForms
             this.peticiones_groupBox.Controls.Add(this.nivel_radiobtn);
             this.peticiones_groupBox.Controls.Add(this.user_txt);
             this.peticiones_groupBox.Controls.Add(this.user_lbl);
+            this.peticiones_groupBox.Controls.Add(this.servicios_btn);
+            this.peticiones_groupBox.Controls.Add(this.cont_lbl);
             this.peticiones_groupBox.Location = new System.Drawing.Point(651, 292);
             this.peticiones_groupBox.Name = "peticiones_groupBox";
-            this.peticiones_groupBox.Size = new System.Drawing.Size(241, 275);
+            this.peticiones_groupBox.Size = new System.Drawing.Size(281, 310);
             this.peticiones_groupBox.TabIndex = 2;
             this.peticiones_groupBox.TabStop = false;
             this.peticiones_groupBox.Text = "PETICIONES";
             // 
             // enviar_button
             // 
-            this.enviar_button.Location = new System.Drawing.Point(65, 208);
+            this.enviar_button.Location = new System.Drawing.Point(65, 189);
             this.enviar_button.Name = "enviar_button";
             this.enviar_button.Size = new System.Drawing.Size(116, 33);
             this.enviar_button.TabIndex = 5;
@@ -238,7 +241,7 @@ namespace ClienteForms
             // 
             // juga_btn
             // 
-            this.juga_btn.Location = new System.Drawing.Point(1245, 579);
+            this.juga_btn.Location = new System.Drawing.Point(120, 313);
             this.juga_btn.Name = "juga_btn";
             this.juga_btn.Size = new System.Drawing.Size(107, 41);
             this.juga_btn.TabIndex = 7;
@@ -248,9 +251,9 @@ namespace ClienteForms
             // 
             // servicios_btn
             // 
-            this.servicios_btn.Location = new System.Drawing.Point(651, 576);
+            this.servicios_btn.Location = new System.Drawing.Point(14, 247);
             this.servicios_btn.Name = "servicios_btn";
-            this.servicios_btn.Size = new System.Drawing.Size(211, 47);
+            this.servicios_btn.Size = new System.Drawing.Size(167, 47);
             this.servicios_btn.TabIndex = 8;
             this.servicios_btn.Text = "¿Cuantos servicios?";
             this.servicios_btn.UseVisualStyleBackColor = true;
@@ -260,9 +263,9 @@ namespace ClienteForms
             // 
             this.cont_lbl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.cont_lbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cont_lbl.Location = new System.Drawing.Point(875, 576);
+            this.cont_lbl.Location = new System.Drawing.Point(187, 247);
             this.cont_lbl.Name = "cont_lbl";
-            this.cont_lbl.Size = new System.Drawing.Size(92, 47);
+            this.cont_lbl.Size = new System.Drawing.Size(66, 44);
             this.cont_lbl.TabIndex = 9;
             // 
             // dataGridView_conectados
@@ -272,7 +275,7 @@ namespace ClienteForms
             this.dataGridView_conectados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_conectados.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Conectados});
-            this.dataGridView_conectados.Location = new System.Drawing.Point(1245, 300);
+            this.dataGridView_conectados.Location = new System.Drawing.Point(19, 46);
             this.dataGridView_conectados.Name = "dataGridView_conectados";
             this.dataGridView_conectados.ReadOnly = true;
             this.dataGridView_conectados.RowHeadersWidth = 62;
@@ -290,7 +293,7 @@ namespace ClienteForms
             // 
             // invitado_txt
             // 
-            this.invitado_txt.Location = new System.Drawing.Point(1245, 268);
+            this.invitado_txt.Location = new System.Drawing.Point(237, 14);
             this.invitado_txt.Name = "invitado_txt";
             this.invitado_txt.Size = new System.Drawing.Size(100, 26);
             this.invitado_txt.TabIndex = 12;
@@ -300,7 +303,7 @@ namespace ClienteForms
             this.groupBox_invitacionPartida.Controls.Add(this.button2_invitacionPartida_NO);
             this.groupBox_invitacionPartida.Controls.Add(this.button_invitacionPartida_si);
             this.groupBox_invitacionPartida.Controls.Add(this.label_invitacionPartida_name);
-            this.groupBox_invitacionPartida.Location = new System.Drawing.Point(898, 422);
+            this.groupBox_invitacionPartida.Location = new System.Drawing.Point(953, 422);
             this.groupBox_invitacionPartida.Name = "groupBox_invitacionPartida";
             this.groupBox_invitacionPartida.Size = new System.Drawing.Size(327, 139);
             this.groupBox_invitacionPartida.TabIndex = 13;
@@ -412,6 +415,7 @@ namespace ClienteForms
             // 
             this.PasswordRegistro.Location = new System.Drawing.Point(134, 84);
             this.PasswordRegistro.Name = "PasswordRegistro";
+            this.PasswordRegistro.PasswordChar = '*';
             this.PasswordRegistro.Size = new System.Drawing.Size(100, 26);
             this.PasswordRegistro.TabIndex = 1;
             // 
@@ -428,7 +432,7 @@ namespace ClienteForms
             // 
             this.UserRegistro.Location = new System.Drawing.Point(134, 43);
             this.UserRegistro.Name = "UserRegistro";
-            this.UserRegistro.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.UserRegistro.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.UserRegistro.Size = new System.Drawing.Size(100, 26);
             this.UserRegistro.TabIndex = 1;
             this.UserRegistro.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
@@ -454,8 +458,6 @@ namespace ClienteForms
             // 
             // groupBox_Chat
             // 
-            this.groupBox_Chat.Controls.Add(this.label3);
-            this.groupBox_Chat.Controls.Add(this.textBox_UserChat);
             this.groupBox_Chat.Controls.Add(this.textBox_Chat);
             this.groupBox_Chat.Controls.Add(this.dataGridView_Chat);
             this.groupBox_Chat.Controls.Add(this.Enviar_Chat);
@@ -465,23 +467,6 @@ namespace ClienteForms
             this.groupBox_Chat.TabIndex = 18;
             this.groupBox_Chat.TabStop = false;
             this.groupBox_Chat.Text = "CHAT";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(49, 41);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 20);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Usuario";
-            // 
-            // textBox_UserChat
-            // 
-            this.textBox_UserChat.Location = new System.Drawing.Point(120, 41);
-            this.textBox_UserChat.Name = "textBox_UserChat";
-            this.textBox_UserChat.Size = new System.Drawing.Size(128, 26);
-            this.textBox_UserChat.TabIndex = 21;
-            this.textBox_UserChat.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // textBox_Chat
             // 
@@ -495,12 +480,13 @@ namespace ClienteForms
             this.dataGridView_Chat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_Chat.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Chat});
-            this.dataGridView_Chat.Location = new System.Drawing.Point(27, 84);
+            this.dataGridView_Chat.Location = new System.Drawing.Point(27, 35);
             this.dataGridView_Chat.Name = "dataGridView_Chat";
             this.dataGridView_Chat.RowHeadersWidth = 62;
             this.dataGridView_Chat.RowTemplate.Height = 28;
-            this.dataGridView_Chat.Size = new System.Drawing.Size(257, 177);
+            this.dataGridView_Chat.Size = new System.Drawing.Size(257, 226);
             this.dataGridView_Chat.TabIndex = 19;
+            this.dataGridView_Chat.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_Chat_CellContentClick);
             // 
             // Chat
             // 
@@ -519,22 +505,30 @@ namespace ClienteForms
             this.Enviar_Chat.UseVisualStyleBackColor = true;
             this.Enviar_Chat.Click += new System.EventHandler(this.Enviar_Chat_Click);
             // 
+            // groupBox_listaConectados
+            // 
+            this.groupBox_listaConectados.Controls.Add(this.invitado_txt);
+            this.groupBox_listaConectados.Controls.Add(this.dataGridView_conectados);
+            this.groupBox_listaConectados.Controls.Add(this.juga_btn);
+            this.groupBox_listaConectados.Location = new System.Drawing.Point(1286, 256);
+            this.groupBox_listaConectados.Name = "groupBox_listaConectados";
+            this.groupBox_listaConectados.Size = new System.Drawing.Size(343, 365);
+            this.groupBox_listaConectados.TabIndex = 19;
+            this.groupBox_listaConectados.TabStop = false;
+            this.groupBox_listaConectados.Text = "LISTA DE CONECTADOS";
+            // 
             // INICIO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1683, 963);
+            this.Controls.Add(this.groupBox_listaConectados);
             this.Controls.Add(this.groupBox_Chat);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label_yo);
             this.Controls.Add(this.groupBox1_invitar);
             this.Controls.Add(this.groupBox_invitacionPartida);
-            this.Controls.Add(this.invitado_txt);
-            this.Controls.Add(this.dataGridView_conectados);
-            this.Controls.Add(this.cont_lbl);
-            this.Controls.Add(this.servicios_btn);
-            this.Controls.Add(this.juga_btn);
             this.Controls.Add(this.conectar_button);
             this.Controls.Add(this.desconectar_button);
             this.Controls.Add(this.peticiones_groupBox);
@@ -558,6 +552,8 @@ namespace ClienteForms
             this.groupBox_Chat.ResumeLayout(false);
             this.groupBox_Chat.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Chat)).EndInit();
+            this.groupBox_listaConectados.ResumeLayout(false);
+            this.groupBox_listaConectados.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -606,9 +602,8 @@ namespace ClienteForms
         private System.Windows.Forms.TextBox textBox_Chat;
         private System.Windows.Forms.DataGridView dataGridView_Chat;
         private System.Windows.Forms.Button Enviar_Chat;
-        private System.Windows.Forms.TextBox textBox_UserChat;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Chat;
+        private System.Windows.Forms.GroupBox groupBox_listaConectados;
     }
 }
 

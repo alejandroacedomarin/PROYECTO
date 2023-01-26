@@ -33,7 +33,11 @@ namespace ClienteForms
         private void INICIO_Load(object sender, EventArgs e)
         {
             this.BackColor = Color.DarkGray;
-            groupBox_invitacionPartida.Visible = true;
+            groupBox_invitacionPartida.Visible = false;
+            groupBox_Chat.Visible = false;
+            groupBox_listaConectados.Visible = false;
+            peticiones_groupBox.Visible = false;
+            groupBox1_invitar.Visible = false;
         }
 
         private void AtenderServer()
@@ -72,6 +76,12 @@ namespace ClienteForms
 
                             signin_groupBox.Visible = false;
                             peticiones_groupBox.Visible = true;
+                            groupBox_invitacionPartida.Visible = true;
+                            
+                            groupBox_listaConectados.Visible = true;
+                            peticiones_groupBox.Visible = true;
+                            groupBox1_invitar.Visible = true;
+                            groupBox1.Visible = false;
                         }
 
                         else
@@ -193,6 +203,7 @@ namespace ClienteForms
                             ThreadStart ts = delegate { PonerEnMarchaPartida(idP); };
                             Thread partida_thread = new Thread(ts);
                             partida_thread.Start();
+                            groupBox_Chat.Visible = true;
                         }
                         //string mensaje2 = "8/" + nombreyo + "/" + nombreel + "/SI/"+idP;
                         //byte[] msg45 = System.Text.Encoding.ASCII.GetBytes(mensaje2);
@@ -216,6 +227,7 @@ namespace ClienteForms
                             ThreadStart ts = delegate { PonerEnMarchaPartida(idP2); };
                             Thread partida_thread = new Thread(ts);
                             partida_thread.Start();
+                            groupBox_Chat.Visible = true;
                         }
                         break;
                     case 12:
@@ -259,7 +271,7 @@ namespace ClienteForms
             //Creamos un IPEndPoint con el ip del servid0o y puerto del servidor 
             //al que deseamos conectarnos
             IPAddress direc = IPAddress.Parse("192.168.56.101");
-            IPEndPoint ipep = new IPEndPoint(direc, 9050);
+            IPEndPoint ipep = new IPEndPoint(direc, 9080);
 
 
             //Creamos el socket 
@@ -424,6 +436,7 @@ namespace ClienteForms
             byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
             server.Send(msg);
             groupBox_invitacionPartida.Visible = false;
+            groupBox_Chat.Visible = true;
             //ThreadStart ts = delegate { PonerEnMarchaPartida(idP); };
             //Thread partida_thread = new Thread(ts);
             //partida_thread.Start();
@@ -509,6 +522,11 @@ namespace ClienteForms
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView_Chat_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

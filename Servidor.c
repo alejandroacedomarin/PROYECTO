@@ -107,13 +107,15 @@ void *AtenderCliente (void *socket)
 		//****PETICION PARA LA DESCONEXION******
 		if (codigo ==0) 
 		{
-			Eliminar(&miLista, nombre);
+			Eliminar(nombre);
+			printf("ya he eliminado");
 			printf(nombre);
 			//Lista de conectados
 			char conectados[300];
 			conectados[0]= '\0';
 			DameConectados(&miLista, conectados);
 			sprintf(noti,"6/%s", conectados);
+			printf (noti);
 			strcpy(respuesta, noti);
 			
 			int j;
@@ -490,7 +492,7 @@ int main (int argc, char *argv[])
 	//htonl formatea el numero que recibe al formato necesario
 	serv_adr.sin_addr.s_addr = htonl(INADDR_ANY);
 	//escuchamos en el puerto 9050
-	serv_adr.sin_port = htons(9050);
+	serv_adr.sin_port = htons(9080);
 	if (bind(sock_listen, (struct sockaddr *) &serv_adr, sizeof(serv_adr)) < 0)
 		printf ("Error al bind");
 	
@@ -605,20 +607,21 @@ int AddConectado (ListaConectados *lista, char nombre[20], int socket)
 
 
 //Funcion que retorna 0 si elimina a la persona de la lista y -1 si ese usuario no esta conectado.
-int Eliminar (ListaConectados *lista, char nombre[20])
+int Eliminar (char nombre[20])
 {
-	int pos = DamePos(lista,nombre);
+	int pos = DamePos(miLista,nombre);
 	printf("pos %d\n",pos);
 	
 	int i=0;
-	for (i = pos; i < lista->num-1; i++)
+	for (i = pos; i < miLista.num-1; i++)
 	{
-		strcpy(lista->conectados[i].nombre, lista->conectados[i+1].nombre);
-		lista->conectados[i].socket = lista->conectados[i+1].socket;
+		miLista.conectados[i]= miLista.conectados[i+1];
+		//strcpy(lista->conectados[i].nombre, lista->conectados[i+1].nombre);
+		//lista->conectados[i].socket = lista->conectados[i+1].socket;
 	}
-	lista->conectados[ lista->num-1].nombre==NULL;
-	lista->conectados[ lista->num-1].socket==NULL;
-	lista->num--;
+	miLista.conectados[ miLista.num-1].nombre==NULL;
+	miLista.conectados[ miLista.num-1].socket==NULL;
+	miLista.num--;
 	return 0;
 	
 }
