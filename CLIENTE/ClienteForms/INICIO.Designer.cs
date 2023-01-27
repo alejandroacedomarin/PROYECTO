@@ -529,7 +529,7 @@ namespace ClienteForms
             this.groupBox_chat_partida.Controls.Add(this.dgv_chat_partida);
             this.groupBox_chat_partida.Controls.Add(this.textBox_mensaje_partida);
             this.groupBox_chat_partida.Controls.Add(this.enviat_btn_partida);
-            this.groupBox_chat_partida.Location = new System.Drawing.Point(12, 875);
+            this.groupBox_chat_partida.Location = new System.Drawing.Point(411, 1041);
             this.groupBox_chat_partida.Name = "groupBox_chat_partida";
             this.groupBox_chat_partida.Size = new System.Drawing.Size(297, 266);
             this.groupBox_chat_partida.TabIndex = 9;
@@ -580,7 +580,7 @@ namespace ClienteForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1683, 963);
+            this.ClientSize = new System.Drawing.Size(1683, 1050);
             this.Controls.Add(this.groupBox_chat_partida);
             this.Controls.Add(this.groupBox_listaConectados);
             this.Controls.Add(this.groupBox_Chat);

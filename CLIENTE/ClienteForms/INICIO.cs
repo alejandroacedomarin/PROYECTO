@@ -14,8 +14,8 @@ namespace ClienteForms
     public partial class INICIO : Form
     {
         //Variables para la partida
-        PictureBox[] fichaB = new PictureBox[33];
-        PictureBox[] fichaN = new PictureBox[33];
+        PictureBox[] fichaB = new PictureBox[64];
+        PictureBox[] fichaN = new PictureBox[64];
         string nombre;
         int idP;
         List<int> puntos_puestos_B = new List<int>();
@@ -131,7 +131,24 @@ namespace ClienteForms
 
             Bitmap FichaB = new Bitmap("FichaB.png");
             Bitmap FichaN = new Bitmap("FichaN.png");
+            for (int ggg = 2; ggg < 64; ggg++)
+            {
+                fichaB[ggg] = new PictureBox();
+                fichaB[ggg].Location = new Point(50, 00);
+                fichaB[ggg].ClientSize = new Size(59, 59);
+                fichaB[ggg].SizeMode = PictureBoxSizeMode.StretchImage;
+                fichaB[ggg].Image = FichaB;
+                tablero.Controls.Add(fichaB[ggg]);
 
+                fichaN[ggg] = new PictureBox();
+                fichaN[ggg].Location = new Point(50, 00);
+                fichaN[ggg].ClientSize = new Size(59, 59);
+                fichaN[ggg].SizeMode = PictureBoxSizeMode.StretchImage;
+                fichaN[ggg].Image = FichaN;
+                tablero.Controls.Add(fichaN[ggg]);
+                
+                
+            }
             fichaB[0] = new PictureBox();
             fichaB[0].Location = puntos[27];
             fichaB[0].ClientSize = new Size(59, 59);
@@ -314,12 +331,12 @@ namespace ClienteForms
                     case 6: // Notificacion lista de conectados
 
                         int i = 0;
-                        int n = mensaje.Length;
+                        int n1 = mensaje.Length;
                         dataGridView_conectados.ClearSelection();
                         this.dataGridView_conectados.Rows.Clear();
                        
                         int m = 0;
-                        while (i < n)
+                        while (i < n1)
                         {
                             string[] conectado = mensaje.Split(',');
                             string usuario = conectado[m];
@@ -343,7 +360,7 @@ namespace ClienteForms
                         string yo = mensaje.Split('-')[1];
                         string resp = mensaje.Split('-')[2];
                         int idP = Convert.ToInt32(mensaje.Split('-')[3]);
-
+                        this.mi_color = 0;
                         MessageBox.Show(el + " ha dicho: " + resp);
                         if (resp == "SI")
                         {
@@ -381,7 +398,7 @@ namespace ClienteForms
                         string yo2 = mensaje.Split('-')[1];
                         string resp2 = mensaje.Split('-')[2];
                         int idP2 = Convert.ToInt32(mensaje.Split('-')[3]);
-
+                        this.mi_color = 1;
                         MessageBox.Show(el2 + " ha dicho: " + resp2);
                         if (resp2 == "SI")
                         {
@@ -445,22 +462,21 @@ namespace ClienteForms
                         textBox_Chat.Text = "";
 
                         break;
-                    case 16:
+                    case 16: //Printar nueva jugada
                         string mensaje_fichasB = mensaje.Split('*')[0];
                         string mensaje_fichasN = mensaje.Split('*')[1];
-                        List<int> fB = new List<int>(32);
-                        List<int> fN = new List<int>(32);
+                        List<int> fb = new List<int>(32);
+                        List<int> fn = new List<int>(32);
                         try
                         {
                             for (int ii = 0; ii < 64; ii++)
                             {
-                                fB.Add(Convert.ToInt32(mensaje_fichasB.Split(',')[ii]));
-                                fN.Add(Convert.ToInt32(mensaje_fichasN.Split(',')[ii]));
+                                fb.Add(Convert.ToInt32(mensaje_fichasB.Split(',')[ii]));
+                                fn.Add(Convert.ToInt32(mensaje_fichasN.Split(',')[ii]));
                             }
                         }
                         catch (System.IndexOutOfRangeException) { }
-                        
-                        Actualizar(fB,fN);
+                        Actualizar(fb,fn);
                         break;
 
                 }
@@ -498,7 +514,7 @@ namespace ClienteForms
                 MessageBox.Show("Conectado");
                 signin_groupBox.Visible = true;
                 // peticiones_groupBox.Visible = false;
-                //this.BackColor = Color.Green;
+                this.BackColor = Color.Green;
 
             }
             catch (SocketException ex)
@@ -785,7 +801,7 @@ namespace ClienteForms
 
             int i = 0;
             int j = 0;
-            int k = 3;
+            int k = 2;
             int p_x = e.X;
             int p_y = e.Y;
             bool encontradofinal = false;
@@ -809,204 +825,394 @@ namespace ClienteForms
                     maximo = true;
                 }
             }
-            if (encontradofinal == true)
+            if (mi_color == 1)
             {
-                int y = 0;
-
-
-                int numpunto = i + (8 * j);
-                puntos_puestos_B.Add(numpunto);
-                fichaB[k] = new PictureBox();
-                fichaB[k].Location = puntos[numpunto - 1];
-                fichaB[k].ClientSize = new Size(59, 59);
-                fichaB[k].SizeMode = PictureBoxSizeMode.StretchImage;
-                fichaB[k].Image = FichaB;
-                tablero.Controls.Add(fichaB[k]);
-                fichaB[k].Tag = k;
-                k++;
-                tablero.Enabled = false;
-
-
-
-
-                bool no = false;
-                int f = 0;
-                int p = 0;
-                int pp = 0;
-                int a = 1;
-                for (int hh = 9; hh > -10; hh--)
+                if (encontradofinal == true)
                 {
+                    int y = 0;
 
 
-                    no = false;
-                    f = 0;
-                    p = 0;
-                    pp = 0;
-                    a = 1;
-                    patron_encontrado = false;
-                    patron_no1 = false;
-                    encontrado1patron = false;
-                    if (hh == -6 || hh == -5 || hh == -4 || hh == -3 || hh == -2 || hh == 0 || hh == 2 || hh == 3 || hh == 4 || hh == 5 || hh == 6)
+                    int numpunto = i + (8 * j);
+                    puntos_puestos_N.Add(numpunto);
+                    fichaN[k] = new PictureBox();
+                    fichaN[k].Location = puntos[numpunto - 1];
+                    fichaN[k].ClientSize = new Size(59, 59);
+                    fichaN[k].SizeMode = PictureBoxSizeMode.StretchImage;
+                    fichaN[k].Image = FichaN;
+                    tablero.Controls.Add(fichaB[k]);
+                    fichaN[k].Tag = k;
+                    k++;
+                    tablero.Enabled = false;
+
+
+
+
+                    bool no = false;
+                    int f = 0;
+                    int p = 0;
+                    int pp = 0;
+                    int a = 1;
+                    for (int hh = 9; hh > -10; hh--)
                     {
 
-                    }
-                    else
-                    {
-                        while (p < 32 && patron_encontrado == false && patron_no1 == false)
+
+                        no = false;
+                        f = 0;
+                        p = 0;
+                        pp = 0;
+                        a = 1;
+                        patron_encontrado = false;
+                        patron_no1 = false;
+                        encontrado1patron = false;
+                        if (hh == -6 || hh == -5 || hh == -4 || hh == -3 || hh == -2 || hh == 0 || hh == 2 || hh == 3 || hh == 4 || hh == 5 || hh == 6)
                         {
-                            try
-                            {
-                                if (no == false && puntos_puestos_N[p] == numpunto - hh && puntos_puestos_N.Count - 1 >= p)
-                                {
-
-                                    encontrado1patron = true;
-                                    no = true;
-                                    p = 0;
-                                    a++;
-                                }
-                                if (puntos_puestos_N.Count - 1 <= p && encontrado1patron == false)
-                                {
-                                    patron_no1 = true;
-                                    tablero.Enabled = false;
-                                }
-                                if (puntos_puestos_B[p] == (numpunto - (a * hh)) && encontrado1patron == true)
-                                {
-                                    int rr = 0;
-                                    bool gg = false;
-                                    for (int yy = 0; yy <= puntos_puestos_N.Count + 1; yy++)
-                                    {
-                                        if (yy > puntos_puestos_N.Count - 1 && gg == false)
-                                        {
-                                            yy = 0;
-                                            rr++;
-                                        }
-                                        if (rr > a)
-                                        {
-                                            gg = true;
-                                        }
-                                        else if (fichaN[yy].Location == puntos[(numpunto - (rr * hh)) - 1])
-                                        {
-                                            tablero.Controls.Remove(fichaN[yy]);
-                                            fichaN[yy].Location = new Point(0, 0);
-                                            puntos_puestos_N.Remove(numpunto - (rr * hh));
-                                        }
-
-
-
-
-                                    }
-                                    while (f < a)
-                                    {
-
-                                        fichaB[k] = new PictureBox();
-                                        fichaB[k].Location = puntos[numpunto - (f * hh) - 1];
-                                        puntos_puestos_B.Add(numpunto - (f * hh));
-
-                                        fichaB[k].ClientSize = new Size(59, 59);
-                                        fichaB[k].SizeMode = PictureBoxSizeMode.StretchImage;
-                                        fichaB[k].Image = FichaB;
-
-                                        fichaB[k].Tag = k;
-
-
-
-                                        tablero.Controls.Add(fichaB[k]);
-
-                                        f++;
-                                        k++;
-                                    }
-                                    tablero.Enabled = false;
-                                    patron_encontrado = true;
-                                    if (puntos_puestos_B.Count + puntos_puestos_N.Count >= 64)
-                                    {
-
-                                        if (puntos_puestos_B.Count > puntos_puestos_N.Count)
-                                        {
-                                            MessageBox.Show("Ganador");
-                                        }
-                                        else if (puntos_puestos_B.Count == puntos_puestos_N.Count)
-                                        {
-                                            MessageBox.Show("Empate");
-                                        }
-                                        else if (puntos_puestos_B.Count == puntos_puestos_N.Count)
-                                        {
-                                            MessageBox.Show("Perdedor");
-                                        }
-                                    }
-                                }
-                                p++;
-                                if (hh == -1 || hh == +1)
-                                {
-                                    if (numpunto > 0 && numpunto <= 8)
-                                    {
-                                        if (numpunto - (a * hh) < 0 || numpunto - (a * hh) > 8)
-                                        {
-                                            patron_no1 = true;
-                                        }
-                                    }
-                                    if (numpunto > 8 && numpunto <= 16)
-                                    {
-                                        if (numpunto - (a * hh) < 8 || numpunto - (a * hh) > 16)
-                                        {
-                                            patron_no1 = true;
-                                        }
-                                    }
-                                    if (numpunto > 16 && numpunto <= 24)
-                                    {
-                                        if (numpunto - (a * hh) < 16 || numpunto - (a * hh) > 24)
-                                        {
-                                            patron_no1 = true;
-                                        }
-                                    }
-                                    if (numpunto > 24 && numpunto <= 32)
-                                    {
-                                        if (numpunto - (a * hh) < 24 || numpunto - (a * hh) > 32)
-                                        {
-                                            patron_no1 = true;
-                                        }
-                                    }
-                                    if (numpunto > 32 && numpunto <= 40)
-                                    {
-                                        if (numpunto - (a * hh) < 32 || numpunto - (a * hh) > 40)
-                                        {
-                                            patron_no1 = true;
-                                        }
-                                    }
-                                    if (numpunto > 40 && numpunto <= 48)
-                                    {
-                                        if (numpunto - (a * hh) < 40 || numpunto - (a * hh) > 48)
-                                        {
-                                            patron_no1 = true;
-                                        }
-                                    }
-                                    if (numpunto > 48 && numpunto <= 56)
-                                    {
-                                        if (numpunto - (a * hh) < 48 || numpunto - (a * hh) > 56)
-                                        {
-                                            patron_no1 = true;
-                                        }
-                                    }
-                                    if (numpunto > 56 && numpunto <= 64)
-                                    {
-                                        if (numpunto - (a * hh) < 56 || numpunto - (a * hh) > 64)
-                                        {
-                                            patron_no1 = true;
-                                        }
-                                    }
-                                }
-                                else if (numpunto - (a * hh) < 0 || numpunto - (a * hh) > 64)
-                                {
-                                    patron_no1 = true;
-                                }
-
-
-                            }
-                            catch (System.ArgumentOutOfRangeException) { p = 0; a++; }
 
                         }
+                        else
+                        {
+                            while (p < 32 && patron_encontrado == false && patron_no1 == false)
+                            {
+                                try
+                                {
+                                    if (no == false && puntos_puestos_B[p] == numpunto - hh && puntos_puestos_B.Count - 1 >= p)
+                                    {
+
+                                        encontrado1patron = true;
+                                        no = true;
+                                        p = 0;
+                                        a++;
+                                    }
+                                    if (puntos_puestos_B.Count - 1 <= p && encontrado1patron == false)
+                                    {
+                                        patron_no1 = true;
+                                        tablero.Enabled = false;
+                                    }
+                                    if (puntos_puestos_N[p] == (numpunto - (a * hh)) && encontrado1patron == true)
+                                    {
+                                        int rr = 0;
+                                        bool gg = false;
+                                        for (int yy = 0; yy <= puntos_puestos_B.Count + 1; yy++)
+                                        {
+                                            if (yy > puntos_puestos_B.Count - 1 && gg == false)
+                                            {
+                                                yy = 0;
+                                                rr++;
+                                            }
+                                            if (rr > a)
+                                            {
+                                                gg = true;
+                                            }
+                                            else if (fichaB[yy].Location == puntos[(numpunto - (rr * hh)) - 1])
+                                            {
+                                                
+                                                fichaB[yy].Location = new Point(0, 0);
+                                                puntos_puestos_B.Remove(numpunto - (rr * hh));
+                                            }
+
+
+
+
+                                        }
+                                        while (f < a)
+                                        {
+
+
+                                            fichaB[k].Location = puntos[numpunto - (f * hh) - 1];
+                                            puntos_puestos_N.Add(numpunto - (f * hh));
+
+
+
+                                            f++;
+                                            k++;
+                                        }
+                                        tablero.Enabled = false;
+                                        patron_encontrado = true;
+                                        if (puntos_puestos_N.Count + puntos_puestos_B.Count >= 64)
+                                        {
+
+                                            if (puntos_puestos_N.Count > puntos_puestos_B.Count)
+                                            {
+                                                MessageBox.Show("Ganador");
+                                            }
+                                            else if (puntos_puestos_N.Count == puntos_puestos_B.Count)
+                                            {
+                                                MessageBox.Show("Empate");
+                                            }
+                                            else if (puntos_puestos_N.Count == puntos_puestos_B.Count)
+                                            {
+                                                MessageBox.Show("Perdedor");
+                                            }
+                                        }
+                                    }
+                                    p++;
+                                    if (hh == -1 || hh == +1)
+                                    {
+                                        if (numpunto > 0 && numpunto <= 8)
+                                        {
+                                            if (numpunto - (a * hh) < 0 || numpunto - (a * hh) > 8)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 8 && numpunto <= 16)
+                                        {
+                                            if (numpunto - (a * hh) < 8 || numpunto - (a * hh) > 16)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 16 && numpunto <= 24)
+                                        {
+                                            if (numpunto - (a * hh) < 16 || numpunto - (a * hh) > 24)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 24 && numpunto <= 32)
+                                        {
+                                            if (numpunto - (a * hh) < 24 || numpunto - (a * hh) > 32)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 32 && numpunto <= 40)
+                                        {
+                                            if (numpunto - (a * hh) < 32 || numpunto - (a * hh) > 40)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 40 && numpunto <= 48)
+                                        {
+                                            if (numpunto - (a * hh) < 40 || numpunto - (a * hh) > 48)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 48 && numpunto <= 56)
+                                        {
+                                            if (numpunto - (a * hh) < 48 || numpunto - (a * hh) > 56)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 56 && numpunto <= 64)
+                                        {
+                                            if (numpunto - (a * hh) < 56 || numpunto - (a * hh) > 64)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                    }
+                                    else if (numpunto - (a * hh) < 0 || numpunto - (a * hh) > 64)
+                                    {
+                                        patron_no1 = true;
+                                    }
+
+
+                                }
+                                catch (System.ArgumentOutOfRangeException) { p = 0; a++; }
+
+                            }
+                        }
+
+
                     }
+                }
+            }
+            else if (mi_color == 0)
+            {
+                if (encontradofinal == true)
+                {
+                    int y = 0;
 
 
+                    int numpunto = i + (8 * j);
+                    puntos_puestos_B.Add(numpunto);
+                    fichaB[k] = new PictureBox();
+                    fichaB[k].Location = puntos[numpunto - 1];
+                    fichaB[k].ClientSize = new Size(59, 59);
+                    fichaB[k].SizeMode = PictureBoxSizeMode.StretchImage;
+                    fichaB[k].Image = FichaB;
+                    tablero.Controls.Add(fichaB[k]);
+                    fichaB[k].Tag = k;
+                    k++;
+                    tablero.Enabled = false;
+
+
+
+
+                    bool no = false;
+                    int f = 0;
+                    int p = 0;
+                    int pp = 0;
+                    int a = 1;
+                    for (int hh = 9; hh > -10; hh--)
+                    {
+
+
+                        no = false;
+                        f = 0;
+                        p = 0;
+                        pp = 0;
+                        a = 1;
+                        patron_encontrado = false;
+                        patron_no1 = false;
+                        encontrado1patron = false;
+                        if (hh == -6 || hh == -5 || hh == -4 || hh == -3 || hh == -2 || hh == 0 || hh == 2 || hh == 3 || hh == 4 || hh == 5 || hh == 6)
+                        {
+
+                        }
+                        else
+                        {
+                            while (p < 32 && patron_encontrado == false && patron_no1 == false)
+                            {
+                                try
+                                {
+                                    if (no == false && puntos_puestos_N[p] == numpunto - hh && puntos_puestos_N.Count - 1 >= p)
+                                    {
+
+                                        encontrado1patron = true;
+                                        no = true;
+                                        p = 0;
+                                        a++;
+                                    }
+                                    if (puntos_puestos_N.Count - 1 <= p && encontrado1patron == false)
+                                    {
+                                        patron_no1 = true;
+                                        tablero.Enabled = false;
+                                    }
+                                    if (puntos_puestos_B[p] == (numpunto - (a * hh)) && encontrado1patron == true)
+                                    {
+                                        int rr = 0;
+                                        bool gg = false;
+                                        for (int yy = 0; yy <= puntos_puestos_N.Count + 1; yy++)
+                                        {
+                                            if (yy > puntos_puestos_N.Count - 1 && gg == false)
+                                            {
+                                                yy = 0;
+                                                rr++;
+                                            }
+                                            if (rr > a)
+                                            {
+                                                gg = true;
+                                            }
+                                            else if (fichaN[yy].Location == puntos[(numpunto - (rr * hh)) - 1])
+                                            {
+                                               
+                                                fichaN[yy].Location = new Point(0, 0);
+                                                puntos_puestos_N.Remove(numpunto - (rr * hh));
+                                            }
+
+
+
+
+                                        }
+                                        while (f < a)
+                                        {
+
+
+                                            fichaB[k].Location = puntos[numpunto - (f * hh) - 1];
+                                            puntos_puestos_B.Add(numpunto - (f * hh));
+
+
+
+                                            f++;
+                                            k++;
+                                        }
+                                        tablero.Enabled = false;
+                                        patron_encontrado = true;
+                                        if (puntos_puestos_B.Count + puntos_puestos_N.Count >= 64)
+                                        {
+
+                                            if (puntos_puestos_B.Count > puntos_puestos_N.Count)
+                                            {
+                                                MessageBox.Show("Ganador");
+                                            }
+                                            else if (puntos_puestos_B.Count == puntos_puestos_N.Count)
+                                            {
+                                                MessageBox.Show("Empate");
+                                            }
+                                            else if (puntos_puestos_B.Count == puntos_puestos_N.Count)
+                                            {
+                                                MessageBox.Show("Perdedor");
+                                            }
+                                        }
+                                    }
+                                    p++;
+                                    if (hh == -1 || hh == +1)
+                                    {
+                                        if (numpunto > 0 && numpunto <= 8)
+                                        {
+                                            if (numpunto - (a * hh) < 0 || numpunto - (a * hh) > 8)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 8 && numpunto <= 16)
+                                        {
+                                            if (numpunto - (a * hh) < 8 || numpunto - (a * hh) > 16)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 16 && numpunto <= 24)
+                                        {
+                                            if (numpunto - (a * hh) < 16 || numpunto - (a * hh) > 24)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 24 && numpunto <= 32)
+                                        {
+                                            if (numpunto - (a * hh) < 24 || numpunto - (a * hh) > 32)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 32 && numpunto <= 40)
+                                        {
+                                            if (numpunto - (a * hh) < 32 || numpunto - (a * hh) > 40)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 40 && numpunto <= 48)
+                                        {
+                                            if (numpunto - (a * hh) < 40 || numpunto - (a * hh) > 48)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 48 && numpunto <= 56)
+                                        {
+                                            if (numpunto - (a * hh) < 48 || numpunto - (a * hh) > 56)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                        if (numpunto > 56 && numpunto <= 64)
+                                        {
+                                            if (numpunto - (a * hh) < 56 || numpunto - (a * hh) > 64)
+                                            {
+                                                patron_no1 = true;
+                                            }
+                                        }
+                                    }
+                                    else if (numpunto - (a * hh) < 0 || numpunto - (a * hh) > 64)
+                                    {
+                                        patron_no1 = true;
+                                    }
+
+
+                                }
+                                catch (System.ArgumentOutOfRangeException) { p = 0; a++; }
+
+                            }
+                        }
+
+
+                    }
                 }
 
             }
@@ -1031,7 +1237,7 @@ namespace ClienteForms
 
         private void Actualizar(List<int> b, List<int> n)
         {
-            
+           
             Bitmap FichaB = new Bitmap("FichaB.png");
             Bitmap FichaN = new Bitmap("FichaN.png");
             tablero.Enabled = true;
@@ -1040,87 +1246,30 @@ namespace ClienteForms
             int jj = 0;
             for (jj = 0; jj < b.Count; jj++)
             {
-                if (fichaB.GetValue(jj) == null)
-                {
-                    en = true;
-                }
-                if (b.Count < puntos_puestos_B.Count)
-                {
-                    for (int y = b.Count; y < puntos_puestos_B.Count; y++)
-                    {
-                        puntos_puestos_B.RemoveAt(y);
-                        tablero.Controls.Remove(fichaB[y]);
-                        fichaB[y] = null;
 
-                    }
-                }
-                if (en == false)
+
+                try
                 {
                     fichaB[jj].Location = puntos[b[jj] - 1];
                     puntos_puestos_B[jj] = b[jj];
                 }
-                else
-                {
-                    fichaB[jj] = new PictureBox();
-                    fichaB[jj].Location = puntos[b[jj] - 1];
-
-
-                    fichaB[jj].ClientSize = new Size(59, 59);
-                    fichaB[jj].SizeMode = PictureBoxSizeMode.StretchImage;
-                    fichaB[jj].Image = FichaB;
-
-                    fichaB[jj].Tag = jj;
-
-
-
-                    tablero.Controls.Add(fichaB[jj]);
-                    puntos_puestos_B.Add(n[jj]);
-                }
+                catch (System.ArgumentOutOfRangeException) { puntos_puestos_B.Add(jj); }
+                
 
 
             }
 
-            en = false;
+           
 
             for (jj = 0; jj < n.Count; jj++)
             {
-                if (fichaN.GetValue(jj) == null)
-                {
-                    en = true;
-                }
-                if (n.Count < puntos_puestos_N.Count)
-                {
-                    for (int y = n.Count; y < puntos_puestos_N.Count; y++)
+
+                    try
                     {
-                        puntos_puestos_N.RemoveAt(y);
-                        tablero.Controls.Remove(fichaN[y]);
-                        fichaN[y] = null;
-
+                        fichaN[jj].Location = puntos[n[jj] - 1];
+                        puntos_puestos_N[jj] = n[jj];
                     }
-                }
-                if (en == false)
-                {
-                    fichaN[jj].Location = puntos[n[jj] - 1];
-                    puntos_puestos_N[jj] = n[jj];
-                }
-                else
-                {
-                    fichaN[jj] = new PictureBox();
-                    fichaN[jj].Location = puntos[n[jj] - 1];
-
-
-                    fichaN[jj].ClientSize = new Size(59, 59);
-                    fichaN[jj].SizeMode = PictureBoxSizeMode.StretchImage;
-                    fichaN[jj].Image = FichaN;
-
-                    fichaN[jj].Tag = jj;
-
-
-
-                    tablero.Controls.Add(fichaN[jj]);
-                    puntos_puestos_N.Add(n[jj]);
-                }
-
+                    catch(System.ArgumentOutOfRangeException) { puntos_puestos_N.Add(jj); }
 
             }
 
@@ -1167,9 +1316,10 @@ namespace ClienteForms
                 //{
                 //    tablero.Enabled = true;
                 //}
-            }
+            }
+
         }
 
-        
+
     }
 }
