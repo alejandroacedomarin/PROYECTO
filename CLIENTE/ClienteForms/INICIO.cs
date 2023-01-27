@@ -501,8 +501,8 @@ namespace ClienteForms
         {
             //Creamos un IPEndPoint con el ip del servid0o y puerto del servidor 
             //al que deseamos conectarnos
-            IPAddress direc = IPAddress.Parse("192.168.56.101");
-            IPEndPoint ipep = new IPEndPoint(direc, 9080);
+            IPAddress direc = IPAddress.Parse("147.83.117.22");
+            IPEndPoint ipep = new IPEndPoint(direc, 50062);
 
 
             //Creamos el socket 
@@ -1253,7 +1253,7 @@ namespace ClienteForms
                     fichaB[jj].Location = puntos[b[jj] - 1];
                     puntos_puestos_B[jj] = b[jj];
                 }
-                catch (System.ArgumentOutOfRangeException) { puntos_puestos_B.Add(jj); }
+                catch (System.ArgumentOutOfRangeException) { puntos_puestos_B.Add(jj); fichaB[jj].Location = puntos[b[jj] - 1]; }
                 
 
 
@@ -1269,7 +1269,7 @@ namespace ClienteForms
                         fichaN[jj].Location = puntos[n[jj] - 1];
                         puntos_puestos_N[jj] = n[jj];
                     }
-                    catch(System.ArgumentOutOfRangeException) { puntos_puestos_N.Add(jj); }
+                    catch(System.ArgumentOutOfRangeException) { puntos_puestos_N.Add(jj); fichaN[jj].Location = puntos[n[jj] - 1]; }
 
             }
 
