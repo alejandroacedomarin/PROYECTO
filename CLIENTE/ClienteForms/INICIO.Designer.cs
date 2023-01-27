@@ -65,14 +65,6 @@ namespace ClienteForms
             this.label1 = new System.Windows.Forms.Label();
             this.UserRegistro = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.Pnl_Partida = new System.Windows.Forms.FlowLayoutPanel();
-            this.groupBox_chat_partida = new System.Windows.Forms.GroupBox();
-            this.dgv_chat_partida = new System.Windows.Forms.DataGridView();
-            this.textBox_mensaje_partida = new System.Windows.Forms.TextBox();
-            this.enviat_btn_partida = new System.Windows.Forms.Button();
-            this.tablero = new System.Windows.Forms.Panel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.groupBox_Chat = new System.Windows.Forms.GroupBox();
             this.textBox_Chat = new System.Windows.Forms.TextBox();
@@ -80,19 +72,23 @@ namespace ClienteForms
             this.Chat = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Enviar_Chat = new System.Windows.Forms.Button();
             this.groupBox_listaConectados = new System.Windows.Forms.GroupBox();
+            this.groupBox_chat_partida = new System.Windows.Forms.GroupBox();
+            this.dgv_chat_partida = new System.Windows.Forms.DataGridView();
+            this.textBox_mensaje_partida = new System.Windows.Forms.TextBox();
+            this.enviat_btn_partida = new System.Windows.Forms.Button();
+            this.tablero = new System.Windows.Forms.Panel();
             this.signin_groupBox.SuspendLayout();
             this.peticiones_groupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_conectados)).BeginInit();
             this.groupBox_invitacionPartida.SuspendLayout();
             this.groupBox1_invitar.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.Pnl_Partida.SuspendLayout();
-            this.groupBox_chat_partida.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_chat_partida)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_Chat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Chat)).BeginInit();
             this.groupBox_listaConectados.SuspendLayout();
+            this.groupBox_chat_partida.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_chat_partida)).BeginInit();
             this.SuspendLayout();
             // 
             // signin_groupBox
@@ -457,86 +453,6 @@ namespace ClienteForms
             this.label2.TabIndex = 1;
             this.label2.Text = "Usuario";
             // 
-            // Pnl_Partida
-            // 
-            this.Pnl_Partida.Controls.Add(this.groupBox_chat_partida);
-            this.Pnl_Partida.Controls.Add(this.tablero);
-            this.Pnl_Partida.Controls.Add(this.label3);
-            this.Pnl_Partida.Controls.Add(this.label4);
-            this.Pnl_Partida.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Pnl_Partida.Location = new System.Drawing.Point(0, 0);
-            this.Pnl_Partida.Name = "Pnl_Partida";
-            this.Pnl_Partida.Size = new System.Drawing.Size(1683, 963);
-            this.Pnl_Partida.TabIndex = 21;
-            // 
-            // groupBox_chat_partida
-            // 
-            this.groupBox_chat_partida.Controls.Add(this.dgv_chat_partida);
-            this.groupBox_chat_partida.Controls.Add(this.textBox_mensaje_partida);
-            this.groupBox_chat_partida.Controls.Add(this.enviat_btn_partida);
-            this.groupBox_chat_partida.Location = new System.Drawing.Point(3, 3);
-            this.groupBox_chat_partida.Name = "groupBox_chat_partida";
-            this.groupBox_chat_partida.Size = new System.Drawing.Size(297, 266);
-            this.groupBox_chat_partida.TabIndex = 9;
-            this.groupBox_chat_partida.TabStop = false;
-            this.groupBox_chat_partida.Text = "*CHAT*";
-            // 
-            // dgv_chat_partida
-            // 
-            this.dgv_chat_partida.AllowUserToAddRows = false;
-            this.dgv_chat_partida.AllowUserToDeleteRows = false;
-            this.dgv_chat_partida.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_chat_partida.Location = new System.Drawing.Point(13, 25);
-            this.dgv_chat_partida.Name = "dgv_chat_partida";
-            this.dgv_chat_partida.ReadOnly = true;
-            this.dgv_chat_partida.RowHeadersWidth = 62;
-            this.dgv_chat_partida.RowTemplate.Height = 28;
-            this.dgv_chat_partida.Size = new System.Drawing.Size(240, 150);
-            this.dgv_chat_partida.TabIndex = 0;
-            // 
-            // textBox_mensaje_partida
-            // 
-            this.textBox_mensaje_partida.Location = new System.Drawing.Point(13, 181);
-            this.textBox_mensaje_partida.Name = "textBox_mensaje_partida";
-            this.textBox_mensaje_partida.Size = new System.Drawing.Size(240, 26);
-            this.textBox_mensaje_partida.TabIndex = 1;
-            // 
-            // enviat_btn_partida
-            // 
-            this.enviat_btn_partida.Location = new System.Drawing.Point(102, 213);
-            this.enviat_btn_partida.Name = "enviat_btn_partida";
-            this.enviat_btn_partida.Size = new System.Drawing.Size(81, 28);
-            this.enviat_btn_partida.TabIndex = 2;
-            this.enviat_btn_partida.Text = "ENVIAR";
-            this.enviat_btn_partida.UseVisualStyleBackColor = true;
-            this.enviat_btn_partida.Click += new System.EventHandler(this.enviat_btn_partida_Click);
-            // 
-            // tablero
-            // 
-            this.tablero.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tablero.Location = new System.Drawing.Point(306, 3);
-            this.tablero.Name = "tablero";
-            this.tablero.Size = new System.Drawing.Size(1358, 917);
-            this.tablero.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 923);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(51, 20);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "label3";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(60, 923);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 20);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "label4";
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::ClienteForms.Properties.Resources.Titulo;
@@ -552,9 +468,9 @@ namespace ClienteForms
             this.groupBox_Chat.Controls.Add(this.textBox_Chat);
             this.groupBox_Chat.Controls.Add(this.dataGridView_Chat);
             this.groupBox_Chat.Controls.Add(this.Enviar_Chat);
-            this.groupBox_Chat.Location = new System.Drawing.Point(311, 300);
+            this.groupBox_Chat.Location = new System.Drawing.Point(11, 506);
             this.groupBox_Chat.Name = "groupBox_Chat";
-            this.groupBox_Chat.Size = new System.Drawing.Size(308, 363);
+            this.groupBox_Chat.Size = new System.Drawing.Size(307, 363);
             this.groupBox_Chat.TabIndex = 18;
             this.groupBox_Chat.TabStop = false;
             this.groupBox_Chat.Text = "CHAT";
@@ -608,12 +524,64 @@ namespace ClienteForms
             this.groupBox_listaConectados.TabStop = false;
             this.groupBox_listaConectados.Text = "LISTA DE CONECTADOS";
             // 
+            // groupBox_chat_partida
+            // 
+            this.groupBox_chat_partida.Controls.Add(this.dgv_chat_partida);
+            this.groupBox_chat_partida.Controls.Add(this.textBox_mensaje_partida);
+            this.groupBox_chat_partida.Controls.Add(this.enviat_btn_partida);
+            this.groupBox_chat_partida.Location = new System.Drawing.Point(12, 875);
+            this.groupBox_chat_partida.Name = "groupBox_chat_partida";
+            this.groupBox_chat_partida.Size = new System.Drawing.Size(297, 266);
+            this.groupBox_chat_partida.TabIndex = 9;
+            this.groupBox_chat_partida.TabStop = false;
+            this.groupBox_chat_partida.Text = "*CHAT*";
+            // 
+            // dgv_chat_partida
+            // 
+            this.dgv_chat_partida.AllowUserToAddRows = false;
+            this.dgv_chat_partida.AllowUserToDeleteRows = false;
+            this.dgv_chat_partida.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_chat_partida.Location = new System.Drawing.Point(13, 25);
+            this.dgv_chat_partida.Name = "dgv_chat_partida";
+            this.dgv_chat_partida.ReadOnly = true;
+            this.dgv_chat_partida.RowHeadersWidth = 62;
+            this.dgv_chat_partida.RowTemplate.Height = 28;
+            this.dgv_chat_partida.Size = new System.Drawing.Size(240, 150);
+            this.dgv_chat_partida.TabIndex = 0;
+            // 
+            // textBox_mensaje_partida
+            // 
+            this.textBox_mensaje_partida.Location = new System.Drawing.Point(13, 181);
+            this.textBox_mensaje_partida.Name = "textBox_mensaje_partida";
+            this.textBox_mensaje_partida.Size = new System.Drawing.Size(240, 26);
+            this.textBox_mensaje_partida.TabIndex = 1;
+            // 
+            // enviat_btn_partida
+            // 
+            this.enviat_btn_partida.Location = new System.Drawing.Point(102, 213);
+            this.enviat_btn_partida.Name = "enviat_btn_partida";
+            this.enviat_btn_partida.Size = new System.Drawing.Size(81, 28);
+            this.enviat_btn_partida.TabIndex = 2;
+            this.enviat_btn_partida.Text = "ENVIAR";
+            this.enviat_btn_partida.UseVisualStyleBackColor = true;
+            this.enviat_btn_partida.Click += new System.EventHandler(this.enviat_btn_partida_Click);
+            // 
+            // tablero
+            // 
+            this.tablero.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tablero.Location = new System.Drawing.Point(273, 12);
+            this.tablero.Name = "tablero";
+            this.tablero.Size = new System.Drawing.Size(1358, 917);
+            this.tablero.TabIndex = 6;
+            this.tablero.Paint += new System.Windows.Forms.PaintEventHandler(this.tablero_Paint_1);
+            this.tablero.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tablero_MouseDoubleClick_1);
+            // 
             // INICIO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1683, 963);
-            this.Controls.Add(this.Pnl_Partida);
+            this.Controls.Add(this.groupBox_chat_partida);
             this.Controls.Add(this.groupBox_listaConectados);
             this.Controls.Add(this.groupBox_Chat);
             this.Controls.Add(this.pictureBox1);
@@ -625,6 +593,7 @@ namespace ClienteForms
             this.Controls.Add(this.desconectar_button);
             this.Controls.Add(this.peticiones_groupBox);
             this.Controls.Add(this.signin_groupBox);
+            this.Controls.Add(this.tablero);
             this.Name = "INICIO";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "INICIO";
@@ -640,17 +609,15 @@ namespace ClienteForms
             this.groupBox1_invitar.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.Pnl_Partida.ResumeLayout(false);
-            this.Pnl_Partida.PerformLayout();
-            this.groupBox_chat_partida.ResumeLayout(false);
-            this.groupBox_chat_partida.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_chat_partida)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox_Chat.ResumeLayout(false);
             this.groupBox_Chat.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_Chat)).EndInit();
             this.groupBox_listaConectados.ResumeLayout(false);
             this.groupBox_listaConectados.PerformLayout();
+            this.groupBox_chat_partida.ResumeLayout(false);
+            this.groupBox_chat_partida.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_chat_partida)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -701,14 +668,11 @@ namespace ClienteForms
         private System.Windows.Forms.Button Enviar_Chat;
         private System.Windows.Forms.DataGridViewTextBoxColumn Chat;
         private System.Windows.Forms.GroupBox groupBox_listaConectados;
-        private System.Windows.Forms.FlowLayoutPanel Pnl_Partida;
         private System.Windows.Forms.GroupBox groupBox_chat_partida;
         private System.Windows.Forms.DataGridView dgv_chat_partida;
         private System.Windows.Forms.TextBox textBox_mensaje_partida;
         private System.Windows.Forms.Button enviat_btn_partida;
         private System.Windows.Forms.Panel tablero;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
     }
 }
 

@@ -92,7 +92,7 @@ void *AtenderCliente (void *socket)
 		int s2;
 		
 		//Extraemos el nombre de usuario que esta haciendo la peticion
-		if ((codigo !=0)&&(codigo!=5)&&(codigo!=6)&&(codigo!=15))
+		if ((codigo !=0)&&(codigo!=5)&&(codigo!=6)&&(codigo!=15)&&(codigo!=16))
 		{
 			p = strtok (NULL, "/");
 			
@@ -470,6 +470,18 @@ void *AtenderCliente (void *socket)
 			write (DameSocket(&miLista, nombre2), respuesta, strlen(respuesta));
 			write (DameSocket(&miLista, nombre), respuesta, strlen(respuesta));*/	
 			
+		}
+		
+		else if (codigo == 16)
+		{
+			s2 = DameSocket(&miLista, nombre2);
+			p = strtok (NULL, "/");
+			char mensaje[200];
+			strcpy(mensaje, p);
+			sprintf (respuesta,"16/%s",mensaje);
+			
+			write (s2, respuesta, strlen(respuesta));
+			write (s1, respuesta, strlen(respuesta));
 		}
 		
 	}

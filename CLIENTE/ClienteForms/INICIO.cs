@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+
 namespace ClienteForms
 {
 
@@ -20,7 +21,9 @@ namespace ClienteForms
         List<int> puntos_puestos_B = new List<int>();
         List<int> puntos_puestos_N = new List<int>();
         List<Point> puntos = new List<Point>();
-
+        PaintEventArgs eP;
+        object senderP;
+        int mi_color;
         //Variables para el inicio
         ListaFichas listafichas = new ListaFichas();
         Socket server;
@@ -47,13 +50,15 @@ namespace ClienteForms
 
         private void INICIO_Load(object sender, EventArgs e)
         {
+            
             this.BackColor = Color.DarkGray;
             groupBox_invitacionPartida.Visible = false;
             groupBox_Chat.Visible = false;
             groupBox_listaConectados.Visible = false;
             peticiones_groupBox.Visible = false;
             groupBox1_invitar.Visible = false;
-            Pnl_Partida.Visible = false;
+            tablero.Visible = true;
+            tablero.Enabled = true;
 
             //Iniciamos la poscion de la fichas en el tablero
             int i = 0;
@@ -144,14 +149,7 @@ namespace ClienteForms
             puntos_puestos_B.Add(28);
             puntos_puestos_B.Add(37);
 
-            fichaB[2] = new PictureBox();
-            fichaB[2].Location = puntos[26];
-            fichaB[2].ClientSize = new Size(59, 59);
-            fichaB[2].SizeMode = PictureBoxSizeMode.StretchImage;
-            fichaB[2].Image = FichaB;
-            tablero.Controls.Add(fichaB[2]);
-            fichaB[2].Tag = 2;
-            puntos_puestos_B.Add(27);
+            
 
             fichaN[0] = new PictureBox();
             fichaN[0].Location = puntos[28];
@@ -169,24 +167,34 @@ namespace ClienteForms
             fichaN[1].Image = FichaN;
             tablero.Controls.Add(fichaN[1]);
             fichaN[1].Tag = 1;
-            fichaN[2] = new PictureBox();
-            fichaN[2].Location = puntos[43];
-            fichaN[2].ClientSize = new Size(59, 59);
-            fichaN[2].SizeMode = PictureBoxSizeMode.StretchImage;
-            fichaN[2].Image = FichaN;
-            tablero.Controls.Add(fichaN[2]);
-            fichaN[2].Tag = 2;
-            puntos_puestos_N.Add(44);
+           
 
-            fichaN[3] = new PictureBox();
-            fichaN[3].Location = puntos[0];
-            fichaN[3].ClientSize = new Size(59, 59);
-            fichaN[3].SizeMode = PictureBoxSizeMode.StretchImage;
-            fichaN[3].Image = FichaN;
-            tablero.Controls.Add(fichaN[3]);
-            fichaN[3].Tag = 3;
-            puntos_puestos_N.Add(1);
+           
+            tablero.Enabled = true;
+            tablero.Visible = false;
         }
+        private void tablero_Paint_1(object sender, PaintEventArgs e)
+        {
+            System.Drawing.Graphics graphics = e.Graphics;
+
+
+            Pen myPen = new Pen(Color.Black);
+
+            for (int i = 0; i < 9; i++)
+            {
+                Point a = new Point(20 + 190, 20 + i * 60);
+                Point b = new Point(500 + 190, 20 + i * 60);
+                graphics.DrawLine(myPen, a, b);
+                Point c = new Point(190 + 20 + i * 60, 20);
+                Point d = new Point(190 + 20 + i * 60, 500);
+                graphics.DrawLine(myPen, c, d);
+            }
+
+            myPen.Dispose();
+        }
+
+        
+
 
 
         //********************************ATENDEMOS AL SERVIDOR***************************************
@@ -344,6 +352,18 @@ namespace ClienteForms
                             Thread partida_thread = new Thread(ts);
                             partida_thread.Start();*/
                             groupBox_Chat.Visible = true;
+                            CargarTablero();
+                            signin_groupBox.Visible = false;
+                            peticiones_groupBox.Visible = false;
+                            groupBox_invitacionPartida.Visible = false;
+
+                            groupBox_listaConectados.Visible = false;
+                            peticiones_groupBox.Visible = false;
+                            groupBox1_invitar.Visible = false;
+                            groupBox1.Visible = false;
+                            tablero.Visible = true;
+                            tablero.Enabled = true;
+                            
                         }
                         //string mensaje2 = "8/" + nombreyo + "/" + nombreel + "/SI/"+idP;
                         //byte[] msg45 = System.Text.Encoding.ASCII.GetBytes(mensaje2);
@@ -370,6 +390,19 @@ namespace ClienteForms
                             Thread partida_thread = new Thread(ts);
                             partida_thread.Start();*/
                             groupBox_Chat.Visible = true;
+                            CargarTablero();
+                            signin_groupBox.Visible = false;
+                            peticiones_groupBox.Visible = false;
+                            groupBox_invitacionPartida.Visible = false;
+
+                            groupBox_listaConectados.Visible = false;
+                            peticiones_groupBox.Visible = false;
+                            groupBox1_invitar.Visible = false;
+                            groupBox1.Visible = false;
+                            tablero.Visible = true;
+                            tablero.Enabled = true;
+                            
+
                         }
                         break;
                     case 12:
@@ -403,14 +436,31 @@ namespace ClienteForms
                         fila.CreateCells(dataGridView_Chat);
                         fila.Cells[0].Value = mensaje_chat[0];*/
 
-                        int j = dgv_chat_partida.Rows.Add();
+                        /*in j = dgv_chat_partida.Rows.Add();
                         dgv_chat_partida.Rows[j].Cells[0].Value = mensaje_chat;
-                        textBox_mensaje_partida.Text = "";
+                        textBox_mensaje_partida.Text = "";*/
 
-                       /* int j = dataGridView_Chat.Rows.Add();
+                        int j = dataGridView_Chat.Rows.Add();
                         dataGridView_Chat.Rows[j].Cells[0].Value = mensaje_chat;
-                        textBox_Chat.Text = "";*/
+                        textBox_Chat.Text = "";
 
+                        break;
+                    case 16:
+                        string mensaje_fichasB = mensaje.Split('*')[0];
+                        string mensaje_fichasN = mensaje.Split('*')[1];
+                        List<int> fB = new List<int>(32);
+                        List<int> fN = new List<int>(32);
+                        try
+                        {
+                            for (int ii = 0; ii < 64; ii++)
+                            {
+                                fB.Add(Convert.ToInt32(mensaje_fichasB.Split(',')[ii]));
+                                fN.Add(Convert.ToInt32(mensaje_fichasN.Split(',')[ii]));
+                            }
+                        }
+                        catch (System.IndexOutOfRangeException) { }
+                        
+                        Actualizar(fB,fN);
                         break;
 
                 }
@@ -421,10 +471,10 @@ namespace ClienteForms
         //Mostrar Panel de Partidas
         private void MostrarPanel(string nombrePanel)
         {
-            Pnl_Partida.Visible = false;
+            tablero.Visible = false;
             if (nombrePanel == "Partidas") ;
             {
-                Pnl_Partida.Visible = true;
+                tablero.Visible = true;
             }
 
         }
@@ -448,7 +498,7 @@ namespace ClienteForms
                 MessageBox.Show("Conectado");
                 signin_groupBox.Visible = true;
                 // peticiones_groupBox.Visible = false;
-                this.BackColor = Color.Green;
+                //this.BackColor = Color.Green;
 
             }
             catch (SocketException ex)
@@ -701,25 +751,7 @@ namespace ClienteForms
         }
 
         //*********************************************PARTIDA*********************************************
-        private void tablero_Paint(object sender, PaintEventArgs e)
-        {
-            System.Drawing.Graphics graphics = e.Graphics;
-
-
-            Pen myPen = new Pen(Color.Black);
-
-            for (int i = 0; i < 9; i++)
-            {
-                Point a = new Point(20 + 190, 20 + i * 60);
-                Point b = new Point(500 + 190, 20 + i * 60);
-                graphics.DrawLine(myPen, a, b);
-                Point c = new Point(190 + 20 + i * 60, 20);
-                Point d = new Point(190 + 20 + i * 60, 500);
-                graphics.DrawLine(myPen, c, d);
-            }
-
-            myPen.Dispose();
-        }
+        
 
         private void enviat_txt_button_Click(object sender, EventArgs e)
         {
@@ -734,25 +766,23 @@ namespace ClienteForms
 
             dgv_chat_partida.Rows.Add(mensaje);
         }
+        public void CargarTablero()
+        {
+        }
+        private void tablero_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            
+        }
 
-        private void tablero_MouseDoubleClickk(object sender, MouseEventArgs e)
+        private void tablero_MouseDoubleClick_1(object sender, MouseEventArgs e)
         {
             Bitmap FichaB = new Bitmap("FichaB.png");
             Bitmap FichaN = new Bitmap("FichaN.png");
             bool patron_encontrado = false;
             bool patron_no1 = false;
-            bool patron_no2 = false;
-            bool patron_no3 = false;
-            bool patron_no4 = false;
-            bool patron_no5 = false;
-            bool patron_no6 = false;
-            bool patron_no7 = false;
-            bool patron_no8 = false;
-            bool patron_not = false;
 
             bool encontrado1patron = false;
-            bool patron_encontrado_t = false;
-            bool encontrado2patron = false;
+
             int i = 0;
             int j = 0;
             int k = 3;
@@ -782,10 +812,7 @@ namespace ClienteForms
             if (encontradofinal == true)
             {
                 int y = 0;
-                //if(fichaB[y].Location==puntos[y])
-                //{
-                //    label1.Text = Convert.ToString(fichaB[y].Location);
-                //}
+
 
                 int numpunto = i + (8 * j);
                 puntos_puestos_B.Add(numpunto);
@@ -797,7 +824,7 @@ namespace ClienteForms
                 tablero.Controls.Add(fichaB[k]);
                 fichaB[k].Tag = k;
                 k++;
-
+                tablero.Enabled = false;
 
 
 
@@ -840,6 +867,7 @@ namespace ClienteForms
                                 if (puntos_puestos_N.Count - 1 <= p && encontrado1patron == false)
                                 {
                                     patron_no1 = true;
+                                    tablero.Enabled = false;
                                 }
                                 if (puntos_puestos_B[p] == (numpunto - (a * hh)) && encontrado1patron == true)
                                 {
@@ -887,8 +915,24 @@ namespace ClienteForms
                                         f++;
                                         k++;
                                     }
-
+                                    tablero.Enabled = false;
                                     patron_encontrado = true;
+                                    if (puntos_puestos_B.Count + puntos_puestos_N.Count >= 64)
+                                    {
+
+                                        if (puntos_puestos_B.Count > puntos_puestos_N.Count)
+                                        {
+                                            MessageBox.Show("Ganador");
+                                        }
+                                        else if (puntos_puestos_B.Count == puntos_puestos_N.Count)
+                                        {
+                                            MessageBox.Show("Empate");
+                                        }
+                                        else if (puntos_puestos_B.Count == puntos_puestos_N.Count)
+                                        {
+                                            MessageBox.Show("Perdedor");
+                                        }
+                                    }
                                 }
                                 p++;
                                 if (hh == -1 || hh == +1)
@@ -966,6 +1010,164 @@ namespace ClienteForms
                 }
 
             }
+            string mensaje = "16/";
+            int uu;
+            for ( uu = 0; uu < puntos_puestos_B.Count-1; uu++)
+            {
+                mensaje = mensaje+puntos_puestos_B[uu]+"," ;
+            }
+            mensaje = mensaje + puntos_puestos_B[uu] + "*";
+            for ( uu = 0; uu < puntos_puestos_N.Count-1; uu++)
+            {
+                mensaje = mensaje + puntos_puestos_N[uu] + ",";
+            }
+            mensaje = mensaje + puntos_puestos_N[uu]+"/";
+
+
+            byte[] msg = System.Text.Encoding.ASCII.GetBytes(mensaje);
+            server.Send(msg);
+
+        }
+
+        private void Actualizar(List<int> b, List<int> n)
+        {
+            
+            Bitmap FichaB = new Bitmap("FichaB.png");
+            Bitmap FichaN = new Bitmap("FichaN.png");
+            tablero.Enabled = true;
+
+            bool en = false;
+            int jj = 0;
+            for (jj = 0; jj < b.Count; jj++)
+            {
+                if (fichaB.GetValue(jj) == null)
+                {
+                    en = true;
+                }
+                if (b.Count < puntos_puestos_B.Count)
+                {
+                    for (int y = b.Count; y < puntos_puestos_B.Count; y++)
+                    {
+                        puntos_puestos_B.RemoveAt(y);
+                        tablero.Controls.Remove(fichaB[y]);
+                        fichaB[y] = null;
+
+                    }
+                }
+                if (en == false)
+                {
+                    fichaB[jj].Location = puntos[b[jj] - 1];
+                    puntos_puestos_B[jj] = b[jj];
+                }
+                else
+                {
+                    fichaB[jj] = new PictureBox();
+                    fichaB[jj].Location = puntos[b[jj] - 1];
+
+
+                    fichaB[jj].ClientSize = new Size(59, 59);
+                    fichaB[jj].SizeMode = PictureBoxSizeMode.StretchImage;
+                    fichaB[jj].Image = FichaB;
+
+                    fichaB[jj].Tag = jj;
+
+
+
+                    tablero.Controls.Add(fichaB[jj]);
+                    puntos_puestos_B.Add(n[jj]);
+                }
+
+
+            }
+
+            en = false;
+
+            for (jj = 0; jj < n.Count; jj++)
+            {
+                if (fichaN.GetValue(jj) == null)
+                {
+                    en = true;
+                }
+                if (n.Count < puntos_puestos_N.Count)
+                {
+                    for (int y = n.Count; y < puntos_puestos_N.Count; y++)
+                    {
+                        puntos_puestos_N.RemoveAt(y);
+                        tablero.Controls.Remove(fichaN[y]);
+                        fichaN[y] = null;
+
+                    }
+                }
+                if (en == false)
+                {
+                    fichaN[jj].Location = puntos[n[jj] - 1];
+                    puntos_puestos_N[jj] = n[jj];
+                }
+                else
+                {
+                    fichaN[jj] = new PictureBox();
+                    fichaN[jj].Location = puntos[n[jj] - 1];
+
+
+                    fichaN[jj].ClientSize = new Size(59, 59);
+                    fichaN[jj].SizeMode = PictureBoxSizeMode.StretchImage;
+                    fichaN[jj].Image = FichaN;
+
+                    fichaN[jj].Tag = jj;
+
+
+
+                    tablero.Controls.Add(fichaN[jj]);
+                    puntos_puestos_N.Add(n[jj]);
+                }
+
+
+            }
+
+            if (mi_color == 1)
+            {
+                if (puntos_puestos_B.Count + puntos_puestos_N.Count >= 64)
+                {
+                    if (puntos_puestos_B.Count > puntos_puestos_N.Count)
+                    {
+                        MessageBox.Show("Perdedor");
+                    }
+                    else if (puntos_puestos_B.Count == puntos_puestos_N.Count)
+                    {
+                        MessageBox.Show("Empate");
+                    }
+                    else if (puntos_puestos_B.Count == puntos_puestos_N.Count)
+                    {
+                        MessageBox.Show("Ganador");
+                    }
+                }
+                //else
+                //{
+                //    tablero.Enabled = true;
+                //}
+            }
+            else if (mi_color == 0)
+            {
+                if (puntos_puestos_B.Count + puntos_puestos_N.Count >= 64)
+                {
+                    if (puntos_puestos_B.Count > puntos_puestos_N.Count)
+                    {
+                        MessageBox.Show("Ganador");
+                    }
+                    else if (puntos_puestos_B.Count == puntos_puestos_N.Count)
+                    {
+                        MessageBox.Show("Empate");
+                    }
+                    else if (puntos_puestos_B.Count == puntos_puestos_N.Count)
+                    {
+                        MessageBox.Show("Perdedor");
+                    }
+                }
+                //else
+                //{
+                //    tablero.Enabled = true;
+                //}
+            }
         }
 
         
